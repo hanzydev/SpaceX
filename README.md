@@ -9,7 +9,7 @@
   </p>
 </div>
 
-## Features
+## Features :sparkles:
 
 - Configurable
 - Easy to use
@@ -34,22 +34,22 @@
 - Automatic video thumbnail generation
 - File deletion once it reaches a certain amount of views
 
-## Installation
+## :rocket: Installation
 
-### You can install SpaceX by running the following command:
+### :computer: You can install SpaceX by running the following command:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/hanzydev/SpaceX/main/installer.sh | bash
 ```
 
-## Contributing
+## :handshake: Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
+## :page_facing_up: License
 
 This project is licensed under the GNU GPLv3 License - see the [LICENSE](https://choosealicense.com/licenses/gpl-3.0/) file for details.
 
-## Credits
+## :star: Credits
 
 No credits, this project is one of a kind. It's the best file upload server out there.
