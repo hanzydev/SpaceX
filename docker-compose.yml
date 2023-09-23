@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+    spacex:
+        container_name: spacex-frontend
+        image: node:20-alpine3.17
+        ports:
+            - '3000:3000'
+        restart: unless-stopped
+        environment:
+            - PORT=3000
+        build: .

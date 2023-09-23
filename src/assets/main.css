@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;500;600;700&&display=swap');
+@import url('https://fonts.cdnfonts.com/css/gg-sans-2');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --toastify-color-dark: var(--color-spacex-3) !important;
+    --toastify-icon-color-success: var(--color-spacex-primary) !important;
+    --toastify-color-progress-success: var(--color-spacex-primary) !important;
+    --toastify-font-family: 'Montserrat', sans-serif !important;
+    color-scheme: dark;
+}
+
+body {
+    overflow: overlay;
+}
+
+h1 {
+    @apply !text-4xl !my-0 font-bold;
+}
+
+h2 {
+    @apply !text-3xl font-bold;
+}
+
+h3 {
+    @apply !text-2xl font-semibold;
+}
+
+h4 {
+    @apply !text-xl font-semibold;
+}
+
+h5 {
+    @apply !text-lg font-semibold;
+}
+
+h6 {
+    @apply !text-base font-semibold;
+}
+
+p,
+a,
+span {
+    @apply text-base;
+}
+
+a[type='button'],
+button {
+    @apply text-base font-semibold;
+}
+
+.router-link-active {
+    @apply !bg-spacex-primary;
+}
+
+.Toastify__toast-container {
+    @apply !z-[99999];
+}
+
+.Toastify__toast {
+    @apply !rounded-lg;
+}
+
+.view-line {
+    @apply !w-full h-[50vh];
+}
+
+.font-spacemono {
+    font-family: 'Space Mono', monospace;
+}
+
+.font-ggsans {
+    font-family: 'gg sans Normal', sans-serif;
+}
+
+.font-ggsans-medium {
+    font-family: 'gg sans Medium', sans-serif;
+}
+
+.font-ggsans-semibold {
+    font-family: 'gg sans SemiBold', sans-serif;
+}
+
+.font-ggsans-bold {
+    font-family: 'gg sans', sans-serif;
+}
+
+input[type='range'] {
+    @apply h-1 w-full appearance-none bg-spacex-primary outline-none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    @apply cursor-pointer rounded-full h-4 w-4 bg-spacex-primary appearance-none;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    @apply hidden;
+}
+
+::-webkit-scrollbar {
+    @apply block w-[5px];
+}
+
+::-webkit-scrollbar-button {
+    @apply hidden;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply rounded-xl bg-[var(--color-spacex-primary)];
+}

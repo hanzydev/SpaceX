@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /dashboard/
+Disallow: /u/
+Disallow: /code/
+Disallow: /link/
+Disallow: /api/
