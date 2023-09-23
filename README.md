@@ -34,9 +34,9 @@
 - Automatic video thumbnail generation
 - File deletion once it reaches a certain amount of views
 
-## :warning: Information
+## :rocket: Installation
 
-We are currently developing a cli application so that you can easily install this project.
+:warning: We are currently developing a cli application so that you can easily install this project.
 
 ## :page_facing_up: License
 
