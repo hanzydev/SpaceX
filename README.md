@@ -34,13 +34,9 @@
 - Automatic video thumbnail generation
 - File deletion once it reaches a certain amount of views
 
-## :rocket: Installation
+## :warning: Information
 
-### :computer: You can install SpaceX by running the following command:
-
-```bash
-curl -sSL https://raw.githubusercontent.com/hanzydev/SpaceX/main/installer.sh | bash
-```
+We are currently developing a cli application so that you can easily install this project.
 
 ## :page_facing_up: License
 
