@@ -42,10 +42,6 @@
 curl -sSL https://raw.githubusercontent.com/hanzydev/SpaceX/main/installer.sh | bash
 ```
 
-## :handshake: Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
 ## :page_facing_up: License
 
 This project is licensed under the GNU GPLv3 License - see the [LICENSE](https://choosealicense.com/licenses/gpl-3.0/) file for details.
@@ -53,3 +49,7 @@ This project is licensed under the GNU GPLv3 License - see the [LICENSE](https:/
 ## :star: Credits
 
 No credits, this project is one of a kind. It's the best file upload server out there.
+
+## :handshake: Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
