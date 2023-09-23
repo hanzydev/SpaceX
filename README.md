@@ -9,7 +9,7 @@
   </p>
 </div>
 
-## Features :sparkles:
+## :sparkles: Features
 
 - Configurable
 - Easy to use
