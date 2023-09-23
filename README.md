@@ -39,7 +39,7 @@
 ### You can install SpaceX by running the following command:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/hanzydev/SpaceX/main/installer.sh | sh
+curl -sSL https://raw.githubusercontent.com/hanzydev/SpaceX/main/installer.sh | bash
 ```
 
 ## Contributing
