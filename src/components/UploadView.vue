@@ -47,7 +47,7 @@
                 <div class="w-full mt-3">
                     <div
                         v-if="data.type.includes('image')"
-                        class="w-full bg-no-repeat bg-cover bg-center select-none h-80"
+                        class="w-full bg-no-repeat bg-contain bg-center select-none h-80"
                         :style="{
                             backgroundImage: `url(${API_URL}/uploads/${
                                 data.id
