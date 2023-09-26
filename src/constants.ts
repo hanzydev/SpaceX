@@ -1,8 +1,8 @@
 // # CONFIGURATIONS
-export const SITE_URL = 'https://test.hanzy.space';
-export const API_URL = 'https://test.hanzy.space/api';
-export const WSS_URL = 'wss://test.hanzy.space/ws';
-export const CF_TURNSTILE_SITE_KEY = '0x4AAAAAAAEFVPCuNgRNoXL7';
+export const SITE_URL = 'fill-me';
+export const API_URL = 'fill-me';
+export const WSS_URL = 'fill-me';
+export const CF_TURNSTILE_SITE_KEY = 'fill-me';
 export const CHUNK_SIZE_IN_MB = 10;
 
 // # DO NOT CHANGE THIS!
