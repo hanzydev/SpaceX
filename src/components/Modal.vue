@@ -33,39 +33,38 @@ const isDemonstrable = ref(false);
 
 const router = useRouter();
 
-const openModal = () => {
+const openModal = async () => {
     isDemonstrable.value = true;
     document.body.classList.add('overflow-hidden');
 
-    nextTick(() => {
-        gsap.fromTo(
-            containerRef.value!,
-            {
-                opacity: 0,
+    await nextTick();
+    gsap.fromTo(
+        containerRef.value!,
+        {
+            opacity: 0,
+        },
+        {
+            opacity: 1,
+            duration: 0.3,
+            display: 'flex',
+            onComplete: () => {
+                gsap.fromTo(
+                    contentRef.value!,
+                    {
+                        opacity: 0,
+                        scale: 0.4,
+                    },
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.3,
+                        display: 'flex',
+                        ease: 'back.out(2)',
+                    },
+                );
             },
-            {
-                opacity: 1,
-                duration: 0.3,
-                display: 'flex',
-                onComplete: () => {
-                    gsap.fromTo(
-                        contentRef.value!,
-                        {
-                            opacity: 0,
-                            scale: 0.4,
-                        },
-                        {
-                            opacity: 1,
-                            scale: 1,
-                            duration: 0.3,
-                            display: 'flex',
-                            ease: 'back.out(2)',
-                        },
-                    );
-                },
-            },
-        );
-    });
+        },
+    );
 };
 
 const closeModal = async () => {

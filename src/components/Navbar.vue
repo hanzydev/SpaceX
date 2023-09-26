@@ -247,7 +247,7 @@ const handleThemes = () => {
     }
 };
 
-const createSXCU = () => {
+const createSXCU = async () => {
     const fileUploaderSXCU: typeof BASE_SXCU & { FileFormName?: string } =
         _.cloneDeep(BASE_SXCU);
 
@@ -296,16 +296,16 @@ const createSXCU = () => {
     });
 
     render(fileUploaderVNode, document.body);
-    nextTick(() => {
-        fileUploaderVNode.el!.click();
-        fileUploaderVNode.el!.remove();
+    await nextTick();
 
-        render(urlShortenerVNode, document.body);
-        nextTick(() => {
-            urlShortenerVNode.el!.click();
-            urlShortenerVNode.el!.remove();
-        });
-    });
+    fileUploaderVNode.el!.click();
+    fileUploaderVNode.el!.remove();
+
+    render(urlShortenerVNode, document.body);
+    await nextTick();
+
+    urlShortenerVNode.el!.click();
+    urlShortenerVNode.el!.remove();
 };
 
 const setTheme = (name: string) => {
@@ -339,7 +339,7 @@ onUnmounted(() => {
 
 router.beforeEach(async (_, __, next) => {
     if (isProfileOpened.value) {
-       await closeProfile();
+        await closeProfile();
     }
 
     next();

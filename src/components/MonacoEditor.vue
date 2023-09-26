@@ -65,29 +65,28 @@ watch(
 
         window.addEventListener('resize', onResize);
 
-        setTimeout(() => {
+        setTimeout(async () => {
             editorIsLoaded.value = true;
             emit('load', monaco, editor);
 
-            nextTick(() => {
-                editor.layout();
+            await nextTick();
+            editor.layout();
 
-                const monacoEditor = editorRef.value!.querySelector(
-                    '.monaco-editor',
+            const monacoEditor = editorRef.value!.querySelector(
+                '.monaco-editor',
+            ) as HTMLDivElement;
+
+            if (monacoEditor) {
+                monacoEditor.style.borderRadius = rounded;
+
+                const overflowGuard = monacoEditor.querySelector(
+                    '.overflow-guard',
                 ) as HTMLDivElement;
 
-                if (monacoEditor) {
-                    monacoEditor.style.borderRadius = rounded;
-
-                    const overflowGuard = monacoEditor.querySelector(
-                        '.overflow-guard',
-                    ) as HTMLDivElement;
-
-                    if (overflowGuard) {
-                        overflowGuard.style.borderRadius = rounded;
-                    }
+                if (overflowGuard) {
+                    overflowGuard.style.borderRadius = rounded;
                 }
-            });
+            }
         }, 600);
     },
 );

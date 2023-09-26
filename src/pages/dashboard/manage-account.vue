@@ -629,7 +629,7 @@ const handle2FAChange = async (enabled: boolean) => {
     }
 };
 
-const handleModalClose = () => {
+const handleModalClose = async () => {
     isModalOpened.value = false;
 
     if (
@@ -639,23 +639,23 @@ const handleModalClose = () => {
         userStore.twoFaEnabled = twoFaState.value;
     }
 
-    nextTick(() => {
-        setTimeout(() => {
-            if (modalOperation.value === 'update-credentials-2fa') {
-                isCredentialsUpdating.value = false;
-            } else if (
-                modalOperation.value === 'enable-2fa' ||
-                modalOperation.value === 'disable-2fa'
-            ) {
-                twoFaQrCodeBase64.value = '';
-                is2FAQrCodeLoading.value = false;
-            }
+    await nextTick();
 
-            otpCode.value = '';
-            is2FAUpdating.value = false;
-            modalOperation.value = undefined;
-        }, 300);
-    });
+    setTimeout(() => {
+        if (modalOperation.value === 'update-credentials-2fa') {
+            isCredentialsUpdating.value = false;
+        } else if (
+            modalOperation.value === 'enable-2fa' ||
+            modalOperation.value === 'disable-2fa'
+        ) {
+            twoFaQrCodeBase64.value = '';
+            is2FAQrCodeLoading.value = false;
+        }
+
+        otpCode.value = '';
+        is2FAUpdating.value = false;
+        modalOperation.value = undefined;
+    }, 300);
 };
 
 const updateColor = (e: any) => {
@@ -857,18 +857,18 @@ watch(otpCode, (otp) => {
 
 watch(
     () => embedConfigStore.embedConfig!.enabled,
-    () => {
-        nextTick(() => {
-            if (activeItem.value === 'embed-config') {
-                const item = document.getElementById(
-                    `${activeItem.value}-content`,
-                )!;
+    async () => {
+        await nextTick();
 
-                gsap.set(`#${activeItem.value}-container`, {
-                    height: `${item.offsetHeight}px`,
-                });
-            }
-        });
+        if (activeItem.value === 'embed-config') {
+            const item = document.getElementById(
+                `${activeItem.value}-content`,
+            )!;
+
+            gsap.set(`#${activeItem.value}-container`, {
+                height: `${item.offsetHeight}px`,
+            });
+        }
     },
 );
 
