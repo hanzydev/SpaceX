@@ -1,8 +1,8 @@
 // # CONFIGURATIONS
-export const SITE_URL = 'fill-me';
-export const API_URL = 'fill-me';
-export const WSS_URL = 'fill-me';
-export const CF_TURNSTILE_SITE_KEY = 'fill-me';
+export const SITE_URL = 'replace-this';
+export const API_URL = 'replace-this';
+export const WSS_URL = 'replace-this';
+export const CF_TURNSTILE_SITE_KEY = 'replace-this';
 export const CHUNK_SIZE_IN_MB = 10;
 
 // # DO NOT CHANGE THIS!
