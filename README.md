@@ -34,7 +34,7 @@
 - Automatic video thumbnail generation
 - File deletion once it reaches a certain amount of views
 
-## :rocket: Run cli app
+## :rocket: Run cli app (Python 3.10+)
 
 ```bash
 git clone https://github.com/hanzydev/SpaceX
