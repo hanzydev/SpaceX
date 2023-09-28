@@ -34,9 +34,14 @@
 - Automatic video thumbnail generation
 - File deletion once it reaches a certain amount of views
 
-## :rocket: Installation
+## :rocket: Run cli app
 
-:warning: We are currently developing a cli application so that you can easily install this project.
+```bash
+git clone https://github.com/hanzydev/SpaceX
+cd SpaceX
+python3 -m pip install -r requirements.txt
+python3 spacex.py
+```
 
 ## :page_facing_up: License
 
