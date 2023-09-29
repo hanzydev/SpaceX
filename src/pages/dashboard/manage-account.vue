@@ -322,6 +322,7 @@
                                         embedConfigStore.embedConfig!.color
                                     }`,
                                 }"
+                                v-if="isColorPickerOpened"
                             >
                                 <ColorPicker
                                     id="color-picker"
@@ -802,8 +803,8 @@ const updateEmbedConfig = async () => {
     }
 };
 
-const closeColorPicker = () => {
-    gsap.to('#color-picker-container', {
+const closeColorPicker = async () => {
+    await gsap.to('#color-picker-container', {
         opacity: 0,
         duration: 0.2,
         y: '-1rem',
@@ -815,20 +816,22 @@ const closeColorPicker = () => {
 
 const openColorPicker = () => {
     if (!isColorPickerOpened.value) {
-        gsap.fromTo(
-            '#color-picker-container',
-            {
-                y: '-1rem',
-            },
-            {
-                display: 'flex',
-                opacity: 1,
-                duration: 0.2,
-                y: 0,
-            },
-        );
-
         isColorPickerOpened.value = true;
+
+        nextTick(() => {
+            gsap.fromTo(
+                '#color-picker-container',
+                {
+                    y: '-1rem',
+                },
+                {
+                    display: 'flex',
+                    opacity: 1,
+                    duration: 0.2,
+                    y: 0,
+                },
+            );
+        });
     }
 };
 
