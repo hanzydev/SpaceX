@@ -7,7 +7,7 @@ from util.question import *
 from util.data import *
 
 
-def uninstall_app():
+def uninstall():
     username = str_user_input("👉 Enter your username")
     clear()
 

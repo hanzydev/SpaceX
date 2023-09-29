@@ -8,15 +8,15 @@ from util.os import *
 from util.data import init_spacex_data, get_deps_installed, set_deps_installed, set_postgres_password
 from util.other import *
 
-from operations.install import install_app
-from operations.uninstall import uninstall_app
+from operations.install import install
+from operations.uninstall import uninstall
 from operations.list import list_apps
 from operations.reset_pass import reset_pass
 from operations.change_domain import change_domain
 from operations.reset_app import reset_app
 from operations.change_username import change_username
 from operations.change_ports import change_ports
-from operations.update import update_app
+from operations.update import update
 
 if not is_linux():
     print(f"{get_err_prefix()} This script is only for Linux!")
@@ -91,13 +91,13 @@ clear()
 
 match choice:
     case 1:
-        install_app()
+        install()
         pass
     case 2:
-        uninstall_app()
+        uninstall()
         pass
     case 3:
-        update_app()
+        update()
         pass
     case 4:
         list_apps()
@@ -142,7 +142,7 @@ match choice:
                 reset_app()
                 pass
             case 6:
-                restart_app()
+                restart()
                 pass
     case 6:
         print(f"{get_info_prefix()} Exiting...")

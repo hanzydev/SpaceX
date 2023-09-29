@@ -7,7 +7,7 @@ from util.data import *
 from util.git import *
 
 
-def update_app():
+def update():
     username = str_user_input("👉 Enter your username")
     clear()
 

@@ -13,7 +13,7 @@ from util.data import *
 default_encrypted_password = "$argon2id$v=19$m=65536,t=2,p=1$wRDnasEu1sD2H98puPLXPm2IddK/H9tbUXmIdVwGfAA$+Am9R4DJVdKGCKbSKSbyKe5juAOCaQB2+2OtGw+XoPQ"
 
 
-def install_app():
+def install():
     pkg_manager = get_distro_pkg_manager()
 
     print(f"{get_warn_prefix()} All fields are required!\n")
