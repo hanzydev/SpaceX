@@ -1,8 +1,6 @@
 // # CONFIGURATIONS
 export const CHUNK_SIZE_IN_MB = 10;
 
-console.log(import.meta.env);
-
 // # DO NOT CHANGE THIS!
 export const BASE_SXCU = {
     Version: '14.1.0',
