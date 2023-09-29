@@ -21,7 +21,10 @@ def update_app():
     frontend_last_commit = fetch_last_commit("hanzydev/SpaceX", "frontend")
     backend_last_commit = fetch_last_commit("hanzydev/SpaceX", "backend")
 
-    if frontend_last_commit == app["frontend_last_commit"] and backend_last_commit == app["backend_last_commit"]:
+    is_frontend_up_to_date = frontend_last_commit == app["frontend_last_commit"]
+    is_backend_up_to_date = backend_last_commit == app["backend_last_commit"]
+
+    if is_frontend_up_to_date and is_backend_up_to_date:
         clear()
         print(f"{get_info_prefix()} Already up to date!")
         exit(0)
@@ -33,18 +36,20 @@ def update_app():
         print(f"{get_info_prefix()} Aborting...")
         exit(1)
 
-    clear()
-    print(f"{get_info_prefix()} Pulling frontend...")
-    pull_repo(f"/etc/SpaceX/apps/{username}/frontend")
+    if not is_frontend_up_to_date:
+        clear()
+        print(f"{get_info_prefix()} Pulling frontend...")
+        pull_repo(f"/etc/SpaceX/apps/{username}/frontend")
 
-    clear()
-    print(f"{get_info_prefix()} Pulling backend...")
-    pull_repo(f"/etc/SpaceX/apps/{username}/backend")
+        clear()
+        print(f"{get_info_prefix()} Building frontend...")
+        subprocess.run(
+            "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
-    clear()
-    print(f"{get_info_prefix()} Building frontend...")
-    subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+    if not is_backend_up_to_date:
+        clear()
+        print(f"{get_info_prefix()} Pulling backend...")
+        pull_repo(f"/etc/SpaceX/apps/{username}/backend")
 
     clear()
     print(f"{get_info_prefix()} Restarting app...")
@@ -53,7 +58,7 @@ def update_app():
 
     clear()
     print(f"{get_info_prefix()} Updating database...")
-    update_app(username, {
+    update_app(username, app | {
         "frontend_last_commit": frontend_last_commit,
         "backend_last_commit": backend_last_commit
     })
