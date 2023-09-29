@@ -82,26 +82,22 @@ def change_domain():
 
     clear()
     print(f"{get_info_prefix()} Configuring frontend...")
-    with open(
-            f"/etc/SpaceX/apps/{username}/frontend/src/constants.ts", "r") as f:
-        constants_file = f.read()
+    with open(f"/etc/SpaceX/apps/{username}/frontend/.env", "r") as f:
+        env_file = f.read()
 
-        site_url_regex = re.compile(
-            r"export const SITE_URL = '(.*)';")
-        api_url_regex = re.compile(
-            r"export const API_URL = '(.*)';")
-        wss_url_regex = re.compile(
-            r"export const WSS_URL = '(.*)';")
+        site_url_regex = re.compile(r"VITE_SITE_URL=(.*)")
+        api_url_regex = re.compile(r"VITE_API_URL=(.*)")
+        wss_url_regex = re.compile(r"VITE_WSS_URL=(.*)")
 
-        constants_file = site_url_regex.sub(
-            f"export const SITE_URL = '{site_url}';", constants_file)
-        constants_file = api_url_regex.sub(
-            f"export const API_URL = '{api_url}';", constants_file)
-        constants_file = wss_url_regex.sub(
-            f"export const WSS_URL = '{wss_url}';", constants_file)
+        env_file = site_url_regex.sub(
+            f"VITE_SITE_URL={site_url}", env_file)
+        env_file = api_url_regex.sub(
+            f"VITE_API_URL={api_url}", env_file)
+        env_file = wss_url_regex.sub(
+            f"VITE_WSS_URL={wss_url}", env_file)
 
-        open(f"/etc/SpaceX/apps/{username}/frontend/src/constants.ts",
-             "w").write(constants_file)
+        open(
+            f"/etc/SpaceX/apps/{username}/frontend/.env", "w").write(env_file)
         f.close()
 
     clear()
