@@ -80,7 +80,11 @@
                 </tr>
             </tbody>
         </table>
-        <Paginator v-model:currentPage="currentPage" :data="store.uploads" />
+        <Paginator
+            v-model:currentPage="currentPage"
+            item-name="upload"
+            :data="store.uploads"
+        />
     </div>
 </template>
 
