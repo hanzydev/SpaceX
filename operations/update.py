@@ -64,9 +64,9 @@ def update():
     })
 
     frontend_last_commits_after = fetch_last_commits_after_commit(
-        "hanzydev/SpaceX", app["frontend_last_commit"])
+        "hanzydev/SpaceX", app["frontend_last_commit"], "frontend")
     backend_last_commits_after = fetch_last_commits_after_commit(
-        "hanzydev/SpaceX", app["backend_last_commit"])
+        "hanzydev/SpaceX", app["backend_last_commit"], "backend")
 
     clear()
     print(f"{get_ok_prefix()} Update complete! Here are the changes:\n")

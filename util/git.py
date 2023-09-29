@@ -22,5 +22,22 @@ def fetch_last_commit(repo: str, branch: str = None) -> str:
         return requests.get(f"https://api.github.com/repos/{repo}/commits").json()[0]["sha"]
 
 
-def fetch_last_commits_after_commit(repo: str, commit: str) -> str:
-    return requests.get(f"https://api.github.com/repos/{repo}/commits?sha={commit}").json()
+def fetch_last_commits_after_commit(repo: str, commit: str, branch: str = None) -> str:
+    commits = []
+
+    if branch:
+        commits = requests.get(
+            f"https://api.github.com/repos/{repo}/commits?sha={branch}").json()
+    else:
+        commits = requests.get(
+            f"https://api.github.com/repos/{repo}/commits").json()
+
+    last_commits_after_commit = []
+
+    for c in commits:
+        if c["sha"] == commit:
+            break
+
+        last_commits_after_commit.append(c)
+
+    return last_commits_after_commit
