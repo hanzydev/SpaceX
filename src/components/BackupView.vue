@@ -88,7 +88,6 @@
 import gsap from 'gsap';
 import { fire } from '@/util/toast';
 import { useBackupsStore } from '@/store';
-import { API_URL } from '@/constants';
 import type { Backup } from '@/types';
 
 const { data } = defineProps<{
@@ -157,7 +156,7 @@ const handleDelete = async () => {
 
 const handleDownload = async () => {
     window.open(
-        `${API_URL}/backups/${data.id}?token=${useCookie('token').value}`,
+        `${import.meta.env.VITE_API_URL}/backups/${data.id}?token=${useCookie('token').value}`,
         '_blank',
     );
 };

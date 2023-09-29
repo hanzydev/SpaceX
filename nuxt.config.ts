@@ -1,6 +1,5 @@
 import { randomBytes } from 'node:crypto';
 import svgLoader from 'vite-svg-loader';
-import { CF_TURNSTILE_SITE_KEY } from './src/constants';
 
 export default defineNuxtConfig({
     modules: [
@@ -17,7 +16,7 @@ export default defineNuxtConfig({
         configPath: 'tailwind.config.js',
     },
     turnstile: {
-        siteKey: CF_TURNSTILE_SITE_KEY,
+        siteKey: process.env.VITE_CF_TURNSTILE_SITE_KEY,
     },
     pwa: {
         strategies: 'generateSW',

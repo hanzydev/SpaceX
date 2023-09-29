@@ -91,13 +91,15 @@
 <script setup lang="ts">
 import { useUploadsStore } from '@/store';
 import { fire } from '@/util/toast';
-import { API_URL, SITE_URL } from '@/constants';
 
 const store = useUploadsStore();
 const router = useRouter();
 
 const deletings = ref<string[]>([]);
 const currentPage = ref(0);
+
+const API_URL = import.meta.env.VITE_API_URL;
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 const handleCopy = (id: string) => {
     navigator.clipboard.writeText(`${SITE_URL}/u/${id}`);

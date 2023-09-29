@@ -315,6 +315,7 @@
                                 }"
                             ></div>
                             <div
+                                v-if="isColorPickerOpened"
                                 id="color-picker-container"
                                 class="absolute top-20 z-50 left-0 bg-spacex-3 p-2 rounded-xl hidden"
                                 :style="{
@@ -322,7 +323,6 @@
                                         embedConfigStore.embedConfig!.color
                                     }`,
                                 }"
-                                v-if="isColorPickerOpened"
                             >
                                 <ColorPicker
                                     id="color-picker"
@@ -511,7 +511,6 @@
 <script setup lang="ts">
 import gsap from 'gsap';
 import _ from 'lodash';
-import { SITE_URL } from '@/constants';
 import { useEmbedConfigStore, useUserStore } from '@/store';
 import { replaceString } from '@/util/replace-string';
 import { fire } from '@/util/toast';
@@ -547,6 +546,8 @@ const modalOperation = ref<
 const twoFaQrCodeBase64 = ref('');
 const otpCode = ref('');
 const twoFaState = ref(userStore.twoFaEnabled);
+
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 const enable2FA = async () => {
     is2FAUpdating.value = true;

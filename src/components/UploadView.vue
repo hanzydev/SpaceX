@@ -240,7 +240,6 @@
 import { fire } from '@/util/toast';
 import { useUploadsStore, useFoldersStore } from '@/store';
 import { Upload } from '@/types';
-import { API_URL, SITE_URL } from '@/constants';
 
 const { data, alwaysRing, parentFolder } = defineProps<{
     data: Upload;
@@ -261,6 +260,9 @@ const isModalOpen = ref(false);
 const loadableElementRef = ref<HTMLVideoElement | HTMLImageElement>();
 
 const token = useCookie('token').value!;
+
+const API_URL = import.meta.env.VITE_API_URL;
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 onMounted(() => {
     if (data.type.includes('image')) {

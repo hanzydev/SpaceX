@@ -1,4 +1,3 @@
-import { API_URL } from '@/constants';
 import type { NitroFetchOptions } from 'nitropack';
 
 interface ExtendedFetchOptions extends NitroFetchOptions<string> {
@@ -25,7 +24,7 @@ export function useAPI<T = any>(
     return $fetch(route, {
         ...options,
         ignoreResponseError: true,
-        baseURL: API_URL,
+        baseURL: import.meta.env.VITE_API_URL,
     });
 }
 

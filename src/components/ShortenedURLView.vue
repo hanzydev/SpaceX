@@ -86,7 +86,6 @@
 import { fire } from '@/util/toast';
 import { useShortenedURLsStore } from '@/store';
 import { ShortenedURL } from '@/types';
-import { SITE_URL } from '@/constants';
 
 const { data } = defineProps<{
     data: ShortenedURL;
@@ -97,6 +96,8 @@ const store = useShortenedURLsStore();
 
 const isDeleting = ref(false);
 const isModalOpen = ref(false);
+
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 const handleCopy = async () => {
     await navigator.clipboard.writeText(`${SITE_URL}/link/${data.id}`);

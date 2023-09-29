@@ -11,7 +11,7 @@ import {
     useUserStore,
     useUploadsStore,
 } from '@/store';
-import { OPCodes, WSS_URL } from '@/constants';
+import { OPCodes } from '@/constants';
 
 import folderEmitter from './emitters/folder';
 import noteEmitter from './emitters/note';
@@ -38,7 +38,7 @@ export const initWebSocket = () => {
     const tokenCookie = useCookie('token');
 
     const createWS = () => {
-        const ws = new WebSocket(WSS_URL);
+        const ws = new WebSocket(import.meta.env.VITE_WSS_URL!);
 
         let heartbeatTimer: NodeJS.Timeout | null = null;
         let lastPingTimestamp = Date.now();

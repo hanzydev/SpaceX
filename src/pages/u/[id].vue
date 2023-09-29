@@ -72,7 +72,6 @@
 </template>
 
 <script setup lang="ts">
-import { API_URL } from '@/constants';
 import type { Meta } from '@unhead/vue';
 import { replaceString } from '@/util/replace-string';
 
@@ -91,6 +90,8 @@ const { data: jsonRef } = await useAsyncAPI<any>(
 const embedConfig = await useAPI('/embed-config');
 
 const json = unref(jsonRef)!;
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const handleDownload = () => {
     window.open(

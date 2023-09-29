@@ -1,9 +1,7 @@
 // # CONFIGURATIONS
-export const SITE_URL = 'replace-this';
-export const API_URL = 'replace-this';
-export const WSS_URL = 'replace-this';
-export const CF_TURNSTILE_SITE_KEY = 'replace-this';
 export const CHUNK_SIZE_IN_MB = 10;
+
+console.log(import.meta.env);
 
 // # DO NOT CHANGE THIS!
 export const BASE_SXCU = {
@@ -11,7 +9,7 @@ export const BASE_SXCU = {
     Name: 'SpaceX ({name})',
     DestinationType: '',
     RequestMethod: 'POST',
-    RequestURL: API_URL,
+    RequestURL: import.meta.env.VITE_API_URL,
     Headers: {
         Authorization: '',
     },

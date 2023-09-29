@@ -83,7 +83,6 @@
 import { fire } from '@/util/toast';
 import { useCodesStore } from '@/store';
 import { Code } from '@/types';
-import { SITE_URL } from '@/constants';
 
 const { data } = defineProps<{
     data: Code;
@@ -94,6 +93,8 @@ const store = useCodesStore();
 
 const isDeleting = ref(false);
 const isModalOpen = ref(false);
+
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 const handleCopy = async () => {
     await navigator.clipboard.writeText(`${SITE_URL}/code/${data.id}`);
