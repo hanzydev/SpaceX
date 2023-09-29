@@ -5,7 +5,7 @@ from colorama import Fore
 from util.console import *
 from util.question import *
 from util.os import *
-from util.data import *
+from util.data import init_spacex_data, get_deps_installed, set_deps_installed, set_postgres_password
 from util.other import *
 
 from operations.install import install_app
@@ -16,6 +16,7 @@ from operations.change_domain import change_domain
 from operations.reset_app import reset_app
 from operations.change_username import change_username
 from operations.change_ports import change_ports
+from operations.update import update_app
 
 if not is_linux():
     print(f"{get_err_prefix()} This script is only for Linux!")
