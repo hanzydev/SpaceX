@@ -81,12 +81,17 @@
     </Modal>
     <div class="mt-6 w-full rounded-md flex flex-col">
         <div
-            class="h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-lg border-spacex-primary border-dotted"
+            :class="`h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-lg border-spacex-primary border-dotted ${
+                isUploading && 'opacity-50'
+            }`"
         >
             <input
                 type="file"
-                class="h-full w-full opacity-0 z-10 absolute cursor-pointer"
+                :class="`h-full w-full opacity-0 z-10 absolute ${
+                    isUploading ? 'cursor-not-allowed' : 'cursor-pointer'
+                }`"
                 multiple
+                :disabled="isUploading"
                 @change="onFileUpload"
             />
             <div
