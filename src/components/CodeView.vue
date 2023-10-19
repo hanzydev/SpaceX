@@ -129,6 +129,6 @@ const handleOpen = () => {
 };
 
 const handleEdit = () => {
-    router.push(`/dashboard/code/${data.id}/edit`);
+    router.push(`/dashboard/codes/${data.id}/edit`);
 };
 </script>
