@@ -58,6 +58,7 @@ def update():
 
         clear()
         print(f"{get_info_prefix()} Installing backend...")
+        os.remove(f"/etc/SpaceX/apps/{username}/backend/bun.lockb")
         subprocess.run(
             "bun install", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
 
