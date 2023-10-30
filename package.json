@@ -33,7 +33,6 @@
         "gsap": "^3.12.2",
         "lodash": "^4.17.21",
         "monaco-editor": "^0.41.0",
-        "normalize.css": "^8.0.1",
         "nuxt": "3.6.5",
         "postcss-custom-properties": "^13.3.0",
         "prettier": "^3.0.3",

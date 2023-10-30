@@ -6520,11 +6520,6 @@ normalize-range@^0.1.2:
   resolved "https://registry.npmjs.org/normalize-range/-/normalize-range-0.1.2.tgz"
   integrity sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==
 
-normalize.css@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.npmjs.org/normalize.css/-/normalize.css-8.0.1.tgz"
-  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
-
 npm-bundled@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/npm-bundled/-/npm-bundled-3.0.0.tgz"

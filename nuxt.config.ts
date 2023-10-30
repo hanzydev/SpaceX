@@ -8,7 +8,6 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@vite-pwa/nuxt',
     ],
-    css: ['normalize.css/normalize.css'],
     srcDir: 'src',
     devtools: { enabled: true },
     tailwindcss: {
