@@ -1,17 +1,17 @@
 <template>
     <div
-        class="flex flex-col items-center absolute justify-center min-h-screen w-full p-4 bg-spacex-5 md:px-24 lg:px-32"
+        class="absolute flex min-h-screen w-full flex-col items-center justify-center bg-spacex-5 p-4 md:px-24 lg:px-32"
     >
         <GoBack to="/dashboard/folders" />
         <h1>Update Folder Uploads</h1>
-        <div class="mt-7 bg-spacex-4 p-4 rounded-xl w-full">
+        <div class="mt-7 w-full rounded-xl bg-spacex-4 p-4">
             <SearchBar
                 v-model:value="searchQuery"
                 placeholder="Search for uploads..."
             />
             <div
                 :key="currentPage + searchQuery"
-                class="grid max-sm:grid-cols-1 max-md:grid-cols-2 max-[1262px]:grid-cols-3 max-[1495px]:grid-cols-4 grid-cols-5 gap-4 mt-4"
+                class="mt-4 grid grid-cols-5 gap-4 max-[1495px]:grid-cols-4 max-[1262px]:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
             >
                 <UploadView
                     v-for="upload in filtered.slice(
@@ -39,8 +39,8 @@
             />
             <button
                 type="button"
-                :class="`mt-10 py-2 px-4 w-full bg-spacex-primary rounded-lg outline-none focus:ring-2 ring-white flex items-center justify-center text-center ${
-                    isUpdating && 'opacity-50 cursor-not-allowed'
+                :class="`mt-10 flex w-full items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center outline-none ring-white focus:ring-2 ${
+                    isUpdating && 'cursor-not-allowed opacity-50'
                 }`"
                 :disabled="isUpdating"
                 @click="handleBulkUpdate"

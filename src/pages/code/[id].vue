@@ -1,17 +1,17 @@
 <template>
     <div
         v-if="!json?.error"
-        class="absolute w-screen h-screen flex justify-center items-center"
+        class="absolute flex h-screen w-screen items-center justify-center"
     >
         <MonacoEditor
-            class="w-full h-full"
+            class="h-full w-full"
             :value="json?.content!"
             :language="json?.language.toLowerCase()!"
             :options="{ theme: 'spacex', readOnly: true }"
             @load="onEditorLoad"
         >
             <template #loading>
-                <div class="flex items-center justify-center w-full h-full">
+                <div class="flex h-full w-full items-center justify-center">
                     <Spinner :size="64" />
                 </div>
             </template>

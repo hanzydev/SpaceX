@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLoaded" class="bg-spacex-4 h-screen w-screen">
+    <div v-if="isLoaded" class="h-screen w-screen bg-spacex-4">
         <slot />
     </div>
 </template>

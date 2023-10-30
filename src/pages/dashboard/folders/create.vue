@@ -1,23 +1,23 @@
 <template>
     <GoBack to="/dashboard/folders" />
     <div
-        class="flex flex-col items-center absolute justify-center min-h-screen w-full p-4 bg-spacex-5"
+        class="absolute flex min-h-screen w-full flex-col items-center justify-center bg-spacex-5 p-4"
     >
         <form
-            class="flex flex-col bg-spacex-4 p-10 max-sm:w-80 w-[30rem] rounded-xl"
+            class="flex w-[30rem] flex-col rounded-xl bg-spacex-4 p-10 max-sm:w-80"
             @submit.prevent="handleCreate"
         >
             <h1 class="mx-auto max-sm:!text-3xl">Create Folder</h1>
 
             <div class="mt-7 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >Name</label
                 >
                 <input
                     v-model="name"
                     type="text"
                     placeholder="Enter Name"
-                    :class="`h-10 mt-1 py-2 px-3 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isCreating && 'cursor-not-allowed'
                     }`"
                     :disabled="isCreating"
@@ -25,8 +25,8 @@
             </div>
 
             <button
-                :class="`mt-8 py-2 px-4 bg-spacex-primary rounded-lg outline-none focus:ring-2 ring-white flex items-center justify-center text-center ${
-                    isCreating && 'opacity-50 cursor-not-allowed'
+                :class="`mt-8 flex items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center outline-none ring-white focus:ring-2 ${
+                    isCreating && 'cursor-not-allowed opacity-50'
                 }`"
                 :disabled="isCreating"
             >

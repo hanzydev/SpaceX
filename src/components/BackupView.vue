@@ -1,7 +1,7 @@
 <template>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
         <div
-            class="flex flex-col justify-center items-center text-center p-6 w-full space-y-6"
+            class="flex w-full flex-col items-center justify-center space-y-6 p-6 text-center"
         >
             <Icon name="alert" class="h-20 w-20" />
             <h3>Are you sure? This action is irreversible!</h3>
@@ -9,16 +9,16 @@
                 You are about to restore a backup. This will delete all your
                 current data and replace it with the data from the backup.
             </p>
-            <div class="grid grid-cols-2 space-x-3 w-full">
+            <div class="grid w-full grid-cols-2 space-x-3">
                 <button
-                    class="py-2.5 rounded-lg bg-spacex-2 focus:ring-2 focus:ring-white"
+                    class="rounded-lg bg-spacex-2 py-2.5 focus:ring-2 focus:ring-white"
                     @click="isModalOpen = false"
                 >
                     Cancel
                 </button>
                 <button
-                    :class="`py-2.5 rounded-lg bg-spacex-primary focus:ring-2 focus:ring-white ${
-                        isRestoring && 'opacity-50 cursor-not-allowed'
+                    :class="`rounded-lg bg-spacex-primary py-2.5 focus:ring-2 focus:ring-white ${
+                        isRestoring && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isRestoring"
                     @click="restoreFromBackup"
@@ -29,33 +29,33 @@
         </div>
     </Modal>
     <div
-        class="h-[176px] flex flex-col items-center justify-center p-4 bg-spacex-2 rounded-lg relative hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+        class="relative flex h-[176px] flex-col items-center justify-center rounded-lg bg-spacex-2 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
         @mouseenter="onMouseEnter"
         @mouseleave="onMouseLeave"
         @touchstart="onMouseEnter"
         @touchend="onMouseLeave"
     >
-        <div class="flex flex-col items-center mt-5 w-full h-full">
+        <div class="mt-5 flex h-full w-full flex-col items-center">
             <Icon name="file-archive" class="text-4xl" />
             <h6 class="mt-1.5 text-slate-400">{{ data.id }}</h6>
 
-            <div class="flex items-center justify-center gap-2 mt-1">
-                <span class="text-slate-400 text-sm">{{
+            <div class="mt-1 flex items-center justify-center gap-2">
+                <span class="text-sm text-slate-400">{{
                     data.size.formatted
                 }}</span>
-                <span class="text-slate-400 text-sm">-</span>
-                <span class="text-slate-400 text-sm">
+                <span class="text-sm text-slate-400">-</span>
+                <span class="text-sm text-slate-400">
                     {{ new Date(data.date).toLocaleString() }}
                 </span>
             </div>
         </div>
         <div
             :id="`${data.id}-controls`"
-            class="absolute bottom-0 bg-spacex-2 w-full border-t-spacex-primary border-t-2 px-3 py-2 items-center justify-center gap-4 rounded-b-md hidden"
+            class="absolute bottom-0 hidden w-full items-center justify-center gap-4 rounded-b-md border-t-2 border-t-spacex-primary bg-spacex-2 px-3 py-2"
         >
             <button
-                :class="`text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300 ${
-                    isRestoring && 'opacity-50 cursor-not-allowed'
+                :class="`rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
+                    isRestoring && 'cursor-not-allowed opacity-50'
                 }`"
                 aria-label="Restore from backup"
                 :disabled="isRestoring"
@@ -64,15 +64,15 @@
                 <Icon name="restore" />
             </button>
             <button
-                class="text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300"
+                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                 aria-label="Download backup"
                 @click="handleDownload"
             >
                 <Icon name="download" />
             </button>
             <button
-                :class="`text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300 ${
-                    isDeleting && 'opacity-50 cursor-not-allowed'
+                :class="`rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
+                    isDeleting && 'cursor-not-allowed opacity-50'
                 }`"
                 aria-label="Delete backup"
                 :disabled="isDeleting"
@@ -156,7 +156,9 @@ const handleDelete = async () => {
 
 const handleDownload = async () => {
     window.open(
-        `${import.meta.env.VITE_API_URL}/backups/${data.id}?token=${useCookie('token').value}`,
+        `${import.meta.env.VITE_API_URL}/backups/${data.id}?token=${
+            useCookie('token').value
+        }`,
         '_blank',
     );
 };

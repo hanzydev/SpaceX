@@ -1,23 +1,23 @@
 <template>
     <GoBack to="/dashboard/codes" />
     <div
-        class="flex flex-col items-center absolute justify-center min-h-screen w-full p-4 bg-spacex-5"
+        class="absolute flex min-h-screen w-full flex-col items-center justify-center bg-spacex-5 p-4"
     >
         <form
-            class="flex flex-col bg-spacex-4 p-10 max-sm:w-80 max-lg:w-[30rem] w-[50rem] rounded-xl"
+            class="flex w-[50rem] flex-col rounded-xl bg-spacex-4 p-10 max-lg:w-[30rem] max-sm:w-80"
             @submit.prevent="handleShare"
         >
             <h1 class="mx-auto max-sm:!text-3xl">Share Code</h1>
 
             <div class="mt-7 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >Title</label
                 >
                 <input
                     v-model="code.title"
                     type="text"
                     placeholder="Enter Title"
-                    :class="`h-10 mt-1 py-2 px-3 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isSharing && 'cursor-not-allowed'
                     }`"
                     :disabled="isSharing"
@@ -25,22 +25,22 @@
             </div>
 
             <div class="mt-3 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >DELETE AFTER VIEWS (0 = NEVER DELETE)</label
                 >
                 <div class="relative mt-1">
                     <input
                         v-model="deleteAfterViews"
-                        class="w-full h-10 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300"
+                        class="h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                         type="number"
                         :min="0"
                         :max="100000"
                     />
                     <div
-                        class="absolute right-0 top-0 h-full flex items-center flex-col justify-center bg-spacex-1 rounded-r-md"
+                        class="absolute right-0 top-0 flex h-full flex-col items-center justify-center rounded-r-md bg-spacex-1"
                     >
                         <button
-                            class="p-1 w-6 flex items-center justify-center rounded-tr-md hover:ring-2 hover:ring-spacex-primary duration-300 transition-all"
+                            class="flex w-6 items-center justify-center rounded-tr-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
                                 deleteAfterViews = (
@@ -51,7 +51,7 @@
                             <Icon name="chevron-up" class="text-xs" />
                         </button>
                         <button
-                            class="p-1 w-6 flex items-center justify-center rounded-br-md hover:ring-2 hover:ring-spacex-primary duration-300 transition-all"
+                            class="flex w-6 items-center justify-center rounded-br-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
                                 deleteAfterViews = (
@@ -66,11 +66,11 @@
             </div>
 
             <div class="mt-3 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >Content</label
                 >
                 <div
-                    class="mt-1 relative w-full h-[45vh] flex items-center justify-center"
+                    class="relative mt-1 flex h-[45vh] w-full items-center justify-center"
                 >
                     <MonacoEditor
                         v-model:value="code.content"
@@ -80,7 +80,7 @@
                     >
                         <template #loading>
                             <div
-                                class="flex items-center justify-center w-full h-full"
+                                class="flex h-full w-full items-center justify-center"
                             >
                                 <Spinner :size="64" />
                             </div>
@@ -89,12 +89,12 @@
                 </div>
             </div>
 
-            <div class="mt-3 w-fit flex items-center gap-2">
+            <div class="mt-3 flex w-fit items-center gap-2">
                 <Switch v-model:is-checked="isPrivate" />
                 <h6>Make code private</h6>
             </div>
 
-            <div class="grid sm:grid-cols-2 w-full gap-2 mt-8 relative">
+            <div class="relative mt-8 grid w-full gap-2 sm:grid-cols-2">
                 <Dropdown
                     id="language-dropdown"
                     default-item="JavaScript"
@@ -111,8 +111,8 @@
                 <button
                     id="language-dropdown-toggler"
                     type="button"
-                    :class="`py-2 px-4 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary flex items-center justify-center text-center ${
-                        isSharing && 'opacity-50 cursor-not-allowed'
+                    :class="`flex items-center justify-center rounded-lg bg-spacex-2 px-4 py-2 text-center outline-none focus:ring-2 focus:ring-spacex-primary ${
+                        isSharing && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isSharing"
                     @click="isDropdownOpened = !isDropdownOpened"
@@ -120,8 +120,8 @@
                     {{ code.language }}
                 </button>
                 <button
-                    :class="`py-2 px-4 bg-spacex-primary rounded-lg outline-none focus:ring-2 ring-white flex items-center justify-center text-center ${
-                        isSharing && 'opacity-50 cursor-not-allowed'
+                    :class="`flex items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center outline-none ring-white focus:ring-2 ${
+                        isSharing && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isSharing"
                 >

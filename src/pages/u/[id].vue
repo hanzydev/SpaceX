@@ -1,11 +1,11 @@
 <template>
     <div
         v-if="!json?.error"
-        class="absolute w-screen h-screen flex justify-center items-center"
+        class="absolute flex h-screen w-screen items-center justify-center"
     >
         <img
             v-if="json.type.includes('image')"
-            class="max-w-full max-h-full"
+            class="max-h-full max-w-full"
             :src="`${API_URL}/uploads/${json.id}?ref=cdn${
                 json.private ? `&token=${useCookie('token').value!}` : ''
             }`"
@@ -13,7 +13,7 @@
         />
         <video
             v-else-if="json.type.includes('video')"
-            class="max-w-full max-h-full"
+            class="max-h-full max-w-full"
             controls
             :src="`${API_URL}/uploads/${json.id}?ref=cdn${
                 json.private ? `&token=${useCookie('token').value!}` : ''
@@ -28,7 +28,7 @@
         />
         <div
             v-else
-            class="p-4 bg-spacex-4 w-96 max-xs:w-60 rounded-xl flex flex-col items-center justify-center text-center"
+            class="flex w-96 flex-col items-center justify-center rounded-xl bg-spacex-4 p-4 text-center max-xs:w-60"
         >
             <Icon
                 v-if="
@@ -62,7 +62,7 @@
 
             <h2 class="mt-1">{{ json.id }}</h2>
             <button
-                class="bg-spacex-primary rounded-lg px-3 py-3 h-10 w-full focus:ring-2 mt-5 focus:ring-white"
+                class="mt-5 h-10 w-full rounded-lg bg-spacex-primary px-3 py-3 focus:ring-2 focus:ring-white"
                 @click="handleDownload"
             >
                 Download

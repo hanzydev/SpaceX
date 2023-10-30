@@ -8,11 +8,11 @@
             v-model="isChecked"
             type="checkbox"
             value=""
-            class="sr-only peer"
+            class="peer sr-only"
             :disabled="disabled"
         />
         <div
-            class="w-11 h-6 bg-spacex-2 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-spacex-primary"
+            class="peer h-6 w-11 rounded-full bg-spacex-2 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:bg-white after:transition-all after:content-[''] peer-checked:bg-spacex-primary peer-checked:after:translate-x-full peer-checked:after:border-white"
         ></div>
     </label>
 </template>

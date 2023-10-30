@@ -1,23 +1,23 @@
 <template>
     <div
-        class="flex flex-col items-center justify-between w-full h-screen px-8"
+        class="flex h-screen w-full flex-col items-center justify-between px-8"
     >
-        <div class="flex max-md:flex-col justify-between items-center mt-auto">
-            <div class="flex justify-center flex-col">
-                <h2 class="!mt-1 font-medium md:!text-5xl select-none">
+        <div class="mt-auto flex items-center justify-between max-md:flex-col">
+            <div class="flex flex-col justify-center">
+                <h2 class="!mt-1 select-none font-medium md:!text-5xl">
                     {{ error.statusCode }}
                 </h2>
 
-                <h2 class="!mt-1 md:!text-5xl select-none">
+                <h2 class="!mt-1 select-none md:!text-5xl">
                     {{ error.title }}
                 </h2>
-                <div class="h-1 bg-spacex-primary mt-3 rounded-full"></div>
-                <p class="text-slate-200 font-medium mt-3">
+                <div class="mt-3 h-1 rounded-full bg-spacex-primary"></div>
+                <p class="mt-3 font-medium text-slate-200">
                     {{ `Houston, we have a problem. ${error.message}` }}
                 </p>
 
                 <button
-                    class="bg-spacex-primary rounded-lg py-2.5 h-11 mt-4 md:w-52 text-center focus:ring-2 focus:ring-white"
+                    class="mt-4 h-11 rounded-lg bg-spacex-primary py-2.5 text-center focus:ring-2 focus:ring-white md:w-52"
                     @click="$router.push(button.to)"
                 >
                     {{ button.content }}
@@ -29,7 +29,7 @@
                 width="248"
                 height="248"
                 alt="Moon"
-                class="md:ml-32 max-md:mt-3 select-none"
+                class="select-none max-md:mt-3 md:ml-32"
                 draggable="false"
             />
         </div>

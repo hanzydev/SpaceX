@@ -1,7 +1,7 @@
 <template>
-    <div class="w-full overflow-y-hidden relative">
-        <table class="w-full bg-spacex-3 rounded-lg border-collapse table-auto">
-            <thead class="text-left h-10">
+    <div class="relative w-full overflow-y-hidden">
+        <table class="w-full table-auto border-collapse rounded-lg bg-spacex-3">
+            <thead class="h-10 text-left">
                 <tr>
                     <th class="px-4 py-2 font-semibold">Name</th>
                     <th class="px-4 py-2 font-semibold">Size</th>
@@ -10,7 +10,7 @@
                     <th class="px-4 py-2 font-semibold">Actions</th>
                 </tr>
             </thead>
-            <tbody class="text-slate-100 border-none">
+            <tbody class="border-none text-slate-100">
                 <tr
                     v-for="(upload, index) in store.uploads.slice(
                         currentPage * 15,
@@ -18,38 +18,38 @@
                     )"
                     :key="index"
                 >
-                    <td class="border px-4 py-2 border-spacex-4">
+                    <td class="border border-spacex-4 px-4 py-2">
                         <span>{{ upload.id }}</span>
                     </td>
-                    <td class="border px-4 py-2 border-spacex-4">
+                    <td class="border border-spacex-4 px-4 py-2">
                         <span>{{ upload.size.formatted }}</span>
                     </td>
-                    <td class="border px-4 py-2 border-spacex-4">
+                    <td class="border border-spacex-4 px-4 py-2">
                         <span>{{ upload.type }}</span>
                     </td>
-                    <td class="border px-4 py-2 border-spacex-4">
+                    <td class="border border-spacex-4 px-4 py-2">
                         <span>{{
                             new Date(upload.date).toLocaleString('en-US')
                         }}</span>
                     </td>
-                    <td class="border px-4 py-2 border-spacex-4">
+                    <td class="border border-spacex-4 px-4 py-2">
                         <div class="flex items-center gap-3">
                             <button
-                                class="text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300"
+                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Open link"
                                 @click="handleOpen(upload.id)"
                             >
                                 <Icon name="link-open" />
                             </button>
                             <button
-                                class="text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300"
+                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Copy link"
                                 @click="handleCopy(upload.id)"
                             >
                                 <Icon name="copy" />
                             </button>
                             <button
-                                class="text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300"
+                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Download file"
                                 @click="
                                     handleDownload(upload.id, upload.private)
@@ -58,14 +58,14 @@
                                 <Icon name="download" />
                             </button>
                             <button
-                                class="text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300"
+                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Edit upload"
                                 @click="handleEdit(upload.id)"
                             >
                                 <Icon name="pen" />
                             </button>
                             <button
-                                :class="`text-slate-400 p-2 rounded-lg hover:bg-spacex-primary hover:text-white ring-1 ring-spacex-primary transition-colors duration-300 ${
+                                :class="`rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
                                     deletings.includes(upload.id) &&
                                     'cursor-not-allowed'
                                 }`"

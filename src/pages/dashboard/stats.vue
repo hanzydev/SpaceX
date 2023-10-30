@@ -4,31 +4,31 @@
         <Stats class="mt-6" />
         <h3 class="mt-6">Views</h3>
         <div
-            class="mt-3 p-4 bg-spacex-3 w-full rounded-lg h-96 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+            class="mt-3 h-96 w-full rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
         >
             <canvas ref="viewsChartRef" />
         </div>
 
         <h3 class="mt-6">Types</h3>
         <div
-            class="mt-3 flex max-xl:flex-col items-center max-xl:justify-center px-4 py-3 bg-spacex-3 w-full rounded-lg gap-20 max-xl:gap-8 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+            class="mt-3 flex w-full items-center gap-20 rounded-lg bg-spacex-3 px-4 py-3 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary max-xl:flex-col max-xl:justify-center max-xl:gap-8"
         >
-            <table class="w-full bg-spacex-3 rounded-lg table-auto">
-                <thead class="text-left h-10">
+            <table class="w-full table-auto rounded-lg bg-spacex-3">
+                <thead class="h-10 text-left">
                     <tr>
                         <th class="p-2 font-semibold">Type</th>
                         <th class="p-2 font-semibold">Count</th>
                     </tr>
                 </thead>
-                <tbody class="text-slate-100 border-none">
+                <tbody class="border-none text-slate-100">
                     <tr
                         v-for="(type, index) in store.stats.chart!.types.labels"
                         :key="index"
                     >
-                        <td class="p-2 border-t border-spacex-1">
+                        <td class="border-t border-spacex-1 p-2">
                             <span>{{ type }}</span>
                         </td>
-                        <td class="p-2 border-t border-spacex-1">
+                        <td class="border-t border-spacex-1 p-2">
                             <span>{{
                                 store.stats.chart!.types.data[
                                     store.stats.chart!.types.labels.indexOf(
@@ -42,7 +42,7 @@
             </table>
             <canvas
                 ref="typesChartRef"
-                class="xl:ml-auto max-h-80 max-w-[20rem] max-xl:w-full max-xl:h-full"
+                class="max-h-80 max-w-[20rem] max-xl:h-full max-xl:w-full xl:ml-auto"
             />
         </div>
     </div>

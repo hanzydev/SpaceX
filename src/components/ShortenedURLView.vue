@@ -1,17 +1,17 @@
 <template>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
-        <div class="flex flex-col justify-center p-4 w-full">
+        <div class="flex w-full flex-col justify-center p-4">
             <h2>{{ data.id }}</h2>
             <h3 class="!mt-5">Statistics</h3>
-            <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 !mt-3">
+            <div class="!mt-3 grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
                 <div
-                    class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+                    class="flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                 >
                     <Icon name="eye" class="text-2xl text-spacex-primary" />
                     <h6>{{ data.views.today }}</h6>
                 </div>
                 <div
-                    class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+                    class="flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                 >
                     <Icon
                         name="calendar"
@@ -23,7 +23,7 @@
 
             <h3 class="!mt-5">URL</h3>
             <div
-                class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300 !mt-3"
+                class="!mt-3 flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
                 <Icon name="link" class="text-2xl text-spacex-primary" />
                 <h6>{{ data.url }}</h6>
@@ -31,32 +31,32 @@
 
             <h3 class="!mt-5">Controls</h3>
             <div
-                class="grid max-xs:grid-cols-1 grid-cols-2 md:grid-cols-4 gap-2 mt-3 w-full"
+                class="mt-3 grid w-full grid-cols-2 gap-2 max-xs:grid-cols-1 md:grid-cols-4"
             >
                 <button
-                    class="flex items-center py-2 px-3 w-full gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex w-full items-center gap-2 rounded-lg bg-spacex-2 px-3 py-2 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleCopy"
                 >
                     <Icon name="copy" />
                     <span>Copy Link</span>
                 </button>
                 <button
-                    class="flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleOpen"
                 >
                     <Icon name="link-open" />
                     <span>Open</span>
                 </button>
                 <button
-                    class="flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleEdit"
                 >
                     <Icon name="pen" />
                     <span>Edit</span>
                 </button>
                 <button
-                    :class="`flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                        isDeleting && 'opacity-50 cursor-not-allowed'
+                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary ${
+                        isDeleting && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isDeleting"
                     @click="handleDelete"
@@ -69,14 +69,14 @@
         </div>
     </Modal>
     <div
-        :class="`cursor-pointer h-16 flex flex-col items-center justify-center p-4 bg-spacex-3 rounded-lg relative transition-all duration-300 ${
+        :class="`relative flex h-16 cursor-pointer flex-col items-center justify-center rounded-lg bg-spacex-3 p-4 transition-all duration-300 ${
             isModalOpen
                 ? 'ring-2 ring-spacex-primary'
                 : 'hover:ring-2 hover:ring-spacex-primary'
         }`"
         @click="isModalOpen = true"
     >
-        <h6 class="text-slate-400 text-center">
+        <h6 class="text-center text-slate-400">
             {{ data.id.length > 24 ? `${data.id.slice(0, 24)}...` : data.id }}
         </h6>
     </div>

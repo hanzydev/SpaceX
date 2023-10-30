@@ -1,5 +1,5 @@
 <template>
-    <div class="flex items-center justify-center h-screen">
+    <div class="flex h-screen items-center justify-center">
         <Spinner :size="64" />
     </div>
 </template>

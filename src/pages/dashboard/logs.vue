@@ -5,11 +5,11 @@
             v-model:value="searchQuery"
             placeholder="Search for logs..."
         />
-        <div class="w-full overflow-y-hidden relative">
+        <div class="relative w-full overflow-y-hidden">
             <table
-                class="w-full bg-spacex-3 rounded-lg border-collapse table-auto mt-4"
+                class="mt-4 w-full table-auto border-collapse rounded-lg bg-spacex-3"
             >
-                <thead class="text-left h-10">
+                <thead class="h-10 text-left">
                     <tr>
                         <th class="px-4 py-2 font-semibold">IP</th>
                         <th class="px-4 py-2 font-semibold">Action</th>
@@ -19,7 +19,7 @@
                 </thead>
                 <tbody
                     :key="currentPage + searchQuery"
-                    class="text-slate-100 border-none"
+                    class="border-none text-slate-100"
                 >
                     <tr
                         v-for="(log, index) in filtered.slice(
@@ -28,7 +28,7 @@
                         )"
                         :key="index"
                     >
-                        <td class="border px-4 py-2 border-spacex-4">
+                        <td class="border border-spacex-4 px-4 py-2">
                             <a
                                 class="text-spacex-primary hover:underline"
                                 target="_blank"
@@ -37,13 +37,13 @@
                                 {{ log.ip }}
                             </a>
                         </td>
-                        <td class="border px-4 py-2 border-spacex-4">
+                        <td class="border border-spacex-4 px-4 py-2">
                             {{ log.action }}
                         </td>
-                        <td class="border px-4 py-2 border-spacex-4">
+                        <td class="border border-spacex-4 px-4 py-2">
                             {{ log.message }}
                         </td>
-                        <td class="border px-4 py-2 border-spacex-4">
+                        <td class="border border-spacex-4 px-4 py-2">
                             {{ new Date(log.date).toLocaleString('en-US') }}
                         </td>
                     </tr>

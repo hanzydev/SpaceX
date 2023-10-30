@@ -2,7 +2,7 @@
     <h2>Backups</h2>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
         <div
-            class="flex flex-col justify-center items-center text-center p-6 w-full space-y-6"
+            class="flex w-full flex-col items-center justify-center space-y-6 p-6 text-center"
         >
             <Icon name="alert" class="h-20 w-20" />
             <h3>Are you sure? This action is irreversible!</h3>
@@ -10,15 +10,15 @@
                 You are about to restore a backup. This will delete all your
                 current data and replace it with the data from the backup.
             </p>
-            <div class="grid grid-cols-2 space-x-3 w-full">
+            <div class="grid w-full grid-cols-2 space-x-3">
                 <button
-                    class="py-2.5 rounded-lg bg-spacex-2 focus:ring-2 focus:ring-white"
+                    class="rounded-lg bg-spacex-2 py-2.5 focus:ring-2 focus:ring-white"
                     @click="isModalOpen = false"
                 >
                     Cancel
                 </button>
                 <button
-                    class="py-2.5 rounded-lg bg-spacex-primary focus:ring-2 focus:ring-white"
+                    class="rounded-lg bg-spacex-primary py-2.5 focus:ring-2 focus:ring-white"
                     :disabled="isRestoring"
                     @click="restoreFromBackup"
                 >
@@ -34,10 +34,10 @@
         </div>
         <div class="mt-6 rounded-xl bg-spacex-3 p-4">
             <h3>Operations</h3>
-            <div class="grid grid-cols-2 w-full max-sm:grid-cols-1 gap-2 mt-6">
+            <div class="mt-6 grid w-full grid-cols-2 gap-2 max-sm:grid-cols-1">
                 <button
-                    :class="`h-10 px-4 bg-spacex-primary rounded-lg outline-none flex items-center justify-center text-center ${
-                        isCreating && 'opacity-50 cursor-not-allowed'
+                    :class="`flex h-10 items-center justify-center rounded-lg bg-spacex-primary px-4 text-center outline-none ${
+                        isCreating && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isCreating"
                     @click="createBackup"
@@ -45,9 +45,9 @@
                     <span v-if="!isCreating">Create Backup</span>
                     <Spinner v-else :size="24" color="#fff" />
                 </button>
-                <div class="relative w-full flex flex-col">
+                <div class="relative flex w-full flex-col">
                     <button
-                        :class="`h-10 px-4 bg-spacex-primary rounded-lg outline-none flex items-center justify-center text-center ${
+                        :class="`flex h-10 items-center justify-center rounded-lg bg-spacex-primary px-4 text-center outline-none ${
                             isRestoring && 'opacity-50'
                         }`"
                         :disabled="isRestoring"
@@ -58,7 +58,7 @@
                     <input
                         type="file"
                         accept=".tar.gz"
-                        :class="`h-full w-full opacity-0 z-10 absolute ${
+                        :class="`absolute z-10 h-full w-full opacity-0 ${
                             isRestoring
                                 ? 'cursor-not-allowed'
                                 : 'cursor-pointer'

@@ -1,6 +1,6 @@
 <template>
     <button
-        class="fixed ring-2 ring-spacex-primary hover:bg-spacex-primary focus:ring-white z-50 bg-spacex-4 top-4 left-4 p-3 h-12 w-12 rounded-md flex items-center justify-center transition-all duration-300 focus:ring-2 focus:ring-spacex-primary"
+        class="fixed left-4 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-md bg-spacex-4 p-3 ring-2 ring-spacex-primary transition-all duration-300 hover:bg-spacex-primary focus:ring-2 focus:ring-spacex-primary focus:ring-white"
         aria-label="Go back"
         @click="$router.push($props.to)"
     >

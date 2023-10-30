@@ -1,8 +1,8 @@
 <template>
-    <div class="max-lg:pb-8 pb-16">
+    <div class="pb-16 max-lg:pb-8">
         <nav
             id="navbar"
-            class="py-4 px-4 lg:px-6 w-full bg-spacex-3 flex items-center fixed z-50"
+            class="fixed z-50 flex w-full items-center bg-spacex-3 px-4 py-4 lg:px-6"
         >
             <svg
                 id="sidebar-toggler"
@@ -25,23 +25,23 @@
                     d="m 30,67 h 40 c 0,0 8.5,0.68551 8.5,-10.375 0,-8.292653 -6.122707,-9.002293 -8.5,-6.625 l -11.071429,11.071429"
                 />
             </svg>
-            <h2 class="max-lg:mx-auto lg:font-bold max-lg:!text-2xl">SpaceX</h2>
+            <h2 class="max-lg:mx-auto max-lg:!text-2xl lg:font-bold">SpaceX</h2>
             <div class="relative lg:ml-auto">
                 <img
                     src="/favicon.ico"
                     width="32"
                     height="32"
                     alt=""
-                    class="rounded-full ring-[3px] ring-spacex-primary cursor-pointer"
+                    class="cursor-pointer rounded-full ring-[3px] ring-spacex-primary"
                     draggable="false"
                     @click="handleProfile"
                 />
                 <div
                     id="profile"
-                    class="absolute right-0 z-50 mt-4 shadow-md hidden"
+                    class="absolute right-0 z-50 mt-4 hidden shadow-md"
                 >
                     <div
-                        class="bg-spacex-3 ring-2 ring-spacex-primary rounded-lg flex flex-col justify-center shadow-lg p-2.5 w-52"
+                        class="flex w-52 flex-col justify-center rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary"
                     >
                         <h4 class="px-2.5">
                             {{ _.capitalize(userStore.username) }}
@@ -49,44 +49,44 @@
 
                         <hr class="my-2 h-[1px] border-0 bg-spacex-1" />
 
-                        <div class="flex items-center flex-col gap-2 mt-1">
+                        <div class="mt-1 flex flex-col items-center gap-2">
                             <NuxtLink
                                 to="/dashboard/manage-account"
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
                             >
                                 <Icon name="user" />
                                 Manage Account
                             </NuxtLink>
                             <NuxtLink
                                 to="/dashboard/stats"
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
                             >
                                 <Icon name="stats" />
                                 Statistics
                             </NuxtLink>
                             <NuxtLink
                                 to="/dashboard/logs"
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
                             >
                                 <Icon name="book" />
                                 Logs
                             </NuxtLink>
                             <NuxtLink
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
                                 to="/dashboard/backups"
                             >
                                 <Icon name="folder-zip" />
                                 Backups
                             </NuxtLink>
                             <NuxtLink
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
                                 to="/dashboard/system-monitor"
                             >
                                 <Icon name="monitor" />
                                 System Monitor
                             </NuxtLink>
                             <button
-                                class="flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg focus:bg-spacex-primary"
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:bg-spacex-primary"
                                 @click="createSXCU"
                             >
                                 <Icon name="settings" />
@@ -95,24 +95,24 @@
                             <div class="relative w-full">
                                 <div
                                     id="themes"
-                                    class="absolute right-0 z-50 max-sm:-top-[17.45rem] mr-52 shadow-md hidden"
+                                    class="absolute right-0 z-50 mr-52 hidden shadow-md max-sm:-top-[17.45rem]"
                                 >
                                     <div
-                                        class="bg-spacex-3 ring-spacex-primary ring-2 max-[440px]:w-36 max-[472px]:w-48 w-56 rounded-lg flex flex-col justify-center shadow-lg p-2.5 gap-2"
+                                        class="flex w-56 flex-col justify-center gap-2 rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary max-[472px]:w-48 max-[440px]:w-36"
                                     >
                                         <button
                                             v-for="(
                                                 [name, data], index
                                             ) in Object.entries(themes)"
                                             :key="index"
-                                            :class="`flex items-center gap-2 font-medium w-full h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg ${
+                                            :class="`flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 ${
                                                 name === theme &&
-                                                'ring-spacex-primary ring-2'
+                                                'ring-2 ring-spacex-primary'
                                             }`"
                                             @click="setTheme(name)"
                                         >
                                             <div
-                                                class="w-4 h-4 rounded-full"
+                                                class="h-4 w-4 rounded-full"
                                                 :style="{
                                                     backgroundColor:
                                                         data.primary,
@@ -124,7 +124,7 @@
                                 </div>
 
                                 <button
-                                    class="flex items-center gap-2 font-medium w-full focus:ring-2 h-9 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg focus:ring-spacex-primary"
+                                    class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
                                     @click="handleThemes"
                                 >
                                     <Icon name="palette" />
@@ -133,7 +133,7 @@
                             </div>
                             <NuxtLink
                                 to="/auth/logout"
-                                class="flex items-center text-red-500 gap-2 font-medium w-full py-1.5 px-2.5 hover:bg-spacex-2 transition-colors rounded-lg"
+                                class="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 font-medium text-red-500 transition-colors hover:bg-spacex-2"
                             >
                                 <Icon name="logout" />
                                 Logout

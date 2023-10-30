@@ -2,11 +2,11 @@
     <Teleport v-if="isDemonstrable" to="body">
         <div
             ref="containerRef"
-            class="fixed inset-0 bg-[rgba(0,0,0,0.2)] z-[9999] backdrop-blur-sm justify-center items-center h-screen hidden"
+            class="fixed inset-0 z-[9999] hidden h-screen items-center justify-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm"
         >
             <div
                 ref="contentRef"
-                class="bg-spacex-4 rounded-xl p-0 fixed w-[90%] max-w-[640px] max-h-[90%] overflow-auto opacity-100 translate-none transform-none ring-2 ring-spacex-primary hidden"
+                class="translate-none fixed hidden max-h-[90%] w-[90%] max-w-[640px] transform-none overflow-auto rounded-xl bg-spacex-4 p-0 opacity-100 ring-2 ring-spacex-primary"
             >
                 <div class="w-full">
                     <slot />

@@ -1,16 +1,16 @@
 <template>
     <h2>Upload Files</h2>
     <Modal :is-open="isModalOpened" @close="isModalOpened = false">
-        <div class="flex flex-col justify-center p-4 md:p-8 w-full">
+        <div class="flex w-full flex-col justify-center p-4 md:p-8">
             <h2>Upload Settings</h2>
             <div
                 v-if="
                     files[currentModal!]!.type.startsWith('image/') &&
                     files[currentModal!]!.type !== 'image/gif'
                 "
-                class="bg-spacex-3 rounded-lg p-4 flex flex-col mt-7"
+                class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
             >
-                <p class="font-semibold uppercase text-slate-300 text-sm">
+                <p class="text-sm font-semibold uppercase text-slate-300">
                     IMAGE QUALITY PERCENTAGE (CURRENTLY %{{
                         uploadSettings[currentModal!]!.quality
                     }})
@@ -24,8 +24,8 @@
                 />
             </div>
 
-            <div class="bg-spacex-3 rounded-lg p-4 flex flex-col mt-7">
-                <p class="font-semibold uppercase text-slate-300 text-sm">
+            <div class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4">
+                <p class="text-sm font-semibold uppercase text-slate-300">
                     DELETE AFTER VIEWS (0 = NEVER DELETE)
                 </p>
                 <div class="relative mt-4">
@@ -33,16 +33,16 @@
                         v-model="
                             uploadSettings[currentModal!]!.deleteAfterViews
                         "
-                        class="w-full h-10 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300"
+                        class="h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                         type="number"
                         :min="0"
                         :max="100000"
                     />
                     <div
-                        class="absolute right-0 top-0 h-full flex items-center flex-col justify-center bg-spacex-1 rounded-r-md"
+                        class="absolute right-0 top-0 flex h-full flex-col items-center justify-center rounded-r-md bg-spacex-1"
                     >
                         <button
-                            class="p-1 w-6 flex items-center justify-center rounded-tr-md hover:ring-2 hover:ring-spacex-primary duration-300 transition-all"
+                            class="flex w-6 items-center justify-center rounded-tr-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             @click="
                                 uploadSettings[
                                     currentModal!
@@ -55,7 +55,7 @@
                             <Icon name="chevron-up" class="text-xs" />
                         </button>
                         <button
-                            class="p-1 w-6 flex items-center justify-center rounded-br-md hover:ring-2 hover:ring-spacex-primary duration-300 transition-all"
+                            class="flex w-6 items-center justify-center rounded-br-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             @click="
                                 uploadSettings[
                                     currentModal!
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="mt-7 w-fit flex items-center gap-2">
+            <div class="mt-7 flex w-fit items-center gap-2">
                 <Switch
                     v-model:is-checked="uploadSettings[currentModal!]!.private"
                 />
@@ -79,15 +79,15 @@
             </div>
         </div>
     </Modal>
-    <div class="mt-6 w-full rounded-md flex flex-col">
+    <div class="mt-6 flex w-full flex-col rounded-md">
         <div
-            :class="`h-32 w-full overflow-hidden relative shadow-md border-2 items-center rounded-lg border-spacex-primary border-dotted ${
+            :class="`relative h-32 w-full items-center overflow-hidden rounded-lg border-2 border-dotted border-spacex-primary shadow-md ${
                 isUploading && 'opacity-50'
             }`"
         >
             <input
                 type="file"
-                :class="`h-full w-full opacity-0 z-10 absolute ${
+                :class="`absolute z-10 h-full w-full opacity-0 ${
                     isUploading ? 'cursor-not-allowed' : 'cursor-pointer'
                 }`"
                 multiple
@@ -95,7 +95,7 @@
                 @change="onFileUpload"
             />
             <div
-                class="h-full w-full bg-spacex-3 absolute z-1 flex justify-center items-center top-0"
+                class="z-1 absolute top-0 flex h-full w-full items-center justify-center bg-spacex-3"
             >
                 <div class="flex flex-col items-center text-center">
                     <Icon name="upload2" class="text-4xl" />
@@ -103,28 +103,28 @@
                 </div>
             </div>
         </div>
-        <div class="flex gap-2 mt-4 flex-col">
+        <div class="mt-4 flex flex-col gap-2">
             <div
                 v-for="(file, index) in files"
                 :key="index"
-                class="w-full flex items-center justify-between rounded-lg p-3 bg-spacex-3"
+                class="flex w-full items-center justify-between rounded-lg bg-spacex-3 p-3"
             >
                 <div class="flex items-center gap-3">
-                    <div class="h-12 w-12 relative">
+                    <div class="relative h-12 w-12">
                         <img
                             v-if="file.type.includes('image')"
-                            class="rounded-md w-full h-full"
+                            class="h-full w-full rounded-md"
                             :src="getFileURL(file)"
                             :alt="file.name"
                         />
 
                         <div
                             v-else-if="file.type.includes('video')"
-                            class="flex items-center justify-center w-full h-full"
+                            class="flex h-full w-full items-center justify-center"
                         >
                             <video
                                 :src="getFileURL(file)"
-                                class="w-full h-full"
+                                class="h-full w-full"
                                 loop
                                 muted
                             />
@@ -132,7 +132,7 @@
 
                         <div
                             v-else
-                            class="flex items-center justify-center w-full h-full"
+                            class="flex h-full w-full items-center justify-center"
                         >
                             <Icon
                                 v-if="file.type.includes('audio')"
@@ -177,8 +177,8 @@
                 </div>
                 <div class="flex items-center space-x-0.5">
                     <button
-                        :class="`mr-2 text-slate-400 bg-spacex-2 p-2 rounded-md hover:text-spacex-primary transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                            isUploading && 'opacity-50 cursor-not-allowed'
+                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-spacex-primary focus:ring-2 focus:ring-spacex-primary ${
+                            isUploading && 'cursor-not-allowed opacity-50'
                         }`"
                         aria-label="Upload settings"
                         :disabled="isUploading"
@@ -187,8 +187,8 @@
                         <Icon name="settings" />
                     </button>
                     <button
-                        :class="`mr-2 text-slate-400 bg-spacex-2 p-2 rounded-md hover:text-red-500 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                            isUploading && 'opacity-50 cursor-not-allowed'
+                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-red-500 focus:ring-2 focus:ring-spacex-primary ${
+                            isUploading && 'cursor-not-allowed opacity-50'
                         }`"
                         aria-label="Delete file"
                         :disabled="isUploading"
@@ -199,9 +199,9 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-md w-full h-5 bg-spacex-2 mt-4">
+        <div class="mt-4 h-5 w-full rounded-md bg-spacex-2">
             <div
-                class="h-full bg-spacex-primary rounded-md flex items-center justify-between transition-all duration-300"
+                class="flex h-full items-center justify-between rounded-md bg-spacex-primary transition-all duration-300"
                 :style="{
                     width: `${uploadProgress}%`,
                 }"
@@ -209,7 +209,7 @@
                 <Transition>
                     <p
                         v-if="uploadProgress"
-                        class="text-white text-sm ml-auto px-2 font-medium text-center"
+                        class="ml-auto px-2 text-center text-sm font-medium text-white"
                     >
                         {{ uploadProgress.toFixed(2) }}%
                     </p>
@@ -217,8 +217,8 @@
             </div>
         </div>
         <button
-            :class="`gap-4 mt-4 bg-spacex-primary h-10 rounded-lg text-white transition-all duration-300 flex items-center justify-center text-center ${
-                isUploading && 'opacity-50 cursor-not-allowed'
+            :class="`mt-4 flex h-10 items-center justify-center gap-4 rounded-lg bg-spacex-primary text-center text-white transition-all duration-300 ${
+                isUploading && 'cursor-not-allowed opacity-50'
             }`"
             :disabled="isUploading"
             @click="uploadFiles"

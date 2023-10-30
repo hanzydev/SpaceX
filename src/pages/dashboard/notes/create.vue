@@ -1,37 +1,37 @@
 <template>
     <GoBack to="/dashboard/notes" />
     <div
-        class="flex flex-col items-center absolute justify-center min-h-screen w-full p-4 bg-spacex-5"
+        class="absolute flex min-h-screen w-full flex-col items-center justify-center bg-spacex-5 p-4"
     >
         <form
-            class="flex flex-col bg-spacex-4 p-10 max-sm:w-80 max-lg:w-[30rem] w-[50rem] rounded-xl"
+            class="flex w-[50rem] flex-col rounded-xl bg-spacex-4 p-10 max-lg:w-[30rem] max-sm:w-80"
             @submit.prevent="handleCreate"
         >
             <h1 class="mx-auto max-sm:!text-3xl">Create Note</h1>
 
             <div class="mt-7 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >Title</label
                 >
                 <input
                     v-model="note.title"
                     type="text"
                     placeholder="Enter Title"
-                    :class="`h-10 mt-1 py-2 px-3 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isCreating && 'cursor-not-allowed'
                     }`"
                     :disabled="isCreating"
                 />
             </div>
             <div class="mt-3 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm"
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >Content</label
                 >
                 <textarea
                     v-model="note.content"
                     placeholder="Enter Content"
                     wrap="hard"
-                    :class="`mt-1 py-2.5 px-3 min-h-[40px] bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 resize-none ${
+                    :class="`mt-1 min-h-[40px] resize-none rounded-lg bg-spacex-2 px-3 py-2.5 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isCreating && 'cursor-not-allowed'
                     }`"
                     :rows="note.content.split('\n').length"
@@ -40,8 +40,8 @@
             </div>
 
             <button
-                :class="`mt-8 py-2 px-4 bg-spacex-primary rounded-lg outline-none focus:ring-2 ring-white flex items-center justify-center text-center ${
-                    isCreating && 'opacity-50 cursor-not-allowed'
+                :class="`mt-8 flex items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center outline-none ring-white focus:ring-2 ${
+                    isCreating && 'cursor-not-allowed opacity-50'
                 }`"
                 :disabled="isCreating"
             >

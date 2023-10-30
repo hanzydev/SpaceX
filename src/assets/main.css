@@ -19,7 +19,7 @@ body {
 }
 
 h1 {
-    @apply !text-4xl !my-0 font-bold;
+    @apply !my-0 !text-4xl font-bold;
 }
 
 h2 {
@@ -66,7 +66,7 @@ button {
 }
 
 .view-line {
-    @apply !w-full h-[50vh];
+    @apply h-[50vh] !w-full;
 }
 
 .font-spacemono {
@@ -94,7 +94,7 @@ input[type='range'] {
 }
 
 input[type='range']::-webkit-slider-thumb {
-    @apply cursor-pointer rounded-full h-4 w-4 bg-spacex-primary appearance-none;
+    @apply h-4 w-4 cursor-pointer appearance-none rounded-full bg-spacex-primary;
 }
 
 input[type='number']::-webkit-outer-spin-button,

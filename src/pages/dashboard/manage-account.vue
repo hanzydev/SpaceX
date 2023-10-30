@@ -1,7 +1,7 @@
 <template>
     <h2>Manage Account</h2>
     <Modal :is-open="isModalOpened" @close="handleModalClose">
-        <div class="flex flex-col justify-center p-4 md:p-8 w-full">
+        <div class="flex w-full flex-col justify-center p-4 md:p-8">
             <h3>
                 {{
                     modalOperation === 'enable-2fa'
@@ -13,15 +13,15 @@
             </h3>
             <div
                 v-if="modalOperation === 'enable-2fa'"
-                class="mt-7 md:flex md:space-x-10 max-md:space-y-4 items-center"
+                class="mt-7 items-center max-md:space-y-4 md:flex md:space-x-10"
             >
                 <img
                     :src="twoFaQrCodeBase64"
-                    class="w-40 h-40 rounded-md"
+                    class="h-40 w-40 rounded-md"
                     draggable="false"
                 />
                 <div>
-                    <p class="font-semibold uppercase text-slate-300 text-sm">
+                    <p class="text-sm font-semibold uppercase text-slate-300">
                         SCAN THE QR CODE
                     </p>
                     <p class="mt-2 text-slate-200">
@@ -42,7 +42,7 @@
             >
                 <div class="flex flex-col">
                     <label
-                        class="font-semibold uppercase text-slate-300 text-sm"
+                        class="text-sm font-semibold uppercase text-slate-300"
                     >
                         OTP CODE
                     </label>
@@ -54,7 +54,7 @@
                         }`"
                         minlength="6"
                         maxlength="6"
-                        :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                        :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                             is2FAUpdating && 'cursor-not-allowed'
                         }`"
                         :disabled="is2FAUpdating"
@@ -62,8 +62,8 @@
                 </div>
 
                 <button
-                    :class="`mt-4 w-full py-2 px-4 bg-spacex-primary rounded-lg  transition-all flex items-center justify-center text-center ${
-                        is2FAUpdating && 'opacity-50 cursor-not-allowed'
+                    :class="`mt-4 flex w-full items-center justify-center rounded-lg  bg-spacex-primary px-4 py-2 text-center transition-all ${
+                        is2FAUpdating && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="is2FAUpdating"
                 >
@@ -82,17 +82,17 @@
         </div>
     </Modal>
     <div class="mt-6 flex flex-col space-y-5">
-        <div class="rounded-lg bg-spacex-3 z-20">
+        <div class="z-20 rounded-lg bg-spacex-3">
             <div
-                class="flex items-center cursor-pointer select-none p-4"
+                class="flex cursor-pointer select-none items-center p-4"
                 @click="toggleItem('update-credentials')"
             >
                 <div class="flex items-center space-x-3">
-                    <Icon class="w-6 h-6" name="credentials" />
+                    <Icon class="h-6 w-6" name="credentials" />
                     <h2 class="!text-lg font-semibold">Update Credentials</h2>
                 </div>
                 <button
-                    class="bg-spacex-2 p-2 flex items-center justify-center h-8 w-8 rounded-md ml-auto"
+                    class="ml-auto flex h-8 w-8 items-center justify-center rounded-md bg-spacex-2 p-2"
                 >
                     <Icon
                         id="update-credentials-toggler"
@@ -104,15 +104,15 @@
             <div id="update-credentials-container" class="hidden h-0 opacity-0">
                 <form
                     id="update-credentials-content"
-                    class="w-full opacity-0 px-4 pb-4"
+                    class="w-full px-4 pb-4 opacity-0"
                     @submit.prevent="updateCredentials"
                 >
                     <div
-                        class="grid-cols-2 max-sm:grid-cols-1 grid gap-2 w-full"
+                        class="grid w-full grid-cols-2 gap-2 max-sm:grid-cols-1"
                     >
                         <div class="flex flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Username
                             </label>
@@ -120,7 +120,7 @@
                                 v-model="credentials.username"
                                 type="text"
                                 placeholder="Enter username"
-                                :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                                :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                                     isCredentialsUpdating &&
                                     'cursor-not-allowed'
                                 }`"
@@ -129,7 +129,7 @@
                         </div>
                         <div class="flex flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Password
                             </label>
@@ -137,14 +137,14 @@
                                 v-model="credentials.password"
                                 type="password"
                                 placeholder="Enter password"
-                                :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                                :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                                     isCredentialsUpdating &&
                                     'cursor-not-allowed'
                                 }`"
                                 :disabled="isCredentialsUpdating"
                             />
                             <span
-                                class="text-sm font-medium text-slate-300 mt-1"
+                                class="mt-1 text-sm font-medium text-slate-300"
                             >
                                 If you leave it blank, your current password
                                 will be used.
@@ -152,9 +152,9 @@
                         </div>
                     </div>
                     <button
-                        :class="`mt-4 w-full py-2 px-4 bg-spacex-primary rounded-lg transition-all flex items-center justify-center text-center ${
+                        :class="`mt-4 flex w-full items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center transition-all ${
                             isCredentialsUpdating &&
-                            'opacity-50 cursor-not-allowed'
+                            'cursor-not-allowed opacity-50'
                         }`"
                         :disabled="isCredentialsUpdating"
                     >
@@ -166,19 +166,19 @@
                 </form>
             </div>
         </div>
-        <div class="rounded-lg bg-spacex-3 z-20">
+        <div class="z-20 rounded-lg bg-spacex-3">
             <div
-                class="flex items-center cursor-pointer select-none p-4"
+                class="flex cursor-pointer select-none items-center p-4"
                 @click="toggleItem('2fa')"
             >
                 <div class="flex items-center space-x-3">
-                    <Icon class="w-6 h-6" name="shield" />
+                    <Icon class="h-6 w-6" name="shield" />
                     <h2 class="!text-lg font-semibold">
                         Two-Factor Authentication System
                     </h2>
                 </div>
                 <button
-                    class="bg-spacex-2 p-2 flex items-center justify-center h-8 w-8 rounded-md ml-auto"
+                    class="ml-auto flex h-8 w-8 items-center justify-center rounded-md bg-spacex-2 p-2"
                 >
                     <Icon
                         id="2fa-toggler"
@@ -188,8 +188,8 @@
                 </button>
             </div>
             <div id="2fa-container" class="hidden h-0 opacity-0">
-                <div id="2fa-content" class="w-full opacity-0 px-4 pb-4">
-                    <div class="w-fit flex items-center gap-2">
+                <div id="2fa-content" class="w-full px-4 pb-4 opacity-0">
+                    <div class="flex w-fit items-center gap-2">
                         <Switch
                             v-model:is-checked="userStore.twoFaEnabled"
                             :disabled="is2FAQrCodeLoading"
@@ -200,17 +200,17 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-lg bg-spacex-3 z-20">
+        <div class="z-20 rounded-lg bg-spacex-3">
             <div
-                class="flex items-center cursor-pointer select-none p-4"
+                class="flex cursor-pointer select-none items-center p-4"
                 @click="toggleItem('embed-config')"
             >
                 <div class="flex items-center space-x-3">
-                    <Icon class="w-6 h-6" name="embed" />
+                    <Icon class="h-6 w-6" name="embed" />
                     <h2 class="!text-lg font-semibold">Embed Config</h2>
                 </div>
                 <button
-                    class="bg-spacex-2 p-2 flex items-center justify-center h-8 w-8 rounded-md ml-auto"
+                    class="ml-auto flex h-8 w-8 items-center justify-center rounded-md bg-spacex-2 p-2"
                 >
                     <Icon
                         id="embed-config-toggler"
@@ -222,15 +222,15 @@
             <div id="embed-config-container" class="hidden h-0 opacity-0">
                 <form
                     id="embed-config-content"
-                    class="w-full opacity-0 px-4 pb-4"
+                    class="w-full px-4 pb-4 opacity-0"
                     @submit.prevent="updateEmbedConfig"
                 >
                     <div
-                        class="grid-cols-2 max-sm:grid-cols-1 grid gap-2 w-full"
+                        class="grid w-full grid-cols-2 gap-2 max-sm:grid-cols-1"
                     >
                         <div class="flex flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Title
                             </label>
@@ -238,7 +238,7 @@
                                 v-model="embedConfigStore.embedConfig!.title"
                                 type="text"
                                 placeholder="Enter title"
-                                :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                                :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                                     isEmbedConfigUpdating &&
                                     'cursor-not-allowed'
                                 }`"
@@ -248,7 +248,7 @@
 
                         <div class="flex flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Description
                             </label>
@@ -258,16 +258,16 @@
                                 "
                                 type="text"
                                 placeholder="Enter description"
-                                :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                                :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                                     isEmbedConfigUpdating &&
                                     'cursor-not-allowed'
                                 }`"
                                 :disabled="isEmbedConfigUpdating"
                             />
                         </div>
-                        <div class="flex flex-col mt-4">
+                        <div class="mt-4 flex flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Site Name
                             </label>
@@ -277,16 +277,16 @@
                                 "
                                 type="text"
                                 placeholder="Enter site name"
-                                :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                                :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                                     isEmbedConfigUpdating &&
                                     'cursor-not-allowed'
                                 }`"
                                 :disabled="isEmbedConfigUpdating"
                             />
                         </div>
-                        <div class="flex flex-col mt-4 relative w-full">
+                        <div class="relative mt-4 flex w-full flex-col">
                             <label
-                                class="font-semibold uppercase text-slate-300 text-sm"
+                                class="text-sm font-semibold uppercase text-slate-300"
                             >
                                 Color
                             </label>
@@ -300,7 +300,7 @@
                                         embedConfigStore.embedConfig!.color
                                     }`,
                                 }"
-                                :class="`z-10 h-10 pl-10 mt-1.5 py-2 px-4 bg-spacex-2 rounded-md outline-none placeholder-slate-300 ${
+                                :class="`z-10 mt-1.5 h-10 rounded-md bg-spacex-2 px-4 py-2 pl-10 placeholder-slate-300 outline-none ${
                                     isEmbedConfigUpdating &&
                                     'cursor-not-allowed'
                                 }`"
@@ -308,7 +308,7 @@
                                 @click="openColorPicker"
                             />
                             <div
-                                class="z-10 absolute w-5 h-5 top-[36px] left-[10px] rounded-full"
+                                class="absolute left-[10px] top-[36px] z-10 h-5 w-5 rounded-full"
                                 :style="{
                                     backgroundColor:
                                         embedConfigStore.embedConfig!.color,
@@ -317,7 +317,7 @@
                             <div
                                 v-if="isColorPickerOpened"
                                 id="color-picker-container"
-                                class="absolute top-20 z-50 left-0 bg-spacex-3 p-2 rounded-xl hidden"
+                                class="absolute left-0 top-20 z-50 hidden rounded-xl bg-spacex-3 p-2"
                                 :style="{
                                     boxShadow: `0 0 0 2px ${
                                         embedConfigStore.embedConfig!.color
@@ -336,32 +336,32 @@
 
                     <h6 class="mt-4 max-md:hidden">Embed Preview</h6>
                     <div
-                        class="bg-[#313338] hidden md:flex w-full h-full p-4 cursor-default font-ggsans rounded-md mt-1.5"
+                        class="font-ggsans mt-1.5 hidden h-full w-full cursor-default rounded-md bg-[#313338] p-4 md:flex"
                     >
-                        <div class="flex space-x-3.5 h-fit">
+                        <div class="flex h-fit space-x-3.5">
                             <img
                                 src="/icon-512x512.png"
-                                class="w-10 h-10 rounded-full"
+                                class="h-10 w-10 rounded-full"
                                 draggable="false"
                             />
                             <div class="flex flex-col">
                                 <div
-                                    class="flex items-center space-x-2 font-ggsans-medium w-fit"
+                                    class="font-ggsans-medium flex w-fit items-center space-x-2"
                                 >
                                     <span
-                                        class="font-medium text-[1rem] leading-[1.375rem] hover:underline"
+                                        class="text-[1rem] font-medium leading-[1.375rem] hover:underline"
                                     >
                                         {{ _.capitalize(credentials.username) }}
                                     </span>
                                     <span
-                                        class="font-medium text-xs text-[#949ba4]"
+                                        class="text-xs font-medium text-[#949ba4]"
                                     >
                                         Today at {{ currentTime }}
                                     </span>
                                 </div>
 
                                 <span
-                                    class="text-[1rem] leading-[1.375rem] text-[#00a8fc] hover:underline w-fit"
+                                    class="w-fit text-[1rem] leading-[1.375rem] text-[#00a8fc] hover:underline"
                                 >
                                     {{ SITE_URL }}/u/embed-preview.png
                                 </span>
@@ -370,12 +370,12 @@
                                         !embedConfigStore.embedConfig!.enabled
                                     "
                                     src="/spacex.png"
-                                    class="rounded-[4px] w-[516px] mt-0.5"
+                                    class="mt-0.5 w-[516px] rounded-[4px]"
                                     draggable="false"
                                 />
                                 <div
                                     v-if="embedConfigStore.embedConfig!.enabled"
-                                    class="flex flex-col mt-0.5 text-sm text-[#dddedf] w-[516px] p-4 bg-[#2b2d31] rounded-[4px] border-l-4"
+                                    class="mt-0.5 flex w-[516px] flex-col rounded-[4px] border-l-4 bg-[#2b2d31] p-4 text-sm text-[#dddedf]"
                                     :style="{
                                         borderColor:
                                             embedConfigStore.embedConfig!.color,
@@ -386,7 +386,7 @@
                                             embedConfigStore.embedConfig!
                                                 .site_name.length
                                         "
-                                        class="text-xs w-fit"
+                                        class="w-fit text-xs"
                                     >
                                         {{
                                             replaceString(
@@ -408,7 +408,7 @@
                                             embedConfigStore.embedConfig!.title
                                                 .length
                                         "
-                                        class="font-ggsans-semibold text-[#00a8fc] hover:underline w-fit"
+                                        class="font-ggsans-semibold w-fit text-[#00a8fc] hover:underline"
                                     >
                                         {{
                                             replaceString(
@@ -430,7 +430,7 @@
                                             embedConfigStore.embedConfig!
                                                 .description.length
                                         "
-                                        class="text-[0.875rem] leading-[1.125rem] w-fit"
+                                        class="w-fit text-[0.875rem] leading-[1.125rem]"
                                         :style="{
                                             marginTop:
                                                 (embedConfigStore.embedConfig!
@@ -482,7 +482,7 @@
                         </span>
                     </h6>
 
-                    <div class="mt-8 w-fit flex items-center gap-2">
+                    <div class="mt-8 flex w-fit items-center gap-2">
                         <Switch
                             v-model:is-checked="
                                 embedConfigStore.embedConfig!.enabled
@@ -491,9 +491,9 @@
                         <h6>Enable Embeds</h6>
                     </div>
                     <button
-                        :class="`w-full mt-4 py-2 px-4 bg-spacex-primary rounded-lg transition-all flex items-center justify-center text-center ${
+                        :class="`mt-4 flex w-full items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center transition-all ${
                             isEmbedConfigUpdating &&
-                            'opacity-50 cursor-not-allowed'
+                            'cursor-not-allowed opacity-50'
                         }`"
                         :disabled="isEmbedConfigUpdating"
                     >

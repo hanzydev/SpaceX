@@ -1,33 +1,33 @@
 <template>
     <div
         ref="sidebarOverlayRef"
-        class="fixed inset-0 bg-[rgba(0,0,0,0.2)] z-20 backdrop-blur-sm justify-center items-center h-screen hidden lg:!hidden"
+        class="fixed inset-0 z-20 hidden h-screen items-center justify-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm lg:!hidden"
     />
     <nav
         id="sidebar"
         ref="sidebarRef"
-        class="max-lg:mt-5 fixed z-30 flex max-lg:hidden flex-col bg-spacex-3 py-4 w-64 h-screen overflow-y-auto"
+        class="fixed z-30 flex h-screen w-64 flex-col overflow-y-auto bg-spacex-3 py-4 max-lg:mt-5 max-lg:hidden"
     >
-        <div class="flex flex-col h-full gap-2">
+        <div class="flex h-full flex-col gap-2">
             <div
                 v-for="(item, index) in items"
                 :key="index"
                 class="flex flex-col gap-2"
             >
-                <p class="mx-6 mt-3 text-slate-400 text-sm font-semibold">
+                <p class="mx-6 mt-3 text-sm font-semibold text-slate-400">
                     {{ item.name }}
                 </p>
                 <NuxtLink
                     v-for="(child, index2) in item.children"
                     :key="index2"
                     :to="child.to"
-                    class="flex items-center gap-3 px-3 py-2 mx-3 transition-colors font-medium text-base hover:bg-spacex-2 rounded-xl"
+                    class="mx-3 flex items-center gap-3 rounded-xl px-3 py-2 text-base font-medium transition-colors hover:bg-spacex-2"
                 >
                     <Icon :name="child.icon" />
                     {{ child.name }}
                 </NuxtLink>
             </div>
-            <div class="lg:hidden pb-[4.5rem]" />
+            <div class="pb-[4.5rem] lg:hidden" />
         </div>
     </nav>
 </template>

@@ -1,37 +1,37 @@
 <template>
     <GoBack v-if="page === '2fa'" to="/auth/login" @click="page = 'login'" />
     <div
-        class="flex flex-col items-center absolute justify-center min-h-screen w-full px-4 pt-4"
+        class="absolute flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4"
     >
         <form
             v-if="page === 'login'"
-            class="flex flex-col bg-spacex-4 p-10 max-sm:w-80 w-[30rem] rounded-xl mt-auto"
+            class="mt-auto flex w-[30rem] flex-col rounded-xl bg-spacex-4 p-10 max-sm:w-80"
             @submit.prevent="handleLogin"
         >
             <h1 class="mx-auto max-sm:!text-3xl">SpaceX - Login</h1>
             <div class="mt-7 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm">
+                <label class="text-sm font-semibold uppercase text-slate-300">
                     Username
                 </label>
                 <input
                     v-model="credentials.username"
                     type="text"
                     placeholder="Enter username"
-                    :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1.5 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isLoggingIn && 'cursor-not-allowed'
                     }`"
                     :disabled="isLoggingIn"
                 />
             </div>
             <div class="mt-4 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm">
+                <label class="text-sm font-semibold uppercase text-slate-300">
                     Password
                 </label>
                 <input
                     v-model="credentials.password"
                     type="password"
                     placeholder="Enter password"
-                    :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-lg outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1.5 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isLoggingIn && 'cursor-not-allowed'
                     }`"
                     :disabled="isLoggingIn"
@@ -40,12 +40,12 @@
             <NuxtTurnstile
                 ref="turnstileRef"
                 v-model="credentials.cf_turnstile_token"
-                class="mt-6 mx-auto"
+                class="mx-auto mt-6"
                 :options="{ theme: 'dark' }"
             />
             <button
-                :class="`mt-6 py-2 px-4 bg-spacex-primary rounded-lg transition-all duration-300 flex items-center justify-center text-center ${
-                    isLoggingIn && 'opacity-50 cursor-not-allowed'
+                :class="`mt-6 flex items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center transition-all duration-300 ${
+                    isLoggingIn && 'cursor-not-allowed opacity-50'
                 }`"
                 :disabled="isLoggingIn"
             >
@@ -55,7 +55,7 @@
         </form>
         <form
             v-else-if="page === '2fa'"
-            class="flex flex-col bg-spacex-4 p-10 max-sm:w-80 w-[30rem] rounded-xl mt-auto"
+            class="mt-auto flex w-[30rem] flex-col rounded-xl bg-spacex-4 p-10 max-sm:w-80"
             @submit.prevent="handleLogin"
         >
             <h1 class="mx-auto max-sm:!text-3xl">SpaceX - 2FA</h1>
@@ -63,7 +63,7 @@
                 Enter the 6-digit verification code from your authenticator app
             </p>
             <div class="mt-7 flex flex-col">
-                <label class="font-semibold uppercase text-slate-300 text-sm">
+                <label class="text-sm font-semibold uppercase text-slate-300">
                     OTP CODE
                 </label>
                 <input
@@ -72,7 +72,7 @@
                     placeholder="Enter the 6-digit verification code"
                     minlength="6"
                     maxlength="6"
-                    :class="`h-10 mt-1.5 py-2 px-3 bg-spacex-2 rounded-md outline-none focus:ring-2 focus:ring-spacex-primary placeholder-slate-300 ${
+                    :class="`mt-1.5 h-10 rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isLoggingIn && 'cursor-not-allowed'
                     }`"
                     :disabled="isLoggingIn"
@@ -80,12 +80,12 @@
                 <NuxtTurnstile
                     ref="turnstileRef"
                     v-model="credentials.cf_turnstile_token"
-                    class="mt-6 mx-auto"
+                    class="mx-auto mt-6"
                     :options="{ theme: 'dark' }"
                 />
                 <button
-                    :class="`mt-6 py-2 px-4 bg-spacex-primary rounded-lg  transition-all duration-300 flex items-center justify-center text-center ${
-                        isLoggingIn && 'opacity-50 cursor-not-allowed'
+                    :class="`mt-6 flex items-center justify-center rounded-lg  bg-spacex-primary px-4 py-2 text-center transition-all duration-300 ${
+                        isLoggingIn && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isLoggingIn"
                 >

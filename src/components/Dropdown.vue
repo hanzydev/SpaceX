@@ -1,7 +1,7 @@
 <template>
     <div
         ref="dropdownRef"
-        class="absolute w-72 rounded-xl hidden shadow-lg ring-2 ring-spacex-primary"
+        class="absolute hidden w-72 rounded-xl shadow-lg ring-2 ring-spacex-primary"
         :class="{
             'h-16': !state.filteredItems.length,
             'h-36': state.filteredItems.length,
@@ -11,22 +11,22 @@
         }"
     >
         <div
-            class="relative flex justify-between ring-2 ring-spacex-primary rounded-t-lg"
+            class="relative flex justify-between rounded-t-lg ring-2 ring-spacex-primary"
         >
             <Icon
                 name="search"
-                class="absolute top-3 left-3 text-slate-300 h-6 w-6"
+                class="absolute left-3 top-3 h-6 w-6 text-slate-300"
             />
             <input
                 v-model="state.searchQuery"
-                class="h-12 pl-11 pr-4 font-medium py-2.5 bg-spacex-3 hover:bg-spacex-2 focus:bg-spacex-2 transition-colors duration-300 rounded-t-lg w-full outline-none placeholder-slate-300"
+                class="h-12 w-full rounded-t-lg bg-spacex-3 py-2.5 pl-11 pr-4 font-medium placeholder-slate-300 outline-none transition-colors duration-300 hover:bg-spacex-2 focus:bg-spacex-2"
                 type="text"
                 :placeholder="searchPlaceholder"
             />
         </div>
 
         <div
-            class="flex flex-col overflow-y-auto rounded-b-lg items-center h-full bg-spacex-3 w-full ring-2 ring-spacex-primary"
+            class="flex h-full w-full flex-col items-center overflow-y-auto rounded-b-lg bg-spacex-3 ring-2 ring-spacex-primary"
             :class="{
                 'justify-center': !state.filteredItems.length,
             }"
@@ -34,7 +34,7 @@
             <button
                 v-for="item in state.filteredItems"
                 :key="item"
-                class="text-slate-300 px-4 py-3 font-normal text-left hover:bg-spacex-2 w-full transition-colors duration-300"
+                class="w-full px-4 py-3 text-left font-normal text-slate-300 transition-colors duration-300 hover:bg-spacex-2"
                 type="button"
                 @click="selectItem(item)"
             >

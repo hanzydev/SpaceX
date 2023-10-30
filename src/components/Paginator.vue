@@ -1,11 +1,11 @@
 <template>
     <div
         v-bind="$attrs"
-        class="p-2 bg-spacex-3 rounded-lg w-full flex text-center items-center justify-center"
+        class="flex w-full items-center justify-center rounded-lg bg-spacex-3 p-2 text-center"
     >
-        <div class="flex mr-auto gap-2">
+        <div class="mr-auto flex gap-2">
             <button
-                :class="`text-slate-400 bg-spacex-2 p-2 rounded-md transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isFirstPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="First page"
@@ -15,7 +15,7 @@
                 <Icon name="chevron-left-2x" />
             </button>
             <button
-                :class="`text-slate-400 bg-spacex-2 p-2 rounded-md transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isFirstPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Previous page"
@@ -35,9 +35,9 @@
             of {{ Math.ceil(data.length / itemsPerPage) }} ({{ data.length }}
             {{ itemName }}s)
         </p>
-        <div class="flex ml-auto gap-2">
+        <div class="ml-auto flex gap-2">
             <button
-                :class="`text-slate-400 bg-spacex-2 p-2 rounded-md transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isLastPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Next page"
@@ -47,7 +47,7 @@
                 <Icon name="chevron-right" />
             </button>
             <button
-                :class="`text-slate-400 bg-spacex-2 p-2 rounded-md transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isLastPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Last page"

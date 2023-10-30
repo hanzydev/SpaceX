@@ -7,7 +7,7 @@
         />
         <div
             :key="currentPage + searchQuery"
-            class="grid max-sm:grid-cols-1 max-md:grid-cols-2 max-[1262px]:grid-cols-3 max-[1495px]:grid-cols-4 grid-cols-5 gap-4 mt-4"
+            class="mt-4 grid grid-cols-5 gap-4 max-[1495px]:grid-cols-4 max-[1262px]:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"
         >
             <FolderView
                 v-for="folder in filtered.slice(

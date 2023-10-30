@@ -3,45 +3,45 @@
 
     <div
         v-if="!store.data"
-        class="absolute flex items-center justify-center m-auto inset-0"
+        class="absolute inset-0 m-auto flex items-center justify-center"
     >
         <Spinner :size="64" />
     </div>
     <div v-else class="mt-6">
         <div
-            class="w-full grid grid-cols-4 max-[1600px]:grid-cols-3 max-[1340px]:grid-cols-2 max-[1130px]:grid-cols-1 gap-5 mt-3"
+            class="mt-3 grid w-full grid-cols-4 gap-5 max-[1600px]:grid-cols-3 max-[1340px]:grid-cols-2 max-[1130px]:grid-cols-1"
         >
             <div
-                class="bg-spacex-3 p-4 rounded-lg flex flex-col hover:ring-2 hover:ring-spacex-primary transition-all duration-300 relative"
+                class="relative flex flex-col rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
-                <p class="font-semibold text-sm text-slate-400">CPU MODEL</p>
+                <p class="text-sm font-semibold text-slate-400">CPU MODEL</p>
                 <Icon
                     name="cpu"
-                    class="text-2xl mt-3.5 mr-3.5 text-spacex-primary absolute right-0 top-0"
+                    class="absolute right-0 top-0 mr-3.5 mt-3.5 text-2xl text-spacex-primary"
                 />
                 <h6 class="!mt-3">
                     {{ store.data.cpu.name }} (x{{ store.data.cpu.cores }})
                 </h6>
             </div>
             <div
-                class="bg-spacex-3 p-4 rounded-lg flex flex-col hover:ring-2 hover:ring-spacex-primary transition-all duration-300 relative"
+                class="relative flex flex-col rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
-                <p class="font-semibold text-sm text-slate-400">CPU USAGE</p>
+                <p class="text-sm font-semibold text-slate-400">CPU USAGE</p>
                 <Icon
                     name="pulse"
-                    class="text-2xl mt-3.5 mr-3.5 text-spacex-primary absolute right-0 top-0"
+                    class="absolute right-0 top-0 mr-3.5 mt-3.5 text-2xl text-spacex-primary"
                 />
                 <h6 class="!mt-3">
                     {{ store.data.cpu.usage }}% ({{ store.data.cpu.speed }} GHz)
                 </h6>
             </div>
             <div
-                class="bg-spacex-3 p-4 rounded-lg flex flex-col hover:ring-2 hover:ring-spacex-primary transition-all duration-300 relative"
+                class="relative flex flex-col rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
-                <p class="font-semibold text-sm text-slate-400">DISK USAGE</p>
+                <p class="text-sm font-semibold text-slate-400">DISK USAGE</p>
                 <Icon
                     name="hdd"
-                    class="text-2xl mt-3.5 mr-3.5 text-spacex-primary absolute right-0 top-0"
+                    class="absolute right-0 top-0 mr-3.5 mt-3.5 text-2xl text-spacex-primary"
                 />
                 <h6 class="!mt-3">
                     {{ store.data.disk.used }}/{{ store.data.disk.total }} ({{
@@ -50,12 +50,12 @@
                 </h6>
             </div>
             <div
-                class="bg-spacex-3 p-4 rounded-lg flex flex-col hover:ring-2 hover:ring-spacex-primary transition-all duration-300 relative"
+                class="relative flex flex-col rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
-                <p class="font-semibold text-sm text-slate-400">RAM USAGE</p>
+                <p class="text-sm font-semibold text-slate-400">RAM USAGE</p>
                 <Icon
                     name="memory"
-                    class="text-2xl mt-3.5 mr-3.5 text-spacex-primary absolute right-0 top-0"
+                    class="absolute right-0 top-0 mr-3.5 mt-3.5 text-2xl text-spacex-primary"
                 />
                 <h6 class="!mt-3">
                     {{ store.data.ram.used }}/{{ store.data.ram.total }} ({{
@@ -67,13 +67,13 @@
 
         <h3 class="mt-6">Network (in/out)</h3>
         <div
-            class="mt-3 p-4 bg-spacex-3 w-full rounded-lg h-96 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+            class="mt-3 h-96 w-full rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
         >
             <canvas ref="networkChartRef" />
         </div>
         <h3 class="mt-6">CPU History</h3>
         <div
-            class="mt-3 p-4 bg-spacex-3 w-full rounded-lg h-96 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+            class="mt-3 h-96 w-full rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
         >
             <canvas ref="cpuChartRef" />
         </div>

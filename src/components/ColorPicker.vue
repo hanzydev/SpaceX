@@ -2,14 +2,14 @@
     <div class="w-[200px]">
         <div
             ref="saturationRef"
-            class="saturation w-full h-[164px] relative rounded-t-lg flex-grow"
+            class="saturation relative h-[164px] w-full flex-grow rounded-t-lg"
             :style="{
                 backgroundColor: hueColor,
             }"
         >
             <div
                 ref="saturationPointerRef"
-                class="ring-2 ring-white rounded-full absolute top-0 right-0 z-50"
+                class="absolute right-0 top-0 z-50 rounded-full ring-2 ring-white"
                 :style="{
                     backgroundColor: `rgb(${selectedColor.r}, ${selectedColor.g}, ${selectedColor.b})`,
                     top: `${saturationPointerPos.top}%`,
@@ -22,7 +22,7 @@
         <div ref="hueRef" class="hue relative h-[25px] w-full rounded-b-lg">
             <div
                 ref="huePointerRef"
-                class="ring-2 ring-white rounded-full absolute top-0 left-0 z-50"
+                class="absolute left-0 top-0 z-50 rounded-full ring-2 ring-white"
                 :style="{
                     backgroundColor: hueColor,
                     left: `${(color.h / 360) * 100 - 6}%`,

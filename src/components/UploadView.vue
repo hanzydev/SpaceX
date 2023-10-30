@@ -1,25 +1,25 @@
 <template>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
-        <div class="flex flex-col justify-center p-4 w-full">
+        <div class="flex w-full flex-col justify-center p-4">
             <h2>{{ data.id }}</h2>
             <h3 class="!mt-5">Statistics</h3>
             <div
-                class="w-full grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-5 !mt-3"
+                class="!mt-3 grid w-full grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3"
             >
                 <div
-                    class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+                    class="flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                 >
                     <Icon name="eye" class="text-2xl text-spacex-primary" />
                     <h6>{{ data.views.today }}</h6>
                 </div>
                 <div
-                    class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+                    class="flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                 >
                     <Icon name="hdd" class="text-2xl text-spacex-primary" />
                     <h6>{{ data.size.formatted }}</h6>
                 </div>
                 <div
-                    class="bg-spacex-3 p-4 rounded-lg flex items-center gap-2 hover:ring-2 hover:ring-spacex-primary transition-all duration-300"
+                    class="flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                 >
                     <Icon
                         name="calendar"
@@ -44,10 +44,10 @@
                             : 'Audio'
                     }}
                 </h3>
-                <div class="w-full mt-3">
+                <div class="mt-3 w-full">
                     <div
                         v-if="data.type.includes('image')"
-                        class="w-full bg-no-repeat bg-contain bg-center select-none h-80"
+                        class="h-80 w-full select-none bg-contain bg-center bg-no-repeat"
                         :style="{
                             backgroundImage: `url(${API_URL}/uploads/${
                                 data.id
@@ -77,38 +77,38 @@
 
             <h3 class="!mt-5">Controls</h3>
 
-            <div class="grid max-xs:grid-cols-1 grid-cols-2 gap-2 mt-3 w-full">
+            <div class="mt-3 grid w-full grid-cols-2 gap-2 max-xs:grid-cols-1">
                 <button
-                    class="flex items-center py-2 px-3 w-full gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex w-full items-center gap-2 rounded-lg bg-spacex-2 px-3 py-2 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleCopy"
                 >
                     <Icon name="copy" />
                     <span>Copy Link</span>
                 </button>
                 <button
-                    class="flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleDownload"
                 >
                     <Icon name="download" />
                     <span>Download</span>
                 </button>
                 <button
-                    class="flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleOpen"
                 >
                     <Icon name="link-open" />
                     <span>Open</span>
                 </button>
                 <button
-                    class="flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleEdit"
                 >
                     <Icon name="pen" />
                     <span>Edit</span>
                 </button>
                 <button
-                    :class="`flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                        isDeleting && 'opacity-50 cursor-not-allowed'
+                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary ${
+                        isDeleting && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isDeleting"
                     @click="handleDelete"
@@ -120,8 +120,8 @@
 
                 <button
                     v-if="parentFolder"
-                    :class="`flex items-center h-10 px-3 gap-2 rounded-lg bg-spacex-2 hover:bg-spacex-3 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                        isRemoving && 'opacity-50 cursor-not-allowed'
+                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary ${
+                        isRemoving && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isRemoving"
                     @click="handleRemove"
@@ -134,7 +134,7 @@
         </div>
     </Modal>
     <div
-        :class="`cursor-pointer h-[176px] flex flex-col items-center justify-center p-4 bg-spacex-3 rounded-lg relative transition-all duration-300 ${
+        :class="`relative flex h-[176px] cursor-pointer flex-col items-center justify-center rounded-lg bg-spacex-3 p-4 transition-all duration-300 ${
             isModalOpen || alwaysRing
                 ? 'ring-2 ring-spacex-primary'
                 : 'hover:ring-2 hover:ring-spacex-primary'
@@ -156,22 +156,22 @@
                 data.private ? `&token=${token}` : ''
             }`"
             :alt="data.id"
-            class="rounded-lg w-full h-full absolute object-contain"
+            class="absolute h-full w-full rounded-lg object-contain"
             @load="isLoaded = true"
         />
         <div
             v-if="data.type.includes('image') && !isLoaded"
-            class="w-full h-full flex items-center justify-center"
+            class="flex h-full w-full items-center justify-center"
         >
             <Icon
                 name="picture"
-                class="text-spacex-1 !h-16 !w-16 shimmer animate-pulse"
+                class="shimmer !h-16 !w-16 animate-pulse text-spacex-1"
             />
         </div>
 
         <div
             v-else-if="data.type.includes('video')"
-            class="flex items-center justify-center w-full h-full"
+            class="flex h-full w-full items-center justify-center"
         >
             <video
                 v-show="isLoaded"
@@ -179,24 +179,24 @@
                 :src="`${API_URL}/uploads/${data.id}?ref=cdn${
                     data.private ? `&token=${token}` : ''
                 }`"
-                class="rounded-lg w-full h-full absolute object-contain"
+                class="absolute h-full w-full rounded-lg object-contain"
                 loop
                 muted
                 @canplay="isLoaded = true"
             />
             <div
                 v-if="!isLoaded"
-                class="w-full h-full flex items-center justify-center"
+                class="flex h-full w-full items-center justify-center"
             >
                 <Icon
                     name="video"
-                    class="text-spacex-1 !h-16 !w-16 shimmer animate-pulse"
+                    class="shimmer !h-16 !w-16 animate-pulse text-spacex-1"
                 />
             </div>
         </div>
         <div
             v-else-if="!data.type.includes('image')"
-            class="flex flex-col items-center justify-center w-full h-full"
+            class="flex h-full w-full flex-col items-center justify-center"
         >
             <Icon
                 v-if="data.type.includes('audio')"
