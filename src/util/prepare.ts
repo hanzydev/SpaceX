@@ -96,7 +96,7 @@ export const prepareCache = async () => {
 
     createCache('other').set(
         'embed-config',
-        destr(readFileSync('./embed-config.json', { encoding: 'utf-8' })),
+        destr(readFileSync('./files/embed-config.json', { encoding: 'utf-8' })),
     );
     logger.info(`Added ${caches.reduce((a, b) => a + b.data.length, 0) + 1} entries to cache`);
 };

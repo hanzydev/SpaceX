@@ -151,9 +151,9 @@ const _loadBackup = async (filePath: string) => {
     deleteCache('folders');
 
     rmSync('./files/uploads', { recursive: true });
-    rmSync('./embed-config.json');
+    rmSync('./files/embed-config.json');
     renameSync(`${tmpPath}/uploads`, './files/uploads');
-    renameSync(`${tmpPath}/embed-config.json`, './embed-config.json');
+    renameSync(`${tmpPath}/embed-config.json`, './files/embed-config.json');
 
     if (!existsSync(`${tmpPath}/database.sql`)) {
         await prepareUploads();

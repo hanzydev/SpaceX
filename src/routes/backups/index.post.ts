@@ -16,7 +16,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     mkdirSync(tmpPath);
     cpSync('./files/uploads', `${tmpPath}/uploads`, { recursive: true });
-    cpSync('./embed-config.json', `${tmpPath}/embed-config.json`);
+    cpSync('./files/embed-config.json', `${tmpPath}/embed-config.json`);
 
     await new Promise<void>((resolve) => {
         const _process = spawn(

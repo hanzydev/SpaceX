@@ -55,7 +55,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         embedConfig.site_name = site_name;
     }
 
-    writeFileSync('./embed-config.json', JSON.stringify(embedConfig, null, 4));
+    writeFileSync('./files/embed-config.json', JSON.stringify(embedConfig, null, 4));
 
     const log = {
         ip: getIp(req),
