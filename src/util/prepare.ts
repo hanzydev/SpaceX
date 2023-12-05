@@ -15,6 +15,19 @@ export const prepareDirs = () => {
             mkdirSync(dir);
         }
     }
+
+    if (!existsSync('./files/embed-config.json')) {
+        writeFileSync(
+            './files/embed-config.json',
+            JSON.stringify({
+                enabled: true,
+                color: '#5e58f9',
+                title: '{filename}',
+                description: '',
+                site_name: '',
+            }),
+        );
+    }
 };
 
 export const prepareCache = async () => {

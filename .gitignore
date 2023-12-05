@@ -169,8 +169,6 @@ dist
 .pnp.\*
 
 # spacex
-files/backups
-files/temp
-files/uploads
+files/
 .eslintrc-auto-import.json
 auto-imports.d.ts
