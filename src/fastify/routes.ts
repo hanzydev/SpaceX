@@ -120,10 +120,10 @@ export const generateRoutes = async (): Promise<Route[]> => {
 
     for (const file of files) {
         const parsedFile = path.parse(file.rel);
-        const packageURL = new URL(path.resolve(file.filePath), __dirname).pathname.replaceAll(
-            '\\',
-            '/',
-        );
+        const packageURL = new URL(
+            path.resolve(file.filePath.replaceAll('\\', '/')),
+            `file://${__dirname}`,
+        ).pathname.replaceAll('\\', '/');
 
         const route = buildRoutePath(buildRoutePathRaw(parsedFile));
         const def = await import(packageURL);

@@ -21,10 +21,10 @@ export const generateMiddlewares = async (): Promise<Middleware[]> => {
 
     for (const file of files) {
         const withoutExtension = path.basename(file, path.extname(file));
-        const packageURL = new URL(path.join(directory, file), __dirname).pathname.replaceAll(
-            '\\',
-            '/',
-        );
+        const packageURL = new URL(
+            path.join(directory, file),
+            `file://${__dirname}`,
+        ).pathname.replaceAll('\\', '/');
 
         const def = await import(packageURL);
 
