@@ -106,7 +106,7 @@ const restoreFromBackup = async () => {
     if (!backupFile) {
         isRestoring.value = false;
 
-        return fire('Please select a valid backup file!', {
+        return fire('Please select a backup file!', {
             type: 'error',
         });
     }
@@ -153,7 +153,7 @@ const restoreFromBackup = async () => {
                 formData.append('currentChunk', (i + 1).toString());
                 formData.append('totalChunks', totalChunks.toString());
 
-                const json = await useAPI('/backups', {
+                const json = await useAPI('/backups/', {
                     method: 'PUT',
                     body: formData,
                     auth: true,

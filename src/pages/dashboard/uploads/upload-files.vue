@@ -353,10 +353,11 @@ const uploadFiles = async () => {
                             }
                         }
 
-                        const json = await useAPI(`/uploads`, {
+                        const json = await useAPI('/uploads', {
                             method: 'POST',
                             body: formData,
                             auth: true,
+                            retry: 3,
                         });
 
                         if (json?.error) {

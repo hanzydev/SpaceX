@@ -613,7 +613,7 @@ const handle2FAChange = async (enabled: boolean) => {
     if (enabled) {
         is2FAQrCodeLoading.value = true;
 
-        const json = await useAPI(`/auth/2fa/qrcode`, {
+        const json = await useAPI('/auth/2fa/qrcode', {
             auth: true,
         });
 
