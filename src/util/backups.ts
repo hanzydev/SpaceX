@@ -1,8 +1,6 @@
-import { statSync, existsSync } from 'node:fs';
 import { basename } from 'node:path';
 import { filesize } from 'filesize';
 import { walk } from './walk';
-import type { Backup } from '../types';
 
 export const getBackups = (): Backup[] => {
     const backups: Backup[] = [];

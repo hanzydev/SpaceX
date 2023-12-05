@@ -5,7 +5,8 @@
     "scripts": {
         "start": "node .",
         "build": "tsup",
-        "dev": "tsup && node .",
+        "dev": "tsup --watch",
+        "build:start": "tsup && node .",
         "format": "prettier --write . --ignore-path .gitignore",
         "lint": "eslint . --ignore-path .gitignore",
         "lint:fix": "eslint --fix . --ignore-path .gitignore"
@@ -24,7 +25,9 @@
         "prettier": "^3.0.3",
         "tslib": "^2.6.2",
         "tsup": "^7.2.0",
-        "typescript": "^5.2.2"
+        "typescript": "^5.2.2",
+        "unimport": "^3.6.0",
+        "unplugin-auto-import": "^0.17.2"
     },
     "dependencies": {
         "@fastify/cors": "^8.4.1",

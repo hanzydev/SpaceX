@@ -1,7 +1,5 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import { filesize } from 'filesize';
-import { getEntries } from '../util/cache';
-import type { Upload } from '../types';
+import { getEntries } from '@util/cache';
 
 export const middlewares = ['auth'];
 

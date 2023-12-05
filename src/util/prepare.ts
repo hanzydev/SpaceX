@@ -1,11 +1,9 @@
-import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { destr } from 'destr';
 import { getClient } from './database';
 import { createCache } from './cache';
 import { getBackups } from './backups';
 import { getUploads } from './uploads';
 import * as logger from './logger';
-import type { Upload, Note, Log, Code, ShortenedURL, Folder } from '../types';
 
 export const prepareDirs = () => {
     logger.info('Preparing directories');

@@ -1,13 +1,11 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { readdirSync, mkdirSync, cpSync, renameSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import tar from 'tar';
-import { getBackup } from '../../util/backups';
-import { createEntry } from '../../util/cache';
-import { getClient } from '../../util/database';
-import { getIp } from '../../util/get-ip';
-import { randomString } from '../../util/random-string';
-import { dispatchEvent } from '../../util/wss';
+import { getBackup } from '@util/backups';
+import { createEntry } from '@util/cache';
+import { getClient } from '@util/database';
+import { getIp } from '@util/get-ip';
+import { randomString } from '@util/random-string';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['auth'];
 

@@ -1,5 +1,4 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { verifyUser } from '../util/verify-user';
+import { verifyUser } from '@util/verify-user';
 
 export default async (req: FastifyRequest, reply: FastifyReply) => {
     const token = req.query['token'] || req.headers['authorization'];

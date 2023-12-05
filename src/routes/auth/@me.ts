@@ -1,5 +1,4 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { verifyUser } from '../../util/verify-user';
+import { verifyUser } from '@util/verify-user';
 
 export const middlewares = ['auth'];
 

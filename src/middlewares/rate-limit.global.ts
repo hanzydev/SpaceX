@@ -1,6 +1,5 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { getIp } from '../util/get-ip';
-import * as logger from '../util/logger';
+import { getIp } from '@util/get-ip';
+import * as logger from '@util/logger';
 import { cache as getRoutes } from '../fastify/routes';
 
 const rateLimitMap = new Map<
@@ -13,7 +12,7 @@ const rateLimitMap = new Map<
     }
 >();
 
-export default async (req: FastifyRequest, reply: FastifyReply) => {
+export default (req: FastifyRequest, reply: FastifyReply) => {
     const ip = getIp(req);
     const rateLimitKey = `${req.method}_${req.url}_${ip}`;
     const rateLimit = rateLimitMap.get(rateLimitKey);

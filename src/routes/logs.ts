@@ -1,6 +1,4 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { getEntries } from '../util/cache';
-import type { Log } from '../types';
+import { getEntries } from '@util/cache';
 
 export const middlewares = ['auth'];
 

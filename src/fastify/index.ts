@@ -2,7 +2,7 @@ import type { AddressInfo } from 'node:net';
 import Fastify from 'fastify';
 import FastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
-import * as logger from '../util/logger';
+import * as logger from '@util/logger';
 import { generateRoutes } from './routes';
 import { generateMiddlewares } from './middlewares';
 

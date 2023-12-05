@@ -1,16 +1,13 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { MultipartFile, MultipartValue } from '@fastify/multipart';
-import { existsSync, rmSync, renameSync, mkdirSync, appendFileSync, writeFileSync } from 'node:fs';
 import { basename } from 'node:path';
 import { spawn } from 'node:child_process';
 import tar from 'tar';
-import { z } from 'zod';
-import { createEntry, getEntry, deleteCache } from '../../../util/cache';
-import { getIp } from '../../../util/get-ip';
-import { getClient } from '../../../util/database';
-import { dispatchEvent } from '../../../util/wss';
-import { randomString } from '../../../util/random-string';
-import { prepareCache, prepareUploads } from '../../../util/prepare';
+import { createEntry, getEntry, deleteCache } from '@util/cache';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { randomString } from '@util/random-string';
+import { prepareCache, prepareUploads } from '@util/prepare';
 import onlyMultipart from '../../../middlewares/only-multipart';
 
 export const middlewares = ['auth'];

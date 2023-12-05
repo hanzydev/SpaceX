@@ -1,11 +1,9 @@
-import { statSync } from 'node:fs';
 import { basename } from 'node:path';
 import fileType from 'file-type';
 import { destr } from 'destr';
 import { filesize } from 'filesize';
 import { getClient } from './database';
 import { walk } from './walk';
-import type { Upload } from '../types';
 
 export const getUploads = async (): Promise<Upload[]> => {
     const client = getClient();

@@ -1,9 +1,7 @@
-import { readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { ParsedPath } from 'node:path';
 import type { FastifyRequest, FastifyReply, HTTPMethods } from 'fastify';
-import type { Awaitable } from '../types';
 
 interface RawRoute {
     name: string;

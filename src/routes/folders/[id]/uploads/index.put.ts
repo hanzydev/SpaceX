@@ -1,10 +1,7 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { z } from 'zod';
-import { getIp } from '../../../../util/get-ip';
-import { getClient } from '../../../../util/database';
-import { dispatchEvent } from '../../../../util/wss';
-import { getEntry, createEntry } from '../../../../util/cache';
-import type { Folder } from '../../../../types';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { getEntry, createEntry } from '@util/cache';
 
 export const middlewares = ['only-json', 'auth'];
 
@@ -18,6 +15,8 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
             error: 'Folder not found',
         });
     }
+
+    folder;
 
     const { uploads } = req.body as Record<string, any>;
 

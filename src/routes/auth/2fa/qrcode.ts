@@ -1,4 +1,3 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import { authenticator } from 'otplib';
 import qrcode from 'qrcode';
 import rapidenv from 'rapidenv';

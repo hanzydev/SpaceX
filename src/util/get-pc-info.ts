@@ -1,10 +1,8 @@
 import os from 'node:os';
 import { setTimeout as sleep } from 'node:timers/promises';
-import { readFileSync } from 'node:fs';
 import { filesize } from 'filesize';
 import { destr } from 'destr';
 import { execAsync } from './exec-async';
-import type { PCInfo } from '../types';
 
 export const getOSName = async () => {
     if (os.platform() === 'darwin') {

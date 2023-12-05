@@ -28,8 +28,16 @@
         "noUnusedLocals": false,
         "noUnusedParameters": false,
         "skipLibCheck": true,
-        "noEmit": true
+        "noEmit": true,
+        "paths": {
+            "@fastify": ["./src/fastify/*.ts"],
+            "@middlewares/*": ["./src/middlewares/*.ts"],
+            "@routes/*": ["./src/routes/*.ts"],
+            "@util/*": ["./src/util/*.ts"],
+            "@types": ["./src/types.ts"],
+            "@constants": ["./src/constants.ts"],
+            "@wss": ["./src/wss.ts"]
+        }
     },
-    "include": ["src", "tsup.config.ts"],
     "exclude": ["node_modules"]
 }

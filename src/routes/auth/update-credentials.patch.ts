@@ -1,14 +1,12 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import { authenticator } from 'otplib';
-import { z } from 'zod';
 import { argon2id } from 'hash-wasm';
 import { randomBytes } from 'node:crypto';
 import rapidenv from 'rapidenv';
-import { getIp } from '../../util/get-ip';
-import { getClient } from '../../util/database';
-import { dispatchEvent } from '../../util/wss';
-import { createEntry, getKeys, deleteEntry } from '../../util/cache';
-import { randomString } from '../../util/random-string';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { createEntry, getKeys, deleteEntry } from '@util/cache';
+import { randomString } from '@util/random-string';
 
 export const middlewares = ['only-json', 'auth'];
 export const config = {

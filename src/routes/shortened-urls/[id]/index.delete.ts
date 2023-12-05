@@ -1,9 +1,7 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { getIp } from '../../../util/get-ip';
-import { getClient } from '../../../util/database';
-import { dispatchEvent } from '../../../util/wss';
-import { getEntry, createEntry, deleteEntry } from '../../../util/cache';
-import type { ShortenedURL } from '../../../types';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { getEntry, createEntry, deleteEntry } from '@util/cache';
 
 export const middlewares = ['auth'];
 

@@ -2,12 +2,11 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import os from 'node:os';
 import { WebSocketServer, WebSocket, type AddressInfo } from 'ws';
 import { destr } from 'destr';
-import { getPCInfo } from './util/get-pc-info';
-import { randomString } from './util/random-string';
-import { getIp } from './util/get-ip';
-import { verifyUser } from './util/verify-user';
-import * as logger from './util/logger';
-import type { PCInfo } from './types';
+import { getPCInfo } from '@util/get-pc-info';
+import { randomString } from '@util/random-string';
+import { getIp } from '@util/get-ip';
+import { verifyUser } from '@util/verify-user';
+import * as logger from '@util/logger';
 import { OPCodes } from './constants';
 
 let pcInfo: PCInfo;
@@ -38,7 +37,23 @@ const send = (ws: WebSocket, payload: { op: OPCodes; t?: string; d?: any }) => {
 
 let wss: WebSocketServer;
 
-export const getClients = () => wss.clients;
+export const dispatchEvent = (eventName: string, d = {}) => {
+    const clients = wss.clients;
+
+    for (const client of clients) {
+        if (client.readyState === WebSocket.OPEN && client['data'].identified) {
+            client.send(
+                JSON.stringify({
+                    op: OPCodes.Dispatch,
+                    t: eventName,
+                    d,
+                }),
+            );
+        }
+    }
+
+    return clients.size;
+};
 
 export const initWebSocketServer = () => {
     wss = new WebSocketServer({ host: '0.0.0.0', port: +process.env.WSS_PORT });

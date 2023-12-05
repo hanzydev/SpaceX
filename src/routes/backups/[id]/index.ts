@@ -1,11 +1,9 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import send from '@fastify/send';
-import { getEntry } from '../../../util/cache';
-import type { Backup } from '../../../types';
+import { getEntry } from '@util/cache';
 
 export const middlewares = ['auth'];
 
-export default async (req: FastifyRequest, reply: FastifyReply) => {
+export default (req: FastifyRequest, reply: FastifyReply) => {
     const id = req.params['id'];
 
     if (!getEntry<Backup>('backups', id)) {

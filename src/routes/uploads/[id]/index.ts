@@ -1,12 +1,9 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import send from '@fastify/send';
-import { unlinkSync } from 'node:fs';
-import { getIp } from '../../../util/get-ip';
-import { getClient } from '../../../util/database';
-import { dispatchEvent } from '../../../util/wss';
-import { getEntry, createEntry, deleteEntry, getEntries } from '../../../util/cache';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { getEntry, createEntry, deleteEntry, getEntries } from '@util/cache';
 import authMiddleware from '../../../middlewares/auth';
-import type { Upload, Folder } from '../../../types';
 
 export default async (req: FastifyRequest, reply: FastifyReply) => {
     const id = req.params['id'];

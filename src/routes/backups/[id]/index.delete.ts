@@ -1,10 +1,7 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
-import { rmSync } from 'node:fs';
-import { getIp } from '../../../util/get-ip';
-import { getClient } from '../../../util/database';
-import { dispatchEvent } from '../../../util/wss';
-import { createEntry, deleteEntry, getEntry } from '../../../util/cache';
-import type { Backup } from '../../../types';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { createEntry, deleteEntry, getEntry } from '@util/cache';
 
 export const middlewares = ['auth'];
 

@@ -1,15 +1,12 @@
-import type { FastifyReply, FastifyRequest } from 'fastify';
 import type { MultipartFile, MultipartValue } from '@fastify/multipart';
-import { existsSync, renameSync, appendFileSync, writeFileSync, statSync } from 'node:fs';
 import { extname } from 'node:path';
 import sharp from 'sharp';
-import { z } from 'zod';
 import { filesize } from 'filesize';
-import { createEntry } from '../../util/cache';
-import { getIp } from '../../util/get-ip';
-import { getClient } from '../../util/database';
-import { dispatchEvent } from '../../util/wss';
-import { randomString } from '../../util/random-string';
+import { createEntry } from '@util/cache';
+import { getIp } from '@util/get-ip';
+import { getClient } from '@util/database';
+import { dispatchEvent } from '@wss';
+import { randomString } from '@util/random-string';
 
 export const middlewares = ['only-multipart', 'auth'];
 
