@@ -131,9 +131,9 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
             const ext = extname(file.filename);
             let fullname = `${randomString(6)}${ext}`;
 
-            if (existsSync(`./files/tmp/${file.filename}`)) {
-                appendFileSync(`./files/tmp/${file.filename}`, buffer);
-                renameSync(`./files/tmp/${file.filename}`, `./files/uploads/${fullname}`);
+            if (existsSync(`./files/temp/${file.filename}`)) {
+                appendFileSync(`./files/temp/${file.filename}`, buffer);
+                renameSync(`./files/temp/${file.filename}`, `./files/uploads/${fullname}`);
             } else {
                 writeFileSync(`./files/uploads/${fullname}`, buffer);
             }
@@ -159,9 +159,9 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
                 .status(200)
                 .send(await createUpload(fullname, file.mimetype, isPrivate, deleteAfterViews));
         } else if (currentChunk === 1) {
-            writeFileSync(`./files/tmp/${file.filename}`, buffer);
+            writeFileSync(`./files/temp/${file.filename}`, buffer);
         } else {
-            appendFileSync(`./files/tmp/${file.filename}`, buffer);
+            appendFileSync(`./files/temp/${file.filename}`, buffer);
         }
 
         return reply.status(204).send();

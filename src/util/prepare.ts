@@ -8,7 +8,7 @@ import * as logger from './logger';
 export const prepareDirs = () => {
     logger.info('Preparing directories');
 
-    const dirs = ['files', 'files/uploads', 'files/backups', 'files/tmp'];
+    const dirs = ['files', 'files/uploads', 'files/backups', 'files/temp'];
 
     for (const dir of dirs) {
         if (!existsSync(dir)) {

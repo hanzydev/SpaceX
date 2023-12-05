@@ -93,28 +93,28 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     reply.status(204).send();
 
     if (currentChunk === totalChunks) {
-        if (existsSync(`./files/tmp/${file.filename}`)) {
-            appendFileSync(`./files/tmp/${file.filename}`, buffer);
+        if (existsSync(`./files/temp/${file.filename}`)) {
+            appendFileSync(`./files/temp/${file.filename}`, buffer);
         } else {
-            writeFileSync(`./files/tmp/${file.filename}`, buffer);
+            writeFileSync(`./files/temp/${file.filename}`, buffer);
         }
 
-        await loadBackup(`./files/tmp/${file.filename}`);
-        rmSync(`./files/tmp/${file.filename}`);
+        await loadBackup(`./files/temp/${file.filename}`);
+        rmSync(`./files/temp/${file.filename}`);
     } else if (currentChunk === 1) {
-        writeFileSync(`./files/tmp/${file.filename}`, buffer);
+        writeFileSync(`./files/temp/${file.filename}`, buffer);
     } else {
-        appendFileSync(`./files/tmp/${file.filename}`, buffer);
+        appendFileSync(`./files/temp/${file.filename}`, buffer);
     }
 };
 
 const _loadBackup = async (filePath: string) => {
-    const tmpPath = `./files/tmp/${randomString(32)}`;
+    const tempPath = `./files/temp/${randomString(32)}`;
 
-    mkdirSync(tmpPath);
+    mkdirSync(tempPath);
 
     await tar.x({
-        C: tmpPath,
+        C: tempPath,
         file: filePath,
     });
 
@@ -127,10 +127,10 @@ const _loadBackup = async (filePath: string) => {
     await client.query('DELETE FROM shortened_urls');
     await client.query('DELETE FROM folders');
 
-    if (existsSync(`${tmpPath}/database.sql`)) {
+    if (existsSync(`${tempPath}/database.sql`)) {
         await new Promise<void>((resolve) => {
             const _process = spawn(
-                `psql -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tmpPath}/database.sql`,
+                `psql -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tempPath}/database.sql`,
                 {
                     shell: true,
                     env: {
@@ -152,13 +152,13 @@ const _loadBackup = async (filePath: string) => {
 
     rmSync('./files/uploads', { recursive: true });
     rmSync('./files/embed-config.json');
-    renameSync(`${tmpPath}/uploads`, './files/uploads');
-    renameSync(`${tmpPath}/embed-config.json`, './files/embed-config.json');
+    renameSync(`${tempPath}/uploads`, './files/uploads');
+    renameSync(`${tempPath}/embed-config.json`, './files/embed-config.json');
 
-    if (!existsSync(`${tmpPath}/database.sql`)) {
+    if (!existsSync(`${tempPath}/database.sql`)) {
         await prepareUploads();
     }
 
-    rmSync(tmpPath, { recursive: true });
+    rmSync(tempPath, { recursive: true });
     await prepareCache();
 };

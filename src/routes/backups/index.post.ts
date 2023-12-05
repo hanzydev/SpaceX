@@ -12,15 +12,15 @@ export const middlewares = ['auth'];
 export default async (req: FastifyRequest, reply: FastifyReply) => {
     reply.status(204).send();
 
-    const tmpPath = `./files/tmp/${randomString(32)}`;
+    const tempPath = `./files/temp/${randomString(32)}`;
 
-    mkdirSync(tmpPath);
-    cpSync('./files/uploads', `${tmpPath}/uploads`, { recursive: true });
-    cpSync('./files/embed-config.json', `${tmpPath}/embed-config.json`);
+    mkdirSync(tempPath);
+    cpSync('./files/uploads', `${tempPath}/uploads`, { recursive: true });
+    cpSync('./files/embed-config.json', `${tempPath}/embed-config.json`);
 
     await new Promise<void>((resolve) => {
         const _process = spawn(
-            `pg_dump -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tmpPath}/database.sql`,
+            `pg_dump -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tempPath}/database.sql`,
             {
                 shell: true,
                 env: {
@@ -33,22 +33,22 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     });
 
     const id = `${randomString(32)}.tar.gz`;
-    const gzipPath = `./files/tmp/${id}`;
+    const gzipPath = `./files/temp/${id}`;
 
     await tar.c(
         {
             z: { level: 9 },
-            C: tmpPath,
+            C: tempPath,
             file: gzipPath,
         },
-        readdirSync(tmpPath),
+        readdirSync(tempPath),
     );
 
     const date = new Date();
     const newId = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}.${randomString(8)}`;
 
     renameSync(gzipPath, `./files/backups/${newId}.tar.gz`);
-    rmSync(tmpPath, { recursive: true });
+    rmSync(tempPath, { recursive: true });
 
     const client = getClient();
 
