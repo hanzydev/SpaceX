@@ -170,5 +170,5 @@ dist
 
 # spacex
 files/
+src/auto-imports.d.ts
 .eslintrc-auto-import.json
-auto-imports.d.ts
