@@ -4,10 +4,7 @@
         <div class="flex w-full flex-col justify-center p-4 md:p-8">
             <h2>Upload Settings</h2>
             <div
-                v-if="
-                    files[currentModal!]!.type.startsWith('image/') &&
-                    files[currentModal!]!.type !== 'image/gif'
-                "
+                v-if="files[currentModal!]!.type.startsWith('image/')"
                 class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
             >
                 <p class="text-sm font-semibold uppercase text-slate-300">
@@ -272,10 +269,7 @@ const handleUploadSettings = (index: number) => {
         };
     }
 
-    if (
-        files.value[index].type.startsWith('image/') &&
-        files.value[index].type !== 'image/gif'
-    ) {
+    if (files.value[index].type.startsWith('image/')) {
         if (!('quality' in uploadSettings[index])) {
             uploadSettings[index].quality = '100';
         }
