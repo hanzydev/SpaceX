@@ -101,7 +101,7 @@ export const initFastify = async () => {
 
     app.listen(
         {
-            port: +process.env.PORT,
+            port: +process.env.API_PORT,
             host: '0.0.0.0',
         },
         (err) => {
