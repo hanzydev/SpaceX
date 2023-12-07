@@ -32,7 +32,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
         createEntry('logs', log.date.toString(), log);
         dispatchEvent('CREATE_LOG', log);
-        dispatchEvent('LOAD_BACKUP', { id: basename(filePath, '.tar.gz') });
+        dispatchEvent('LOAD_BACKUP', { id: basename(filePath, '.tgz') });
     };
 
     const id = req.params['id'];
@@ -46,7 +46,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         }
 
         reply.status(204).send();
-        return await loadBackup(`./files/backups/${id}.tar.gz`);
+        return await loadBackup(`./files/backups/${id}.tgz`);
     }
 
     if ((await onlyMultipart(req, reply)) !== true) {
@@ -57,7 +57,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     if (
         !file ||
-        !file.filename.endsWith('.tar.gz') ||
+        !file.filename.endsWith('.tgz') ||
         file.fieldname !== 'file' ||
         (file.mimetype !== 'application/x-gzip' && file.mimetype !== 'application/gzip')
     ) {

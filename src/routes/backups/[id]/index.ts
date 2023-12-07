@@ -13,5 +13,5 @@ export default (req: FastifyRequest, reply: FastifyReply) => {
         });
     }
 
-    return reply.send(send(req.raw, `${id}.tar.gz`, { root: './files/backups' }));
+    return reply.send(send(req.raw, `${id}.tgz`, { root: './files/backups' }));
 };

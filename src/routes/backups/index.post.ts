@@ -41,7 +41,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         );
     } catch {}
 
-    const id = `${randomString(32)}.tar.gz`;
+    const id = `${randomString(32)}.tgz`;
     const gzipPath = `./files/temp/${id}`;
 
     await tar.c(
@@ -56,7 +56,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     const date = new Date();
     const newId = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}.${randomString(8)}`;
 
-    renameSync(gzipPath, `./files/backups/${newId}.tar.gz`);
+    renameSync(gzipPath, `./files/backups/${newId}.tgz`);
     rmSync(tempPath, { recursive: true });
 
     const client = getClient();

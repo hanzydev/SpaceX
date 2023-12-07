@@ -16,7 +16,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         });
     }
 
-    rmSync(`./files/backups/${id}.tar.gz`);
+    rmSync(`./files/backups/${id}.tgz`);
 
     const client = getClient();
 
