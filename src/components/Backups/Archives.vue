@@ -1,6 +1,6 @@
 <template>
     <p v-if="!store.backups.length" class="mt-4 text-slate-300">
-        No backups found.
+        No backups were found.
     </p>
     <div
         v-else
