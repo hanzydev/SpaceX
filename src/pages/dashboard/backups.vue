@@ -57,7 +57,7 @@
                     </button>
                     <input
                         type="file"
-                        accept=".tgz"
+                        accept=".tar.gz,.tgz,.gz"
                         :class="`absolute z-10 h-full w-full opacity-0 ${
                             isRestoring
                                 ? 'cursor-not-allowed'
@@ -97,11 +97,7 @@ const restoreFromBackup = async () => {
     isRestoring.value = true;
     isModalOpen.value = false;
 
-    const backupFile = files.value.find(
-        (file) =>
-            file.name.endsWith('.tgz') &&
-            file.type.includes('application/x-gzip'),
-    );
+    const backupFile = files.value[0];
 
     if (!backupFile) {
         isRestoring.value = false;
@@ -115,6 +111,8 @@ const restoreFromBackup = async () => {
         backupFile.size / (CHUNK_SIZE_IN_MB * 1024 * 1024),
     );
 
+    let errorOccurred = false;
+
     for (let i = 0; i < totalChunks; i++) {
         const fileReader = new FileReader();
 
@@ -125,8 +123,6 @@ const restoreFromBackup = async () => {
         );
 
         fileReader.readAsArrayBuffer(backupFile.slice(start, end));
-
-        let errorOccurred = false;
 
         await new Promise<void>((resolve) => {
             fileReader.onload = async () => {
@@ -191,9 +187,11 @@ const restoreFromBackup = async () => {
     isRestoring.value = false;
     files.value = [];
 
-    fire('Backup has been restored successfully!', {
-        type: 'success',
-    });
+    if (!errorOccurred) {
+        fire('Backup has been restored successfully!', {
+            type: 'success',
+        });
+    }
 };
 
 const createBackup = async () => {

@@ -13,6 +13,7 @@
         "vue/html-self-closing": "off",
         "vue/singleline-html-element-content-newline": "off",
         "vue/require-default-prop": "off",
-        "vue/html-closing-bracket-newline": "off"
+        "vue/html-closing-bracket-newline": "off",
+        "vue/first-attribute-linebreak": "off"
     }
 }
