@@ -51,6 +51,11 @@ def update():
         print(f"{get_info_prefix()} Pulling backend...")
         pull_repo(f"/etc/SpaceX/apps/{username}/backend")
 
+        clear()
+        print(f"{get_info_prefix()} Building backend...")
+        subprocess.run(
+            "yarn build", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+
     clear()
     print(f"{get_info_prefix()} Restarting app...")
     subprocess.run(

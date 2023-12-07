@@ -70,7 +70,7 @@ def change_username():
     subprocess.run(
         f"pm2 delete spacex-{username}-backend spacex-{username}-frontend", shell=True)
     subprocess.run(
-        f"pm2 start bun --name spacex-{new_username}-backend -- start", cwd=f"/etc/SpaceX/apps/{new_username}/backend", shell=True)
+        f"pm2 start yarn --name spacex-{new_username}-backend -- start", cwd=f"/etc/SpaceX/apps/{new_username}/backend", shell=True)
     subprocess.run(
         f"pm2 start yarn --name spacex-{new_username}-frontend -- preview ", cwd=f"/etc/SpaceX/apps/{new_username}/frontend", shell=True)
     subprocess.run("pm2 save --force", shell=True)

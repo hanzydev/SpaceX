@@ -53,7 +53,7 @@ if not get_deps_installed():
     clear()
     print(f"{get_ok_prefix()} The following dependencies were added:\n")
 
-    for dep in ['Node.js (https://nodejs.org/)', 'Bun (https://bun.sh)', 'PostgreSQL (https://postgresql.org/)']:
+    for dep in ['Node.js (https://nodejs.org/)', 'PostgreSQL (https://postgresql.org/)']:
         print(f"{Fore.GREEN}(+){Fore.RESET} {dep}")
 
     set_deps_installed(True)
