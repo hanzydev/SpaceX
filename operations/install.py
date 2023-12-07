@@ -181,7 +181,7 @@ def install():
         postgres_database_regex = re.compile(r"POSTGRES_DATABASE=(.*)")
         postgres_user_regex = re.compile(r"POSTGRES_USER=(.*)")
         postgres_password_regex = re.compile(r"POSTGRES_PASSWORD=(.*)")
-        port_regex = re.compile(r"PORT=(.*)")
+        port_regex = re.compile(r"API_PORT=(.*)")
         wss_port_regex = re.compile(r"WSS_PORT=(.*)")
         site_url_regex = re.compile(r"SITE_URL=(.*)")
 
@@ -200,7 +200,7 @@ def install():
         env_file = postgres_password_regex.sub(
             f"POSTGRES_PASSWORD={get_postgres_password()}", env_file)
         env_file = port_regex.sub(
-            f"PORT={api_port}", env_file)
+            f"API_PORT={api_port}", env_file)
         env_file = wss_port_regex.sub(
             f"WSS_PORT={wss_port}", env_file)
         env_file = site_url_regex.sub(

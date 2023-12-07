@@ -88,12 +88,12 @@ def change_ports():
     with open(f"/etc/SpaceX/apps/{username}/backend/.env", "r") as f:
         env_file = f.read()
 
-        port_regex = re.compile(r"PORT=(.*)")
+        port_regex = re.compile(r"API_PORT=(.*)")
         wss_port_regex = re.compile(r"WSS_PORT=(.*)")
         site_url_regex = re.compile(r"SITE_URL=(.*)")
 
         env_file = port_regex.sub(
-            f"PORT={api_port}", env_file)
+            f"API_PORT={api_port}", env_file)
         env_file = wss_port_regex.sub(
             f"WSS_PORT={wss_port}", env_file)
         env_file = site_url_regex.sub(
