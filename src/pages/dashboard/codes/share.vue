@@ -111,7 +111,7 @@
                 <button
                     id="language-dropdown-toggler"
                     type="button"
-                    :class="`flex items-center justify-center rounded-lg bg-spacex-2 px-4 py-2 text-center outline-none focus:ring-2 focus:ring-spacex-primary ${
+                    :class="`flex items-center z-10 justify-center rounded-lg bg-spacex-2 px-4 py-2 text-center outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isSharing && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isSharing"

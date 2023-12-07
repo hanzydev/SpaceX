@@ -42,7 +42,7 @@
             </button>
 
             <span v-if="!state.filteredItems.length" class="text-slate-300">
-                No {{ itemName }}s was found
+                No {{ itemName }}s were found
             </span>
         </div>
     </div>
@@ -100,16 +100,15 @@ const openDropdown = () => {
     );
 };
 
-const closeDropdown = () => {
-    gsap.to(dropdownRef.value!, {
+const closeDropdown = async () => {
+    await gsap.to(dropdownRef.value!, {
         opacity: 0,
         y: direction === 'top' ? 30 : -30,
         duration: 0.2,
-        onComplete: () => {
-            gsap.set(dropdownRef.value!, {
-                display: 'none',
-            });
-        },
+    });
+
+    gsap.set(dropdownRef.value!, {
+        display: 'none',
     });
 };
 
