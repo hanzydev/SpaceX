@@ -140,19 +140,20 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
             if (
                 file.mimetype.startsWith('image/') &&
-                file.mimetype !== 'image/gif' &&
                 quality < 100 &&
                 quality > 0
             ) {
-                writeFileSync(
-                    `./files/uploads/${fullname}`,
-                    await sharp(buffer).jpeg({ quality }).toBuffer(),
-                );
-                renameSync(
-                    `./files/uploads/${fullname}`,
-                    `./files/uploads/${fullname.replace(ext, '.jpg')}`,
-                );
-                fullname = fullname.replace(ext, '.jpg');
+                try {
+                    writeFileSync(
+                        `./files/uploads/${fullname}`,
+                        await sharp(buffer).jpeg({ quality }).toBuffer(),
+                    );
+                    renameSync(
+                        `./files/uploads/${fullname}`,
+                        `./files/uploads/${fullname.replace(ext, '.jpg')}`,
+                    );
+                    fullname = fullname.replace(ext, '.jpg');
+                } catch {}
             }
 
             return reply
@@ -171,12 +172,13 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
         if (
             file.mimetype.startsWith('image/') &&
-            file.mimetype !== 'image/gif' &&
             quality < 100 &&
             quality > 0
         ) {
-            buffer = await sharp(buffer).jpeg({ quality }).toBuffer();
-            fullname = fullname.replace(ext, '.jpg');
+            try {
+                buffer = await sharp(buffer).jpeg({ quality }).toBuffer();
+                fullname = fullname.replace(ext, '.jpg');
+            } catch {}
         }
 
         writeFileSync(`./files/uploads/${fullname}`, buffer);

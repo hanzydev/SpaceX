@@ -7,16 +7,15 @@ export const middlewares = ['auth'];
 
 export default async (req: FastifyRequest, reply: FastifyReply) => {
     const id = req.params['id'];
-    const backup = getEntry<Backup>('backups', id);
 
-    if (!backup) {
+    if (!getEntry('backups', id)) {
         return reply.status(404).send({
             code: 'backup_not_found',
             error: 'Backup not found',
         });
     }
 
-    rmSync(`./files/backups/${id}.tgz`);
+    rmSync(`./files/backups/${id}.tar.gz`);
 
     const client = getClient();
 

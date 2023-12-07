@@ -4,7 +4,7 @@ import { execa } from 'execa';
 import tar from 'tar';
 import { createEntry, getEntry, deleteCache } from '@util/cache';
 import { getIp } from '@util/get-ip';
-import { getClient } from '@util/database';
+import { getClient, prepareTables } from '@util/database';
 import { dispatchEvent } from '@wss';
 import { randomString } from '@util/random-string';
 import { prepareCache, prepareUploads } from '@util/prepare';
@@ -32,7 +32,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
         createEntry('logs', log.date.toString(), log);
         dispatchEvent('CREATE_LOG', log);
-        dispatchEvent('LOAD_BACKUP', { id: basename(filePath, '.tgz') });
+        dispatchEvent('LOAD_BACKUP', { id: basename(filePath, '.tar.gz') });
     };
 
     const id = req.params['id'];
@@ -46,7 +46,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         }
 
         reply.status(204).send();
-        return await loadBackup(`./files/backups/${id}.tgz`);
+        return await loadBackup(`./files/backups/${id}.tar.gz`);
     }
 
     if ((await onlyMultipart(req, reply)) !== true) {
@@ -57,9 +57,10 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     if (
         !file ||
-        !file.filename.endsWith('.tgz') ||
         file.fieldname !== 'file' ||
-        (file.mimetype !== 'application/x-gzip' && file.mimetype !== 'application/gzip')
+        !['application/x-gzip', 'application/gzip', 'application/x-compressed'].includes(
+            file.mimetype,
+        )
     ) {
         return reply.status(400).send({
             code: 'invalid_backup_file',
@@ -120,12 +121,9 @@ const _loadBackup = async (filePath: string) => {
 
     const client = getClient();
 
-    await client.query('DELETE FROM uploads');
-    await client.query('DELETE FROM notes');
-    await client.query('DELETE FROM logs');
-    await client.query('DELETE FROM codes');
-    await client.query('DELETE FROM shortened_urls');
-    await client.query('DELETE FROM folders');
+    await client.query(
+        'DROP TABLE IF EXISTS uploads, notes, logs, codes, shortened_urls, folders CASCADE',
+    );
 
     if (existsSync(`${tempPath}/database.sql`)) {
         try {
@@ -150,6 +148,8 @@ const _loadBackup = async (filePath: string) => {
                 },
             );
         } catch {}
+    } else {
+        await prepareTables(false);
     }
 
     deleteCache('uploads');

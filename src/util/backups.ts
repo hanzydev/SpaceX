@@ -9,7 +9,7 @@ export const getBackups = (): Backup[] => {
         const stat = statSync(file);
 
         backups.push({
-            id: basename(file, '.tgz'),
+            id: basename(file, '.tar.gz'),
             size: {
                 raw: stat.size,
                 formatted: filesize(stat.size, {
@@ -25,14 +25,14 @@ export const getBackups = (): Backup[] => {
 };
 
 export const getBackup = (id: string): Backup | null => {
-    if (!existsSync(`./files/backups/${id}.tgz`)) {
+    if (!existsSync(`./files/backups/${id}.tar.gz`)) {
         return null;
     }
 
-    const stat = statSync(`./files/backups/${id}.tgz`);
+    const stat = statSync(`./files/backups/${id}.tar.gz`);
 
     return {
-        id: basename(id, '.tgz'),
+        id: basename(id, '.tar.gz'),
         size: {
             raw: stat.size,
             formatted: filesize(stat.size, {

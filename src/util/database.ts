@@ -20,12 +20,14 @@ export const connectToDatabase = async () => {
     return client;
 };
 
-export const prepareTables = async () => {
+export const prepareTables = async (log = true) => {
     if (!client) {
         return;
     }
 
-    logger.info('Preparing tables');
+    if (log) {
+        logger.info('Preparing tables');
+    }
 
     await client.query(
         "CREATE TABLE IF NOT EXISTS uploads (id TEXT, size TEXT, type TEXT, date BIGINT, views TEXT DEFAULT '[]', private BOOLEAN DEFAULT FALSE, delete_after_views INTEGER DEFAULT 0)",
