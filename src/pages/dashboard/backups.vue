@@ -57,7 +57,7 @@
                     </button>
                     <input
                         type="file"
-                        accept=".tar.gz"
+                        accept=".tgz"
                         :class="`absolute z-10 h-full w-full opacity-0 ${
                             isRestoring
                                 ? 'cursor-not-allowed'
@@ -99,7 +99,7 @@ const restoreFromBackup = async () => {
 
     const backupFile = files.value.find(
         (file) =>
-            file.name.endsWith('.tar.gz') &&
+            file.name.endsWith('.tgz') &&
             file.type.includes('application/x-gzip'),
     );
 
