@@ -10,7 +10,7 @@ from util.git import *
 from util.data import *
 
 
-default_encrypted_password = "$argon2id$v=19$m=65536,t=2,p=1$wRDnasEu1sD2H98puPLXPm2IddK/H9tbUXmIdVwGfAA$+Am9R4DJVdKGCKbSKSbyKe5juAOCaQB2+2OtGw+XoPQ"
+default_encrypted_password = "$argon2id$v=19$m=65536,t=2,p=1$nxPIevE6UMWTH85/WiCY3e3Xbs/gvNiVJ5l/yHU1sUo$W90ubPGIsDnuJ96I62K5dbwp5DqJEr4p6Pcco2mwcME"
 
 
 def install():
@@ -155,6 +155,16 @@ def install():
         f.close()
 
     clear()
+    print(f"{get_info_prefix()} Installing frontend...")
+    subprocess.run(
+        "yarn", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+
+    clear()
+    print(f"{get_info_prefix()} Building frontend...")
+    subprocess.run(
+        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+
+    clear()
     print(f"{get_info_prefix()} Configuring backend...")
 
     os.rename(f"/etc/SpaceX/apps/{username}/backend/.env.example",
@@ -201,19 +211,9 @@ def install():
         f.close()
 
     clear()
-    print(f"{get_info_prefix()} Installing frontend...")
-    subprocess.run(
-        "yarn", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
-
-    clear()
     print(f"{get_info_prefix()} Installing backend...")
     subprocess.run(
         "yarn", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
-    
-    clear()
-    print(f"{get_info_prefix()} Building frontend...")
-    subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Building backend...")
