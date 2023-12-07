@@ -1,5 +1,5 @@
-import { spawn } from 'node:child_process';
 import tar from 'tar';
+import { execa } from 'execa';
 import { getBackup } from '@util/backups';
 import { createEntry } from '@util/cache';
 import { getClient } from '@util/database';
@@ -18,19 +18,28 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     cpSync('./files/uploads', `${tempPath}/uploads`, { recursive: true });
     cpSync('./files/embed-config.json', `${tempPath}/embed-config.json`);
 
-    await new Promise<void>((resolve) => {
-        const _process = spawn(
-            `pg_dump -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tempPath}/database.sql`,
+    try {
+        await execa(
+            'pg_dump',
+            [
+                '-U',
+                process.env.POSTGRES_USER,
+                '-h',
+                process.env.POSTGRES_HOST,
+                '-p',
+                process.env.POSTGRES_PORT,
+                '-d',
+                process.env.POSTGRES_DATABASE,
+                '-f',
+                `${tempPath}/database.sql`,
+            ],
             {
-                shell: true,
                 env: {
                     PGPASSWORD: process.env.POSTGRES_PASSWORD,
                 },
             },
         );
-
-        _process.on('exit', resolve);
-    });
+    } catch {}
 
     const id = `${randomString(32)}.tar.gz`;
     const gzipPath = `./files/temp/${id}`;

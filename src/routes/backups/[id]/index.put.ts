@@ -1,6 +1,6 @@
 import type { MultipartFile, MultipartValue } from '@fastify/multipart';
 import { basename } from 'node:path';
-import { spawn } from 'node:child_process';
+import { execa } from 'execa';
 import tar from 'tar';
 import { createEntry, getEntry, deleteCache } from '@util/cache';
 import { getIp } from '@util/get-ip';
@@ -128,19 +128,28 @@ const _loadBackup = async (filePath: string) => {
     await client.query('DELETE FROM folders');
 
     if (existsSync(`${tempPath}/database.sql`)) {
-        await new Promise<void>((resolve) => {
-            const _process = spawn(
-                `psql -U ${process.env.POSTGRES_USER} -h ${process.env.POSTGRES_HOST} -p ${process.env.POSTGRES_PORT} -d ${process.env.POSTGRES_DATABASE} -f ${tempPath}/database.sql`,
+        try {
+            await execa(
+                'psql',
+                [
+                    '-U',
+                    process.env.POSTGRES_USER,
+                    '-h',
+                    process.env.POSTGRES_HOST,
+                    '-p',
+                    process.env.POSTGRES_PORT,
+                    '-d',
+                    process.env.POSTGRES_DATABASE,
+                    '-f',
+                    `${tempPath}/database.sql`,
+                ],
                 {
-                    shell: true,
                     env: {
                         PGPASSWORD: process.env.POSTGRES_PASSWORD,
                     },
                 },
             );
-
-            _process.on('exit', resolve);
-        });
+        } catch {}
     }
 
     deleteCache('uploads');

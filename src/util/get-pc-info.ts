@@ -1,14 +1,14 @@
 import os from 'node:os';
 import { setTimeout as sleep } from 'node:timers/promises';
+import { execa } from 'execa';
 import { filesize } from 'filesize';
 import { destr } from 'destr';
-import { execAsync } from './exec-async';
 
 export const getOSName = async () => {
     if (os.platform() === 'darwin') {
         try {
-            const process = await execAsync('sw_vers');
-            const output = process.stdout.split(os.EOL);
+            const { stdout } = await execa('sw_vers');
+            const output = stdout.split(os.EOL);
 
             const productName = output[0].split(':')[1].trim();
             const productVersion = output[1].split(':')[1].trim();
@@ -21,8 +21,8 @@ export const getOSName = async () => {
 
     if (os.platform() === 'linux') {
         try {
-            const process = await execAsync('cat /etc/os-release');
-            const output = process.stdout.split(os.EOL);
+            const { stdout } = await execa('cat', ['/etc/os-release']);
+            const output = stdout.split(os.EOL);
 
             const name = output
                 .find((line) => line.startsWith('NAME='))
@@ -46,8 +46,8 @@ export const getOSName = async () => {
 
     if (os.platform() === 'win32') {
         try {
-            const process = await execAsync('wmic os get Caption');
-            const output = process.stdout.split(os.EOL);
+            const { stdout } = await execa('wmic', ['os', 'get', 'Caption']);
+            const output = stdout.split(os.EOL);
 
             return output[1].replace(/\r|\n/g, '').trim();
         } catch {
@@ -61,8 +61,8 @@ export const getOSName = async () => {
 export const getCPUInfo = async () => {
     if (os.platform() === 'linux') {
         try {
-            const process = await execAsync('lscpu -J');
-            const data: { field: string; data: string }[] = (destr(process.stdout) as any).lscpu;
+            const { stdout } = await execa('lscpu', ['-J']);
+            const data: { field: string; data: string }[] = (destr(stdout) as any).lscpu;
 
             const before = readFileSync('/proc/stat', { encoding: 'utf-8' });
             await sleep(1000);
@@ -104,9 +104,11 @@ export const getCPUInfo = async () => {
 
     if (os.platform() === 'win32') {
         try {
-            const process = await execAsync(
-                'wmic cpu get Name,MaxClockSpeed,NumberOfLogicalProcessors,LoadPercentage',
-            );
+            const process = await execa('wmic', [
+                'cpu',
+                'get',
+                'Name,MaxClockSpeed,NumberOfLogicalProcessors,LoadPercentage',
+            ]);
             const output = process.stdout.split(os.EOL);
 
             const _data = output[1]
@@ -141,8 +143,8 @@ export const getDiskInfo = async () => {
     if (os.platform() === 'linux') {
         try {
             const getDefaultDrive = async () => {
-                const process = await execAsync('blkid');
-                const output = process.stdout.split(os.EOL);
+                const { stdout } = await execa('blkid');
+                const output = stdout.split(os.EOL);
 
                 const [data] = output
                     .filter((line) => line.includes('TYPE="ext4"'))
@@ -153,8 +155,8 @@ export const getDiskInfo = async () => {
 
             const defaultDrive = await getDefaultDrive();
 
-            const process = await execAsync('df -B1 --output=source,size,used');
-            const output = process.stdout.split(os.EOL);
+            const { stdout } = await execa('df', ['-B1', '--output=source,size,used']);
+            const output = stdout.split(os.EOL);
 
             const [data] = output
                 .filter((line) => line.includes(defaultDrive))
@@ -170,8 +172,8 @@ export const getDiskInfo = async () => {
 
     if (os.platform() === 'win32') {
         try {
-            const _process = await execAsync('wmic logicaldisk get Name,Size,FreeSpace');
-            const output = _process.stdout.split(os.EOL);
+            const { stdout } = await execa('wmic', ['logicaldisk', 'get', 'Name,Size,FreeSpace']);
+            const output = stdout.split(os.EOL);
 
             const [data] = output
                 .filter((line) => line.includes(process.env.SystemDrive!))
@@ -196,8 +198,8 @@ const getNetworkStats = async () => {
     if (os.platform() === 'linux') {
         try {
             const getDefaultNetworkInterface = async () => {
-                const process = await execAsync('ip route show default');
-                const output = process.stdout.split(os.EOL);
+                const { stdout } = await execa('ip', ['route', 'show', 'default']);
+                const output = stdout.split(os.EOL);
 
                 const data = output
                     .filter((line) => line.includes('default'))
@@ -209,8 +211,8 @@ const getNetworkStats = async () => {
             const fetch = async () => {
                 const defaultInterface = await getDefaultNetworkInterface();
 
-                const process = await execAsync('cat /proc/net/dev');
-                const output = process.stdout.split(os.EOL);
+                const { stdout } = await execa('cat', ['/proc/net/dev']);
+                const output = stdout.split(os.EOL);
 
                 const data = output
                     .filter((line) => line.includes(defaultInterface))
@@ -236,8 +238,8 @@ const getNetworkStats = async () => {
     if (os.platform() === 'win32') {
         try {
             const fetch = async () => {
-                const process = await execAsync('netstat -e');
-                const output = process.stdout.split(os.EOL);
+                const { stdout } = await execa('netstat', ['-e']);
+                const output = stdout.split(os.EOL);
 
                 const data = output
                     .filter((line) => line.includes('Bytes'))
