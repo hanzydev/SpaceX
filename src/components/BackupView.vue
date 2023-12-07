@@ -29,7 +29,7 @@
         </div>
     </Modal>
     <div
-        class="relative flex h-[176px] flex-col items-center justify-center rounded-lg bg-spacex-2 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
+        class="relative flex h-[176px] flex-col items-center justify-center overflow-hidden rounded-lg bg-spacex-2 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
         @mouseenter="onMouseEnter"
         @mouseleave="onMouseLeave"
         @touchstart="onMouseEnter"
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div
-            :id="`${data.id}-controls`"
-            class="absolute bottom-0 hidden w-full items-center justify-center gap-4 rounded-b-md border-t-2 border-t-spacex-primary bg-spacex-2 px-3 py-2"
+            ref="controlsRef"
+            class="absolute bottom-0 hidden w-full items-center justify-center gap-4 rounded-b-xl border-t-2 border-t-spacex-primary bg-spacex-2 px-3 py-2"
         >
             <button
                 :class="`rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
@@ -94,46 +94,35 @@ const { data } = defineProps<{
     data: Backup;
 }>();
 const store = useBackupsStore();
+const controlsRef = ref<HTMLDivElement>();
 
 const isDeleting = ref(false);
 const isRestoring = ref(false);
 const isModalOpen = ref(false);
 
 const onMouseEnter = () => {
-    const element = document.getElementById(`${data.id}-controls`)!;
-
     gsap.fromTo(
-        element,
+        controlsRef.value!,
         {
+            y: 50,
             opacity: 0,
-            display: 'none',
-            y: 5,
         },
         {
-            opacity: 1,
             display: 'flex',
             duration: 0.2,
             y: 0,
+            opacity: 1,
         },
     );
 };
 
 const onMouseLeave = () => {
-    const element = document.getElementById(`${data.id}-controls`)!;
-
-    gsap.fromTo(
-        element,
-        {
-            opacity: 1,
-            display: 'flex',
-        },
-        {
-            opacity: 0,
-            display: 'none',
-            duration: 0.2,
-            y: 5,
-        },
-    );
+    gsap.to(controlsRef.value!, {
+        display: 'none',
+        duration: 0.2,
+        y: 50,
+        opacity: 0,
+    });
 };
 
 const handleDelete = async () => {
