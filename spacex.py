@@ -17,6 +17,7 @@ from operations.reset_app import reset_app
 from operations.change_username import change_username
 from operations.change_ports import change_ports
 from operations.update import update
+from operations.change_pfp import change_pfp
 
 if not is_linux():
     print(f"{get_err_prefix()} This script is only for Linux!")
@@ -111,11 +112,12 @@ match choice:
 {Fore.CYAN}2{Fore.RESET}. Change domain
 {Fore.CYAN}3{Fore.RESET}. Change ports
 {Fore.CYAN}4{Fore.RESET}. Change username
-{Fore.CYAN}5{Fore.RESET}. Reset app {Fore.RED}[DANGER]{Fore.RESET}
-{Fore.CYAN}6{Fore.RESET}. Back
+{Fore.CYAN}5{Fore.RESET}. Change profile picture
+{Fore.CYAN}6{Fore.RESET}. Reset app {Fore.RED}[DANGER]{Fore.RESET}
+{Fore.CYAN}7{Fore.RESET}. Back
 """)
 
-        choice = num_choice("👉 Enter your choice", (1, 2, 3, 4, 5, 6))
+        choice = num_choice("👉 Enter your choice", (1, 2, 3, 4, 5, 6, 7))
         clear()
 
         if choice == False:
@@ -139,9 +141,12 @@ match choice:
                 change_username()
                 pass
             case 5:
-                reset_app()
+                change_pfp()
                 pass
             case 6:
+                reset_app()
+                pass
+            case 7:
                 restart()
                 pass
     case 6:
