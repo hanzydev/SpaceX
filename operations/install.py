@@ -10,9 +10,6 @@ from util.git import *
 from util.data import *
 
 
-default_encrypted_password = "$argon2id$v=19$m=65536,t=2,p=1$nxPIevE6UMWTH85/WiCY3e3Xbs/gvNiVJ5l/yHU1sUo$W90ubPGIsDnuJ96I62K5dbwp5DqJEr4p6Pcco2mwcME"
-
-
 def install():
     pkg_manager = get_distro_pkg_manager()
 
