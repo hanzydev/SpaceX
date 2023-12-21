@@ -38,7 +38,8 @@ const openModal = async () => {
     document.body.classList.add('overflow-hidden');
 
     await nextTick();
-    gsap.fromTo(
+
+    await gsap.fromTo(
         containerRef.value!,
         {
             opacity: 0,
@@ -47,22 +48,21 @@ const openModal = async () => {
             opacity: 1,
             duration: 0.3,
             display: 'flex',
-            onComplete: () => {
-                gsap.fromTo(
-                    contentRef.value!,
-                    {
-                        opacity: 0,
-                        scale: 0.4,
-                    },
-                    {
-                        opacity: 1,
-                        scale: 1,
-                        duration: 0.3,
-                        display: 'flex',
-                        ease: 'back.out(2)',
-                    },
-                );
-            },
+        },
+    );
+
+    await gsap.fromTo(
+        contentRef.value!,
+        {
+            opacity: 0,
+            scale: 0.4,
+        },
+        {
+            opacity: 1,
+            scale: 1,
+            duration: 0.3,
+            display: 'flex',
+            ease: 'back.out(2)',
         },
     );
 };
@@ -80,16 +80,14 @@ const closeModal = async () => {
         scale: 0.4,
         duration: 0.3,
         ease: 'back.in(2)',
-        onComplete: () => {
-            gsap.to(containerRef.value!, {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => {
-                    isDemonstrable.value = false;
-                },
-            });
-        },
     });
+
+    await gsap.to(containerRef.value!, {
+        opacity: 0,
+        duration: 0.3,
+    });
+
+    isDemonstrable.value = false;
 };
 
 const onKeyDown = (event: KeyboardEvent) => {
