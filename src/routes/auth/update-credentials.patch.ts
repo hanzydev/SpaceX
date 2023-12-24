@@ -1,6 +1,5 @@
 import { authenticator } from 'otplib';
-import { argon2id } from 'hash-wasm';
-import { randomBytes } from 'node:crypto';
+import { hash } from 'argon2';
 import rapidenv from 'rapidenv';
 import { getIp } from '@util/get-ip';
 import { getClient } from '@util/database';
@@ -70,18 +69,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     env.setVariable('JWT_SECRET', randomString(64));
 
     if (typeof password === 'string' && password.length) {
-        env.setVariable(
-            'PASSWORD',
-            await argon2id({
-                password,
-                salt: randomBytes(32),
-                parallelism: 1,
-                iterations: 2,
-                memorySize: 65536,
-                hashLength: 32,
-                outputType: 'encoded',
-            }),
-        );
+        env.setVariable('PASSWORD', await hash(password));
     }
 
     const log = {

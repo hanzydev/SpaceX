@@ -1,6 +1,6 @@
 import { SignJWT } from 'jose';
 import { authenticator } from 'otplib';
-import { argon2Verify } from 'hash-wasm';
+import { verify } from 'argon2';
 import { getIp } from '@util/get-ip';
 import { getClient } from '@util/database';
 import { dispatchEvent } from '@wss';
@@ -64,13 +64,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         return await captchaFailed();
     }
 
-    if (
-        username !== process.env.USERNAME ||
-        !(await argon2Verify({
-            password: password,
-            hash: process.env.PASSWORD!,
-        }))
-    ) {
+    if (username !== process.env.USERNAME || !(await verify(process.env.PASSWORD!, password))) {
         const log = {
             ip,
             action: 'login',
