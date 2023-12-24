@@ -11,6 +11,25 @@
 
             <div class="mt-7 flex flex-col">
                 <label class="text-sm font-semibold uppercase text-slate-300"
+                    >Id</label
+                >
+                <input
+                    v-model="shortenedURL.id"
+                    type="text"
+                    placeholder="Enter Id"
+                    :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
+                        isShorting && 'cursor-not-allowed'
+                    }`"
+                    :disabled="isShorting"
+                />
+
+                <span class="mt-1 text-sm font-medium text-slate-300">
+                    If you leave it blank, the Id will be randomly generated.
+                </span>
+            </div>
+
+            <div class="mt-3 flex flex-col">
+                <label class="text-sm font-semibold uppercase text-slate-300"
                     >URL</label
                 >
                 <input
@@ -89,6 +108,7 @@ import { fire } from '@/util/toast';
 const router = useRouter();
 
 const shortenedURL = reactive({
+    id: '',
     url: '',
     private: false,
     deleteAfterViews: '0',
