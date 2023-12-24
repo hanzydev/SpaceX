@@ -17,11 +17,12 @@ export const config = {
 export default async (req: FastifyRequest, reply: FastifyReply) => {
     const { username, password, otp, cf_turnstile_token } = req.body as Record<string, string>;
 
+    const ip = getIp(req);
     const client = getClient();
 
     const captchaFailed = async () => {
         const log = {
-            ip: getIp(req),
+            ip,
             action: 'login',
             message: 'Captcha failed',
             date: Date.now(),
@@ -49,6 +50,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     formData.append('secret', process.env.CF_TURNSTILE_SECRET_KEY!);
     formData.append('response', cf_turnstile_token);
+    formData.append('remoteip', ip);
 
     const data: Record<string, any> = await fetch(
         'https://challenges.cloudflare.com/turnstile/v0/siteverify',
@@ -70,7 +72,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         }))
     ) {
         const log = {
-            ip: getIp(req),
+            ip,
             action: 'login',
             message: 'Failed to login',
             date: Date.now(),
@@ -103,7 +105,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
         if (isInvalid) {
             const log = {
-                ip: getIp(req),
+                ip,
                 action: 'login',
                 message: 'Invalid otp',
                 date: Date.now(),
@@ -125,7 +127,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     }
 
     const log = {
-        ip: getIp(req),
+        ip,
         action: 'login',
         message: 'Logged in',
         date: Date.now(),
