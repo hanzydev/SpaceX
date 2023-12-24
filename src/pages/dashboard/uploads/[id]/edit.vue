@@ -14,7 +14,7 @@
                     >Id</label
                 >
                 <input
-                    v-model="id"
+                    v-model="upload.id"
                     type="text"
                     placeholder="Enter Id"
                     :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
@@ -30,7 +30,7 @@
                 >
                 <div class="relative mt-1">
                     <input
-                        v-model="deleteAfterViews"
+                        v-model="upload.deleteAfterViews"
                         class="h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                         type="number"
                         :min="0"
@@ -43,8 +43,8 @@
                             class="flex w-6 items-center justify-center rounded-tr-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews + 1
+                                upload.deleteAfterViews = (
+                                    +upload.deleteAfterViews + 1
                                 ).toString()
                             "
                         >
@@ -54,8 +54,8 @@
                             class="flex w-6 items-center justify-center rounded-br-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews - 1
+                                upload.deleteAfterViews = (
+                                    +upload.deleteAfterViews - 1
                                 ).toString()
                             "
                         >
@@ -66,7 +66,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="isPrivate" />
+                <Switch v-model:is-checked="upload.private" />
                 <h6>Make file private</h6>
             </div>
 
@@ -90,11 +90,13 @@ import uploadEmitter from '@/util/emitters/upload';
 const router = useRouter();
 const route = useRoute();
 
-const isEditing = ref(false);
+const upload = reactive({
+    id: '',
+    private: false,
+    deleteAfterViews: '0',
+});
 
-const id = ref('');
-const isPrivate = ref(false);
-const deleteAfterViews = ref('0');
+const isEditing = ref(false);
 
 const json = await useAPI(`/uploads/${route.params.id}`, {
     auth: true,
@@ -103,9 +105,9 @@ const json = await useAPI(`/uploads/${route.params.id}`, {
 if (json?.error) {
     throwError(404);
 } else {
-    id.value = json.id.replace(/\.[^/.]+$/, '');
-    isPrivate.value = json.private;
-    deleteAfterViews.value = json.deleteAfterViews.toString();
+    upload.id = json.id.replace(/\.[^/.]+$/, '');
+    upload.private = json.private;
+    upload.deleteAfterViews = json.deleteAfterViews.toString();
 
     uploadEmitter.on(
         'UPDATE_UPLOAD',
@@ -116,9 +118,10 @@ if (json?.error) {
             deleteAfterViews: newDeleteAfterViews,
         }) => {
             if (oldId === json.id && !isEditing.value) {
-                id.value = newId;
-                isPrivate.value = newIsPrivate;
-                deleteAfterViews.value = newDeleteAfterViews.toString();
+                upload.id = newId;
+                upload.private = newIsPrivate;
+                upload.deleteAfterViews = newDeleteAfterViews.toString();
+
                 router.replace(`/dashboard/uploads/${newId}/edit`);
             }
         },
@@ -137,9 +140,8 @@ const handleEdit = async () => {
     const json = await useAPI(`/uploads/${route.params.id}`, {
         method: 'PATCH',
         body: {
-            id: id.value.replace(/ /g, '_'),
-            private: isPrivate.value,
-            deleteAfterViews: +deleteAfterViews.value,
+            ...upload,
+            deleteAfterViews: +upload.deleteAfterViews,
         },
         auth: true,
     });
@@ -159,13 +161,16 @@ const handleEdit = async () => {
     }
 };
 
-watch(deleteAfterViews, (value) => {
-    if (+value > 100000) {
-        deleteAfterViews.value = '100000';
-    } else if (value === '' || +value < 0) {
-        deleteAfterViews.value = '0';
-    }
-});
+watch(
+    () => upload.deleteAfterViews,
+    (value) => {
+        if (+value > 100000) {
+            upload.deleteAfterViews = '100000';
+        } else if (value === '' || +value < 0) {
+            upload.deleteAfterViews = '0';
+        }
+    },
+);
 
 definePageMeta({
     layout: 'auth-check',

@@ -14,7 +14,7 @@
                     >URL</label
                 >
                 <input
-                    v-model="url"
+                    v-model="shortenedURL.url"
                     type="text"
                     placeholder="Enter URL"
                     :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
@@ -30,7 +30,7 @@
                 >
                 <div class="relative mt-1">
                     <input
-                        v-model="deleteAfterViews"
+                        v-model="shortenedURL.deleteAfterViews"
                         class="h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                         type="number"
                         :min="0"
@@ -43,8 +43,8 @@
                             class="flex w-6 items-center justify-center rounded-tr-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews + 1
+                                shortenedURL.deleteAfterViews = (
+                                    +shortenedURL.deleteAfterViews + 1
                                 ).toString()
                             "
                         >
@@ -54,8 +54,8 @@
                             class="flex w-6 items-center justify-center rounded-br-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews - 1
+                                shortenedURL.deleteAfterViews = (
+                                    +shortenedURL.deleteAfterViews - 1
                                 ).toString()
                             "
                         >
@@ -66,7 +66,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="isPrivate" />
+                <Switch v-model:is-checked="shortenedURL.private" />
                 <h6>Make url private</h6>
             </div>
 
@@ -88,10 +88,13 @@ import { fire } from '@/util/toast';
 
 const router = useRouter();
 
+const shortenedURL = reactive({
+    url: '',
+    private: false,
+    deleteAfterViews: '0',
+});
+
 const isShorting = ref(false);
-const isPrivate = ref(false);
-const deleteAfterViews = ref('0');
-const url = ref('');
 
 const handleShorten = async () => {
     isShorting.value = true;
@@ -99,9 +102,8 @@ const handleShorten = async () => {
     const json = await useAPI('/shortened-urls', {
         method: 'POST',
         body: {
-            url: url.value,
-            private: isPrivate.value,
-            deleteAfterViews: +deleteAfterViews.value,
+            ...shortenedURL,
+            deleteAfterViews: +shortenedURL.deleteAfterViews,
         },
         auth: true,
     });
@@ -121,13 +123,16 @@ const handleShorten = async () => {
     }
 };
 
-watch(deleteAfterViews, (value) => {
-    if (+value > 100000) {
-        deleteAfterViews.value = '100000';
-    } else if (value === '' || +value < 0) {
-        deleteAfterViews.value = '0';
-    }
-});
+watch(
+    () => shortenedURL.deleteAfterViews,
+    (value) => {
+        if (+value > 100000) {
+            shortenedURL.deleteAfterViews = '100000';
+        } else if (value === '' || +value < 0) {
+            shortenedURL.deleteAfterViews = '0';
+        }
+    },
+);
 
 definePageMeta({
     layout: 'auth-check',

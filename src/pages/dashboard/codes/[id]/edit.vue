@@ -30,7 +30,7 @@
                 >
                 <div class="relative mt-1">
                     <input
-                        v-model="deleteAfterViews"
+                        v-model="code.deleteAfterViews"
                         class="h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                         type="number"
                         :min="0"
@@ -43,8 +43,8 @@
                             class="flex w-6 items-center justify-center rounded-tr-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews + 1
+                                code.deleteAfterViews = (
+                                    +code.deleteAfterViews + 1
                                 ).toString()
                             "
                         >
@@ -54,8 +54,8 @@
                             class="flex w-6 items-center justify-center rounded-br-md p-1 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
                             type="button"
                             @click="
-                                deleteAfterViews = (
-                                    +deleteAfterViews - 1
+                                code.deleteAfterViews = (
+                                    +code.deleteAfterViews - 1
                                 ).toString()
                             "
                         >
@@ -90,7 +90,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="isPrivate" />
+                <Switch v-model:is-checked="code.private" />
                 <h6>Make code private</h6>
             </div>
 
@@ -116,15 +116,15 @@ import codeEmitter from '@/util/emitters/code';
 const router = useRouter();
 const route = useRoute();
 
-const isEditing = ref(false);
-
-const isPrivate = ref(false);
-const deleteAfterViews = ref('0');
 const code = reactive({
     title: '',
     content: '',
     language: '',
+    private: false,
+    deleteAfterViews: '0',
 });
+
+const isEditing = ref(false);
 
 const json = await useAPI(`/codes/${route.params.id}`, {
     auth: true,
@@ -136,8 +136,8 @@ if (json?.error) {
     code.title = json.title;
     code.content = json.content;
     code.language = json.language;
-    isPrivate.value = json.private;
-    deleteAfterViews.value = json.deleteAfterViews.toString();
+    code.private = json.private;
+    code.deleteAfterViews = json.deleteAfterViews.toString();
 
     codeEmitter.on(
         'UPDATE_CODE',
@@ -151,8 +151,8 @@ if (json?.error) {
             if (id === json.id && !isEditing.value) {
                 code.title = title;
                 code.content = content;
-                isPrivate.value = newIsPrivate;
-                deleteAfterViews.value = newDeleteAfterViews.toString();
+                code.private = newIsPrivate;
+                code.deleteAfterViews = newDeleteAfterViews.toString();
             }
         },
     );
@@ -177,8 +177,7 @@ const handleEdit = async () => {
         body: {
             ...code,
             language: code.language.toLowerCase(),
-            private: isPrivate.value,
-            deleteAfterViews: +deleteAfterViews.value,
+            deleteAfterViews: +code.deleteAfterViews,
         },
         auth: true,
     });
@@ -198,13 +197,16 @@ const handleEdit = async () => {
     }
 };
 
-watch(deleteAfterViews, (value) => {
-    if (+value > 100000) {
-        deleteAfterViews.value = '100000';
-    } else if (value === '' || +value < 0) {
-        deleteAfterViews.value = '0';
-    }
-});
+watch(
+    () => code.deleteAfterViews,
+    (value) => {
+        if (+value > 100000) {
+            code.deleteAfterViews = '100000';
+        } else if (value === '' || +value < 0) {
+            code.deleteAfterViews = '0';
+        }
+    },
+);
 
 definePageMeta({
     layout: 'auth-check',

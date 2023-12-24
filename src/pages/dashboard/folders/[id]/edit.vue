@@ -44,9 +44,8 @@ import folderEmitter from '@/util/emitters/folder';
 const router = useRouter();
 const route = useRoute();
 
-const isEditing = ref(false);
-
 const name = ref('');
+const isEditing = ref(false);
 
 const json = await useAPI(`/folders/${route.params.id}`, {
     auth: true,

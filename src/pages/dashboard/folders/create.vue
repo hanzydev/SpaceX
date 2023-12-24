@@ -41,9 +41,8 @@
 import { fire } from '@/util/toast';
 
 const router = useRouter();
-
-const isCreating = ref(false);
 const name = ref('');
+const isCreating = ref(false);
 
 const handleCreate = async () => {
     isCreating.value = true;

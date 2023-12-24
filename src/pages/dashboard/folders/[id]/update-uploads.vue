@@ -57,9 +57,9 @@ import { useUploadsStore } from '@/store';
 import { fire } from '@/util/toast';
 import folderEmitter from '@/util/emitters/folder';
 
+const store = useUploadsStore();
 const router = useRouter();
 const route = useRoute();
-const store = useUploadsStore();
 
 if (!store.uploadsLoaded) {
     await store.fetchUploads();

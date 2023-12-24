@@ -60,12 +60,12 @@ import noteEmitter from '@/util/emitters/note';
 const router = useRouter();
 const route = useRoute();
 
-const isEditing = ref(false);
-
 const note = reactive({
     title: '',
     content: '',
 });
+
+const isEditing = ref(false);
 
 const json = await useAPI(`/notes/${route.params.id}`, {
     auth: true,

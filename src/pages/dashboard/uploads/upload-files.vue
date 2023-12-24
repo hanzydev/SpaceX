@@ -203,7 +203,7 @@
                     width: `${uploadProgress}%`,
                 }"
             >
-                <Transition>
+                <Transition name="progress">
                     <p
                         v-if="uploadProgress"
                         class="ml-auto px-2 text-center text-sm font-medium text-white"
@@ -245,21 +245,6 @@ const uploadSettings = reactive<{
         quality?: string;
     };
 }>({});
-
-watch(uploadSettings, (settings) => {
-    const newSettings = { ...settings };
-
-    Object.entries(newSettings).forEach(([key, value]) => {
-        if (+value.deleteAfterViews > 100000) {
-            newSettings[key as never].deleteAfterViews = '100000';
-        } else if (
-            value.deleteAfterViews === '' ||
-            +value.deleteAfterViews < 0
-        ) {
-            newSettings[key as never].deleteAfterViews = '0';
-        }
-    });
-});
 
 const handleUploadSettings = (index: number) => {
     if (!uploadSettings[index]) {
@@ -399,6 +384,21 @@ const getFileURL = (file: File) => {
     return URL.createObjectURL(file);
 };
 
+watch(uploadSettings, (settings) => {
+    const newSettings = { ...settings };
+
+    Object.entries(newSettings).forEach(([key, value]) => {
+        if (+value.deleteAfterViews > 100000) {
+            newSettings[key as never].deleteAfterViews = '100000';
+        } else if (
+            value.deleteAfterViews === '' ||
+            +value.deleteAfterViews < 0
+        ) {
+            newSettings[key as never].deleteAfterViews = '0';
+        }
+    });
+});
+
 definePageMeta({
     layout: 'dashboard',
 });
@@ -419,13 +419,13 @@ useHead({
 </script>
 
 <style scoped>
-.v-enter-active,
-.v-leave-active {
+.progress-enter-active,
+.progress-leave-active {
     @apply transition-opacity duration-500 ease-in-out;
 }
 
-.v-enter-from,
-.v-leave-to {
+.progress-enter-from,
+.progress-leave-to {
     @apply opacity-0;
 }
 </style>
