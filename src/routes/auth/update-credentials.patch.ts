@@ -35,7 +35,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     if (
         typeof password === 'string' &&
         password.length &&
-        !z.string().min(1).max(64).safeParse(password).success
+        !z.string().min(1).max(128).safeParse(password).success
     ) {
         return reply.status(400).send({
             code: 'invalid_password',
