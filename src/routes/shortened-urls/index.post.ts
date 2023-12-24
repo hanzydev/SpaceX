@@ -1,17 +1,50 @@
 import { getIp } from '@util/get-ip';
 import { getClient } from '@util/database';
 import { dispatchEvent } from '@wss';
-import { createEntry } from '@util/cache';
+import { getEntry, createEntry } from '@util/cache';
 import { randomString } from '@util/random-string';
 
 export const middlewares = ['only-json', 'auth'];
 
 export default async (req: FastifyRequest, reply: FastifyReply) => {
-    const {
+    let {
+        id,
+        // eslint-disable-next-line prefer-const
         url,
+        // eslint-disable-next-line prefer-const
         private: isPrivate = false,
+        // eslint-disable-next-line prefer-const
         deleteAfterViews = 0,
     } = req.body as Record<string, any>;
+
+    console.log(id);
+
+    if (
+        typeof id === 'string' &&
+        id.length &&
+        !z
+            .string()
+            .min(1)
+            .max(64)
+            .regex(/^[a-zA-Z0-9-_]+$/)
+            .safeParse(id).success
+    ) {
+        return reply.status(400).send({
+            code: 'invalid_id',
+            error: 'Invalid id',
+        });
+    }
+
+    if (!(typeof id === 'string' && id.length)) {
+        id = randomString(8);
+    }
+
+    if (getEntry('shortened-urls', id)) {
+        return reply.status(400).send({
+            code: 'id_already_exists',
+            error: 'Id already exists',
+        });
+    }
 
     if (!z.string().url().safeParse(url).success) {
         return reply.status(400).send({
@@ -28,7 +61,6 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
     }
 
     const client = getClient();
-    const id = randomString(8);
 
     const shortenedURL = {
         id,
