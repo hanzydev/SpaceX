@@ -27,7 +27,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
         !z
             .string()
             .min(1)
-            .max(32)
+            .max(128)
             .regex(/^[a-zA-Z0-9-_]+$/)
             .safeParse(newId).success
     ) {
