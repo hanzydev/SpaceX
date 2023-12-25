@@ -18,7 +18,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     const { name } = req.body as Record<string, any>;
 
-    if (!z.string().min(1).max(32).safeParse(name).success) {
+    if (!z.string().min(1).max(128).safeParse(name).success) {
         return reply.status(400).send({
             code: 'invalid_name',
             error: 'Invalid name',
