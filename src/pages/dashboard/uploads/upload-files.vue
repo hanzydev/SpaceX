@@ -521,14 +521,6 @@ watch(currentModal, (modalIndex) => {
     ];
 });
 
-watch(
-    files,
-    (value) => {
-        console.log(value);
-    },
-    { deep: true },
-);
-
 definePageMeta({
     layout: 'dashboard',
 });
