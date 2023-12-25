@@ -25,6 +25,7 @@ const { isOpen = false } = defineProps<{
 
 const emit = defineEmits<{
     (event: 'close'): void;
+    (event: 'closed'): void;
 }>();
 
 const containerRef = ref<HTMLDivElement>();
@@ -88,6 +89,9 @@ const closeModal = async () => {
     });
 
     isDemonstrable.value = false;
+
+    await nextTick();
+    emit('closed');
 };
 
 const onKeyDown = (event: KeyboardEvent) => {

@@ -1,8 +1,49 @@
 <template>
     <h2>Upload Files</h2>
-    <Modal :is-open="isModalOpened" @close="isModalOpened = false">
+    <Modal
+        :is-open="isModalOpened"
+        @close="onModalClose"
+        @closed="onModalClosed"
+    >
         <div class="flex w-full flex-col justify-center p-4 md:p-8">
             <h2>Upload Settings</h2>
+            <div class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4">
+                <p class="text-sm font-semibold uppercase text-slate-300">
+                    FILE NAME
+                </p>
+                <div class="mt-2 grid grid-cols-4 rounded-md bg-spacex-2 p-2">
+                    <button
+                        v-for="(type, index) in [
+                            'random',
+                            'UUID',
+                            'keep original',
+                            'custom',
+                        ]"
+                        :key="index"
+                        :class="[
+                            'rounded-[4px] px-2 py-1 font-medium',
+                            uploadSettings[currentModal!]!.idType === type
+                                ? 'bg-spacex-1 text-white'
+                                : 'text-slate-300',
+                        ]"
+                        @click="
+                            uploadSettings[currentModal!]!.idType =
+                                type as never
+                        "
+                    >
+                        {{ _.upperFirst(type) }}
+                    </button>
+                </div>
+
+                <input
+                    v-if="uploadSettings[currentModal!]!.idType === 'custom'"
+                    v-model="uploadSettings[currentModal!]!.id"
+                    class="mt-4 h-10 w-full rounded-md bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
+                    type="text"
+                    placeholder="Enter file name"
+                />
+            </div>
+
             <div
                 v-if="files[currentModal!]!.type.startsWith('image/')"
                 class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
@@ -229,8 +270,11 @@
 </template>
 
 <script setup lang="ts">
+import _ from 'lodash';
 import { CHUNK_SIZE_IN_MB } from '@/constants';
 import { fire } from '@/util/toast';
+import { generateUUID } from '@/util/uuid';
+import { randomString } from '@/util/random-string';
 
 const isModalOpened = ref(false);
 const isUploading = ref(false);
@@ -240,26 +284,27 @@ const files = ref<File[]>([]);
 const currentModal = ref<number>();
 const uploadSettings = reactive<{
     [index: number]: {
+        id: string;
+        idType: 'random' | 'UUID' | 'keep original' | 'custom';
+        originalName: string;
+        extname: string;
         private: boolean;
         deleteAfterViews: string;
         quality?: string;
     };
 }>({});
 
+const changeFileName = (file: File, name: string, extname: string) => {
+    if (extname.length) {
+        extname = `.${extname}`;
+    }
+
+    return new File([file], `${name}${extname}`, {
+        type: file.type,
+    });
+};
+
 const handleUploadSettings = (index: number) => {
-    if (!uploadSettings[index]) {
-        uploadSettings[index] = {
-            private: false,
-            deleteAfterViews: '0',
-        };
-    }
-
-    if (files.value[index].type.startsWith('image/')) {
-        if (!('quality' in uploadSettings[index])) {
-            uploadSettings[index].quality = '100';
-        }
-    }
-
     currentModal.value = index;
     isModalOpened.value = true;
 };
@@ -272,8 +317,45 @@ const handleFileDelete = (index: number) => {
     files.value.splice(index, 1);
 };
 
-const onFileUpload = (e: any) => {
-    files.value = [...files.value, ...Array.from<File>(e.target.files ?? [])];
+const onModalClose = () => {
+    isModalOpened.value = false;
+};
+
+const onModalClosed = () => {
+    if (uploadSettings[currentModal.value as never]?.id === '') {
+        uploadSettings[currentModal.value as never].id = uploadSettings[
+            currentModal.value as never
+        ].originalName.replace(/\.[^/.]+$/, '');
+    }
+    currentModal.value = undefined;
+};
+
+const onFileUpload = async (e: any) => {
+    const targetFiles = e.target.files ?? [];
+    const all = [...files.value, ...targetFiles];
+
+    for (const file of targetFiles) {
+        const extname = file.name.match(/\.[^/.]+$/)?.[0].slice(1) ?? '';
+        const index = all.indexOf(file);
+
+        uploadSettings[index] = {
+            id: randomString(6),
+            idType: 'random',
+            originalName: file.name,
+            extname,
+            private: false,
+            deleteAfterViews: '0',
+        };
+
+        if (file.type.startsWith('image/')) {
+            uploadSettings[index].quality = '100';
+        }
+
+        await nextTick();
+        files.value.push(
+            changeFileName(file, uploadSettings[index].id, extname),
+        );
+    }
 };
 
 const uploadFiles = async () => {
@@ -384,19 +466,56 @@ const getFileURL = (file: File) => {
     return URL.createObjectURL(file);
 };
 
-watch(uploadSettings, (settings) => {
-    const newSettings = { ...settings };
+let unwatch: (() => void)[] = [];
 
-    Object.entries(newSettings).forEach(([key, value]) => {
-        if (+value.deleteAfterViews > 100000) {
-            newSettings[key as never].deleteAfterViews = '100000';
-        } else if (
-            value.deleteAfterViews === '' ||
-            +value.deleteAfterViews < 0
-        ) {
-            newSettings[key as never].deleteAfterViews = '0';
-        }
-    });
+watch(currentModal, (modalIndex) => {
+    if (modalIndex === undefined) {
+        return unwatch.forEach((unw) => unw());
+    }
+
+    unwatch = [
+        watch(
+            () => uploadSettings[modalIndex].deleteAfterViews,
+            (deleteAfterViews) => {
+                if (+deleteAfterViews > 100000) {
+                    deleteAfterViews = '100000';
+                } else if (deleteAfterViews === '' || +deleteAfterViews < 0) {
+                    deleteAfterViews = '0';
+                }
+            },
+        ),
+        watch(
+            () => uploadSettings[modalIndex].idType,
+            (idType) => {
+                switch (idType) {
+                    case 'random':
+                        uploadSettings[modalIndex].id = randomString(6);
+                        break;
+                    case 'UUID': {
+                        uploadSettings[modalIndex].id = generateUUID();
+                        break;
+                    }
+                    case 'keep original':
+                        uploadSettings[modalIndex].id = uploadSettings[
+                            modalIndex
+                        ].originalName.replace(/\.[^/.]+$/, '');
+                        break;
+                }
+            },
+        ),
+        watch(
+            () => uploadSettings[modalIndex].id,
+            (id) => {
+                if (files.value[modalIndex]) {
+                    files.value[modalIndex] = changeFileName(
+                        files.value[modalIndex],
+                        id,
+                        uploadSettings[modalIndex].extname,
+                    );
+                }
+            },
+        ),
+    ];
 });
 
 definePageMeta({

@@ -11,12 +11,12 @@
 
             <div class="mt-7 flex flex-col">
                 <label class="text-sm font-semibold uppercase text-slate-300"
-                    >Id</label
+                    >FILE NAME</label
                 >
                 <input
                     v-model="upload.id"
                     type="text"
-                    placeholder="Enter Id"
+                    placeholder="Enter file name"
                     :class="`mt-1 h-10 rounded-lg bg-spacex-2 px-3 py-2 placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary ${
                         isEditing && 'cursor-not-allowed'
                     }`"
