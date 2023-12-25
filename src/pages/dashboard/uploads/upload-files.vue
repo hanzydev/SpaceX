@@ -23,7 +23,7 @@
                         ]"
                         :key="index"
                         :class="[
-                            'rounded-[4px] px-2 py-1 font-medium',
+                            'rounded-[4px] px-2 py-1 font-medium max-sm:text-left',
                             uploadSettings[currentModal!]!.idType === type
                                 ? 'bg-spacex-1 text-white'
                                 : 'text-slate-300',
