@@ -6,7 +6,7 @@ from util.question import *
 from util.data import *
 
 
-default_encrypted_password = "$argon2id$v=19$m=65536,t=2,p=1$nxPIevE6UMWTH85/WiCY3e3Xbs/gvNiVJ5l/yHU1sUo$W90ubPGIsDnuJ96I62K5dbwp5DqJEr4p6Pcco2mwcME"
+default_encrypted_password = "$argon2id$v=19$m=65536,t=3,p=4$HmeYzysNcDJPq0ZHVEQOaw$VEt74FZY1oFFgc5p2bbwbiaULdhOb97ak+p/xbhgq60"
 
 
 def reset_pass():
