@@ -10,7 +10,9 @@ export const initFastify = async () => {
     const routes = await generateRoutes();
     const middlewares = await generateMiddlewares();
 
-    const app = Fastify();
+    const app = Fastify({
+        maxParamLength: 200,
+    });
 
     await app.register(FastifyCors, {
         origin: '*',
