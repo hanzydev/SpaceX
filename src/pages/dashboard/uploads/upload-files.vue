@@ -3,7 +3,7 @@
     <Modal
         :is-open="isModalOpened"
         @close="onModalClose"
-        @closed="onModalClosed"
+        @closed="currentModal = undefined"
     >
         <div class="flex w-full flex-col justify-center p-4 md:p-8">
             <h2>Upload Settings</h2>
@@ -147,6 +147,7 @@
             <div
                 v-for="(file, index) in files"
                 :key="index"
+                v-memo="file.name"
                 class="flex w-full items-center justify-between rounded-lg bg-spacex-3 p-3"
             >
                 <div class="flex items-center gap-3 truncate">
@@ -324,15 +325,12 @@ const handleFileDelete = (index: number) => {
 
 const onModalClose = () => {
     isModalOpened.value = false;
-};
 
-const onModalClosed = () => {
-    if (uploadSettings[currentModal.value as never]?.id === '') {
+    if (uploadSettings[currentModal.value as never].id === '') {
         uploadSettings[currentModal.value as never].id = uploadSettings[
             currentModal.value as never
         ].originalName.replace(/\.[^/.]+$/, '');
     }
-    currentModal.value = undefined;
 };
 
 const onFileUpload = async (e: any) => {
@@ -522,6 +520,14 @@ watch(currentModal, (modalIndex) => {
         ),
     ];
 });
+
+watch(
+    files,
+    (value) => {
+        console.log(value);
+    },
+    { deep: true },
+);
 
 definePageMeta({
     layout: 'dashboard',
