@@ -11,7 +11,9 @@
                 <p class="text-sm font-semibold uppercase text-slate-300">
                     FILE NAME
                 </p>
-                <div class="mt-2 grid grid-cols-4 rounded-md bg-spacex-2 p-2">
+                <div
+                    class="mt-2 grid grid-cols-1 rounded-md bg-spacex-2 p-2 sm:grid-cols-4"
+                >
                     <button
                         v-for="(type, index) in [
                             'random',
@@ -141,14 +143,14 @@
                 </div>
             </div>
         </div>
-        <div class="mt-4 flex flex-col gap-2">
+        <div class="relative mt-4 flex flex-col gap-2 overflow-hidden">
             <div
                 v-for="(file, index) in files"
                 :key="index"
                 class="flex w-full items-center justify-between rounded-lg bg-spacex-3 p-3"
             >
-                <div class="flex items-center gap-3">
-                    <div class="relative h-12 w-12">
+                <div class="flex items-center gap-3 truncate">
+                    <div class="relative h-12 w-12 flex-shrink-0">
                         <img
                             v-if="file.type.includes('image')"
                             class="h-full w-full rounded-md"
@@ -211,9 +213,12 @@
                             <Icon v-else name="file-unknown" class="text-3xl" />
                         </div>
                     </div>
-                    <h6>{{ file.name }}</h6>
+
+                    <h6 class="truncate pr-2">
+                        {{ file.name }}
+                    </h6>
                 </div>
-                <div class="flex items-center space-x-0.5">
+                <div class="flex items-center space-x-0.5 bg-spacex-3">
                     <button
                         :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-spacex-primary focus:ring-2 focus:ring-spacex-primary ${
                             isUploading && 'cursor-not-allowed opacity-50'

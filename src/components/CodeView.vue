@@ -1,7 +1,7 @@
 <template>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
         <div class="flex w-full flex-col justify-center p-4">
-            <h2>{{ data.title }}</h2>
+            <h2 class="truncate">{{ data.title }}</h2>
             <h3 class="!mt-5">Statistics</h3>
             <div class="!mt-3 grid w-full grid-cols-1 gap-5 xs:grid-cols-2">
                 <div

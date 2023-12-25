@@ -17,9 +17,16 @@
                         currentPage * 15 + 15,
                     )"
                     :key="index"
+                    class="truncate"
                 >
                     <td class="border border-spacex-4 px-4 py-2">
-                        <span>{{ upload.id }}</span>
+                        <span>
+                            {{
+                                upload.id.length > 48
+                                    ? `${upload.id.slice(0, 48)}...`
+                                    : upload.id
+                            }}</span
+                        >
                     </td>
                     <td class="border border-spacex-4 px-4 py-2">
                         <span>{{ upload.size.formatted }}</span>

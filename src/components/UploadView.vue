@@ -1,7 +1,7 @@
 <template>
     <Modal :is-open="isModalOpen" @close="isModalOpen = false">
         <div class="flex w-full flex-col justify-center p-4">
-            <h2>{{ data.id }}</h2>
+            <h2 class="truncate">{{ data.id }}</h2>
             <h3 class="!mt-5">Statistics</h3>
             <div
                 class="!mt-3 grid w-full grid-cols-1 gap-5 xs:grid-cols-2 sm:grid-cols-3"
@@ -231,7 +231,11 @@
                 class="text-4xl"
             />
             <Icon v-else name="file-unknown" class="text-4xl" />
-            <h6 class="!mt-1.5 text-slate-400">{{ data.id }}</h6>
+            <h6 class="!mt-1.5 text-center text-slate-400">
+                {{
+                    data.id.length > 48 ? `${data.id.slice(0, 48)}...` : data.id
+                }}
+            </h6>
         </div>
     </div>
 </template>
