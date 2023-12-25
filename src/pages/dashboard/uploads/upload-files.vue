@@ -51,9 +51,9 @@
                 class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
             >
                 <p class="text-sm font-semibold uppercase text-slate-300">
-                    IMAGE QUALITY PERCENTAGE (CURRENTLY %{{
+                    IMAGE QUALITY PERCENTAGE (CURRENTLY {{
                         uploadSettings[currentModal!]!.quality
-                    }})
+                    }}%)
                 </p>
                 <input
                     v-model="uploadSettings[currentModal!]!.quality"
