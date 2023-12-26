@@ -216,20 +216,28 @@
                         'js',
                         'md',
                         'txt',
-                    ].includes(data.id.split('.').pop() ?? '')
+                    ].includes(extname)
                 "
                 name="file-text"
                 class="text-4xl"
             />
+
             <Icon
                 v-else-if="
-                    ['zip', 'rar', '7z', 'tar', 'gz', 'bin'].includes(
-                        data.id.split('.').pop() ?? '',
+                    ['zip', 'rar', '7z', 'tar', 'gz', 'bin', 'iso'].includes(
+                        extname,
                     )
                 "
                 name="file-archive"
                 class="text-4xl"
             />
+
+            <Icon
+                v-else-if="extname === 'pdf'"
+                name="file-pdf"
+                class="text-4xl"
+            />
+
             <Icon v-else name="file-unknown" class="text-4xl" />
             <h6 class="!mt-1.5 text-center text-slate-400">
                 {{
@@ -251,6 +259,8 @@ const { data, alwaysRing, parentFolder } = defineProps<{
     parentFolder?: string;
     onClick?: (event: MouseEvent) => void;
 }>();
+
+const extname = computed(() => data.id.match(/\.[^/.]+$/)?.[0].slice(1) ?? '');
 
 const router = useRouter();
 const uploadsStore = useUploadsStore();

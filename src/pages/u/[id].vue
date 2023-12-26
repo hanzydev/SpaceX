@@ -42,7 +42,7 @@
                         'js',
                         'md',
                         'txt',
-                    ].includes(json.id.split('.').pop() ?? '')
+                    ].includes(json.extname)
                 "
                 name="file-text"
                 class="text-6xl"
@@ -50,11 +50,17 @@
 
             <Icon
                 v-else-if="
-                    ['zip', 'rar', '7z', 'tar', 'gz', 'bin'].includes(
-                        json.id.split('.').pop() ?? '',
+                    ['zip', 'rar', '7z', 'tar', 'gz', 'bin', 'iso'].includes(
+                        json.extname,
                     )
                 "
                 name="file-archive"
+                class="text-6xl"
+            />
+
+            <Icon
+                v-else-if="json.extname === 'pdf'"
+                name="file-pdf"
                 class="text-6xl"
             />
 
@@ -106,6 +112,7 @@ if (json?.error) {
     throwError(404);
 } else {
     json.url = `${API_URL}/uploads/${json.id}?ref=cdn`;
+    json.extname = json.id.match(/\.[^/.]+$/)?.[0].slice(1) ?? '';
 
     const meta: Meta[] = [];
 

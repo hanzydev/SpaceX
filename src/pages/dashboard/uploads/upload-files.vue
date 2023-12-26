@@ -51,9 +51,8 @@
                 class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
             >
                 <p class="text-sm font-semibold uppercase text-slate-300">
-                    IMAGE QUALITY PERCENTAGE (CURRENTLY {{
-                        uploadSettings[currentModal!]!.quality
-                    }}%)
+                    IMAGE QUALITY PERCENTAGE (CURRENTLY
+                    {{ uploadSettings[currentModal!]!.quality }}%)
                 </p>
                 <input
                     v-model="uploadSettings[currentModal!]!.quality"
@@ -148,6 +147,10 @@
                 v-for="(file, index) in files"
                 :key="index"
                 v-memo="file.name"
+                :set="
+                    // @ts-ignore
+                    (extname = file.name.match(/\.[^/.]+$/)![0].slice(1))
+                "
                 class="flex w-full items-center justify-between rounded-lg bg-spacex-3 p-3"
             >
                 <div class="flex items-center gap-3 truncate">
@@ -180,6 +183,7 @@
                                 name="file-audio"
                                 class="text-3xl"
                             />
+
                             <Icon
                                 v-else-if="
                                     file.type.includes('text') ||
@@ -192,11 +196,13 @@
                                         'js',
                                         'md',
                                         'txt',
-                                    ].includes(file.name.split('.').pop() ?? '')
+                                        // @ts-ignore
+                                    ].includes(extname)
                                 "
                                 name="file-text"
                                 class="text-3xl"
                             />
+
                             <Icon
                                 v-else-if="
                                     [
@@ -206,11 +212,23 @@
                                         'tar',
                                         'gz',
                                         'bin',
-                                    ].includes(file.name.split('.').pop() ?? '')
+                                        'iso',
+                                        // @ts-ignore
+                                    ].includes(extname)
                                 "
                                 name="file-archive"
                                 class="text-3xl"
                             />
+
+                            <Icon
+                                v-else-if="
+                                    // @ts-ignore
+                                    extname === 'pdf'
+                                "
+                                name="file-pdf"
+                                class="text-3xl"
+                            />
+
                             <Icon v-else name="file-unknown" class="text-3xl" />
                         </div>
                     </div>
