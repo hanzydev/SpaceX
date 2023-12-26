@@ -62,7 +62,7 @@
 
             <h2 class="mt-1">{{ json.id }}</h2>
             <button
-                class="mt-5 h-10 w-full rounded-lg bg-spacex-primary px-3 py-3 focus:ring-2 focus:ring-white"
+                class="mt-5 w-full rounded-lg bg-spacex-primary p-2 focus:ring-2 focus:ring-white"
                 @click="handleDownload"
             >
                 Download
