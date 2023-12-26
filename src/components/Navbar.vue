@@ -43,7 +43,7 @@
                     class="flex w-52 flex-col justify-center rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary"
                 >
                     <h4 class="px-2.5">
-                        {{ _.capitalize(userStore.username) }}
+                        {{ _.upperFirst(userStore.username) }}
                     </h4>
 
                     <hr class="my-2 h-[1px] border-0 bg-spacex-1" />

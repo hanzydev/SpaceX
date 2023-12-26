@@ -351,7 +351,7 @@
                                     <span
                                         class="text-[1rem] font-medium leading-[1.375rem] hover:underline"
                                     >
-                                        {{ _.capitalize(credentials.username) }}
+                                        {{ _.upperFirst(credentials.username) }}
                                     </span>
                                     <span
                                         class="text-xs font-medium text-[#949ba4]"
