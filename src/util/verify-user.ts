@@ -19,7 +19,7 @@ export const verifyUser = async (jwt: string) => {
     try {
         const verified = await jwtVerify(jwt, new TextEncoder().encode(process.env.JWT_SECRET));
 
-        if (!verified) {
+        if (!verified || verified.payload.username !== process.env.USERNAME) {
             createEntry('other', `jwt_${jwt}`, { verified: false });
             return false;
         }
