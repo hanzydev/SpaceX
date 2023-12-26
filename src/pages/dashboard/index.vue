@@ -1,8 +1,5 @@
 <template>
-    <h2>
-        Welcome back,
-        {{ _.capitalize(userStore.username) }}
-    </h2>
+    <h2>Welcome back, {{ _.capitalize(userStore.username) }}</h2>
     <div class="mt-6">
         <h3>Statistics</h3>
         <Stats class="mt-3" />

@@ -1,149 +1,146 @@
 <template>
-    <div class="pb-16 max-lg:pb-8">
-        <nav
-            id="navbar"
-            class="fixed z-50 flex w-full items-center bg-spacex-3 px-4 py-4 lg:px-6"
+    <nav
+        id="navbar"
+        class="relative flex z-50 h-[70px] w-full items-center bg-spacex-3 pl-4 lg:px-6 max-lg:pr-6"
+    >
+        <svg
+            id="sidebar-toggler"
+            class="cursor-pointer transition-transform duration-300 lg:hidden"
+            viewBox="0 0 100 100"
+            width="42"
+            aria-label="Toggle sidebar"
+            :aria-expanded="sidebarStore.opened"
+            @click="sidebarStore.opened = !sidebarStore.opened"
         >
-            <svg
-                id="sidebar-toggler"
-                class="cursor-pointer transition-transform duration-300 lg:hidden"
-                viewBox="0 0 100 100"
-                width="42"
-                aria-label="Toggle sidebar"
-                :aria-expanded="sidebarStore.opened"
-                @click="sidebarStore.opened = !sidebarStore.opened"
+            <path
+                id="top"
+                class="line"
+                d="m 30,33 h 40 c 0,0 8.5,-0.68551 8.5,10.375 0,8.292653 -6.122707,9.002293 -8.5,6.625 l -11.071429,-11.071429"
+            />
+            <path class="line" d="m 70,50 h -40" />
+            <path
+                id="bottom"
+                class="line"
+                d="m 30,67 h 40 c 0,0 8.5,0.68551 8.5,-10.375 0,-8.292653 -6.122707,-9.002293 -8.5,-6.625 l -11.071429,11.071429"
+            />
+        </svg>
+        <h2 class="max-lg:mx-auto max-lg:!text-2xl lg:font-bold">SpaceX</h2>
+        <div class="relative lg:ml-auto">
+            <img
+                src="/favicon.ico"
+                width="32"
+                height="32"
+                alt=""
+                class="cursor-pointer rounded-full ring-[3px] ring-spacex-primary"
+                draggable="false"
+                @click="handleProfile"
+            />
+            <div
+                id="profile"
+                class="absolute right-0 z-50 mt-4 hidden shadow-md"
             >
-                <path
-                    id="top"
-                    class="line"
-                    d="m 30,33 h 40 c 0,0 8.5,-0.68551 8.5,10.375 0,8.292653 -6.122707,9.002293 -8.5,6.625 l -11.071429,-11.071429"
-                />
-                <path class="line" d="m 70,50 h -40" />
-                <path
-                    id="bottom"
-                    class="line"
-                    d="m 30,67 h 40 c 0,0 8.5,0.68551 8.5,-10.375 0,-8.292653 -6.122707,-9.002293 -8.5,-6.625 l -11.071429,11.071429"
-                />
-            </svg>
-            <h2 class="max-lg:mx-auto max-lg:!text-2xl lg:font-bold">SpaceX</h2>
-            <div class="relative lg:ml-auto">
-                <img
-                    src="/favicon.ico"
-                    width="32"
-                    height="32"
-                    alt=""
-                    class="cursor-pointer rounded-full ring-[3px] ring-spacex-primary"
-                    draggable="false"
-                    @click="handleProfile"
-                />
                 <div
-                    id="profile"
-                    class="absolute right-0 z-50 mt-4 hidden shadow-md"
+                    class="flex w-52 flex-col justify-center rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary"
                 >
-                    <div
-                        class="flex w-52 flex-col justify-center rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary"
-                    >
-                        <h4 class="px-2.5">
-                            {{ _.capitalize(userStore.username) }}
-                        </h4>
+                    <h4 class="px-2.5">
+                        {{ _.capitalize(userStore.username) }}
+                    </h4>
 
-                        <hr class="my-2 h-[1px] border-0 bg-spacex-1" />
+                    <hr class="my-2 h-[1px] border-0 bg-spacex-1" />
 
-                        <div class="mt-1 flex flex-col items-center gap-2">
-                            <NuxtLink
-                                to="/dashboard/manage-account"
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                    <div class="mt-1 flex flex-col items-center gap-2">
+                        <NuxtLink
+                            to="/dashboard/manage-account"
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                        >
+                            <Icon name="user" />
+                            Manage Account
+                        </NuxtLink>
+                        <NuxtLink
+                            to="/dashboard/stats"
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                        >
+                            <Icon name="stats" />
+                            Statistics
+                        </NuxtLink>
+                        <NuxtLink
+                            to="/dashboard/logs"
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                        >
+                            <Icon name="book" />
+                            Logs
+                        </NuxtLink>
+                        <NuxtLink
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                            to="/dashboard/backups"
+                        >
+                            <Icon name="folder-zip" />
+                            Backups
+                        </NuxtLink>
+                        <NuxtLink
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
+                            to="/dashboard/system-monitor"
+                        >
+                            <Icon name="monitor" />
+                            System Monitor
+                        </NuxtLink>
+                        <button
+                            class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:bg-spacex-primary"
+                            @click="createSXCU"
+                        >
+                            <Icon name="settings" />
+                            Create SXCU
+                        </button>
+                        <div class="relative w-full">
+                            <div
+                                id="themes"
+                                class="absolute right-0 z-50 mr-52 hidden shadow-md max-sm:-top-[17.45rem]"
                             >
-                                <Icon name="user" />
-                                Manage Account
-                            </NuxtLink>
-                            <NuxtLink
-                                to="/dashboard/stats"
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
-                            >
-                                <Icon name="stats" />
-                                Statistics
-                            </NuxtLink>
-                            <NuxtLink
-                                to="/dashboard/logs"
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
-                            >
-                                <Icon name="book" />
-                                Logs
-                            </NuxtLink>
-                            <NuxtLink
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
-                                to="/dashboard/backups"
-                            >
-                                <Icon name="folder-zip" />
-                                Backups
-                            </NuxtLink>
-                            <NuxtLink
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2"
-                                to="/dashboard/system-monitor"
-                            >
-                                <Icon name="monitor" />
-                                System Monitor
-                            </NuxtLink>
-                            <button
-                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:bg-spacex-primary"
-                                @click="createSXCU"
-                            >
-                                <Icon name="settings" />
-                                Create SXCU
-                            </button>
-                            <div class="relative w-full">
                                 <div
-                                    id="themes"
-                                    class="absolute right-0 z-50 mr-52 hidden shadow-md max-sm:-top-[17.45rem]"
+                                    class="flex w-56 flex-col justify-center gap-2 rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary max-[472px]:w-48 max-[440px]:w-36"
                                 >
-                                    <div
-                                        class="flex w-56 flex-col justify-center gap-2 rounded-lg bg-spacex-3 p-2.5 shadow-lg ring-2 ring-spacex-primary max-[472px]:w-48 max-[440px]:w-36"
+                                    <button
+                                        v-for="(
+                                            [name, data], index
+                                        ) in Object.entries(themes)"
+                                        :key="index"
+                                        :class="`flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 ${
+                                            name === theme &&
+                                            'ring-2 ring-spacex-primary'
+                                        }`"
+                                        @click="setTheme(name)"
                                     >
-                                        <button
-                                            v-for="(
-                                                [name, data], index
-                                            ) in Object.entries(themes)"
-                                            :key="index"
-                                            :class="`flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 ${
-                                                name === theme &&
-                                                'ring-2 ring-spacex-primary'
-                                            }`"
-                                            @click="setTheme(name)"
-                                        >
-                                            <div
-                                                class="h-4 w-4 rounded-full"
-                                                :style="{
-                                                    backgroundColor:
-                                                        data.primary,
-                                                }"
-                                            />
-                                            {{ pascalCase(name) }}
-                                        </button>
-                                    </div>
+                                        <div
+                                            class="h-4 w-4 rounded-full"
+                                            :style="{
+                                                backgroundColor: data.primary,
+                                            }"
+                                        />
+                                        {{ pascalCase(name) }}
+                                    </button>
                                 </div>
-
-                                <button
-                                    class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
-                                    @click="handleThemes"
-                                >
-                                    <Icon name="palette" />
-                                    Themes
-                                </button>
                             </div>
-                            <NuxtLink
-                                to="/auth/logout"
-                                class="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 font-medium text-red-500 transition-colors hover:bg-spacex-2"
+
+                            <button
+                                class="flex h-9 w-full items-center gap-2 rounded-lg px-2.5 font-medium transition-colors hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
+                                @click="handleThemes"
                             >
-                                <Icon name="logout" />
-                                Logout
-                            </NuxtLink>
+                                <Icon name="palette" />
+                                Themes
+                            </button>
                         </div>
+                        <NuxtLink
+                            to="/auth/logout"
+                            class="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 font-medium text-red-500 transition-colors hover:bg-spacex-2"
+                        >
+                            <Icon name="logout" />
+                            Logout
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
 </template>
 
 <script setup lang="ts">

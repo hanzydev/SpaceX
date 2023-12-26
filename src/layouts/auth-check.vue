@@ -1,7 +1,5 @@
 <template>
-    <div v-if="isLoaded" class="h-screen w-screen bg-spacex-4">
-        <slot />
-    </div>
+    <slot v-if="isLoaded" />
 </template>
 
 <script setup lang="ts">

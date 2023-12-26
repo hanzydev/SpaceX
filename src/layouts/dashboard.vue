@@ -2,10 +2,10 @@
     <NuxtLayout name="auth-check">
         <Navbar />
         <Sidebar />
-        <div class="max-lg:pt-10 lg:mt-1 lg:pl-64">
-            <div class="h-full bg-spacex-4 p-5">
-                <slot />
-            </div>
-        </div>
+        <section
+            class="h-[calc(100vh-70px)] w-full overflow-x-hidden bg-spacex-4 p-5 lg:ml-64 lg:w-[calc(100%-256px)]"
+        >
+            <slot />
+        </section>
     </NuxtLayout>
 </template>

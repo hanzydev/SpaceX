@@ -1,12 +1,12 @@
 <template>
     <div
         ref="sidebarOverlayRef"
-        class="fixed inset-0 z-20 hidden h-screen items-center justify-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm lg:!hidden"
+        class="fixed inset-0 z-10 hidden h-screen items-center justify-center bg-[rgba(0,0,0,0.2)] backdrop-blur-sm lg:!hidden"
     />
-    <nav
+    <aside
         id="sidebar"
         ref="sidebarRef"
-        class="fixed z-30 flex h-screen w-64 flex-col overflow-y-auto bg-spacex-3 py-4 max-lg:mt-5 max-lg:hidden"
+        class="absolute z-50 flex h-[calc(100%-70px)] w-64 flex-col overflow-y-auto bg-spacex-3 pb-4 max-lg:hidden lg:pt-4"
     >
         <div class="flex h-full flex-col gap-5">
             <div
@@ -18,8 +18,8 @@
                     {{ item.name }}
                 </p>
                 <NuxtLink
-                    v-for="(child, index2) in item.children"
-                    :key="index2"
+                    v-for="(child, childIndex) in item.children"
+                    :key="childIndex"
                     :to="child.to"
                     class="mx-3 flex items-center gap-3 rounded-xl px-3 py-2 text-base font-medium transition-colors hover:bg-spacex-2"
                 >
@@ -36,9 +36,9 @@
                     >Hànzy</a
                 >
             </p>
-            <div class="pb-[4.5rem] lg:hidden" />
+            <div class="pb-1 lg:hidden" />
         </div>
-    </nav>
+    </aside>
 </template>
 
 <script setup lang="ts">
