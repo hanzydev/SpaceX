@@ -79,35 +79,35 @@
 
             <div class="mt-3 grid w-full grid-cols-2 gap-2 max-xs:grid-cols-1">
                 <button
-                    class="flex w-full items-center gap-2 rounded-lg bg-spacex-2 px-3 py-2 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex w-full items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleCopy"
                 >
                     <Icon name="copy" />
                     <span>Copy Link</span>
                 </button>
                 <button
-                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleDownload"
                 >
                     <Icon name="download" />
                     <span>Download</span>
                 </button>
                 <button
-                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleOpen"
                 >
                     <Icon name="link-open" />
                     <span>Open</span>
                 </button>
                 <button
-                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary"
+                    class="flex h-10 items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary"
                     @click="handleEdit"
                 >
                     <Icon name="pen" />
                     <span>Edit</span>
                 </button>
                 <button
-                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary ${
+                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary ${
                         isDeleting && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isDeleting"
@@ -120,7 +120,7 @@
 
                 <button
                     v-if="parentFolder"
-                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-2 px-3 transition-colors duration-300 hover:bg-spacex-3 focus:ring-2 focus:ring-spacex-primary ${
+                    :class="`flex h-10 items-center gap-2 rounded-lg bg-spacex-3 px-3 py-2 transition-colors duration-300 hover:bg-spacex-2 focus:ring-2 focus:ring-spacex-primary ${
                         isRemoving && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isRemoving"
