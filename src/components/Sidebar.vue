@@ -8,13 +8,13 @@
         ref="sidebarRef"
         class="fixed z-30 flex h-screen w-64 flex-col overflow-y-auto bg-spacex-3 py-4 max-lg:mt-5 max-lg:hidden"
     >
-        <div class="flex h-full flex-col gap-2">
+        <div class="flex h-full flex-col gap-5">
             <div
                 v-for="(item, index) in items"
                 :key="index"
                 class="flex flex-col gap-2"
             >
-                <p class="mx-6 mt-3 text-sm font-semibold text-slate-400">
+                <p class="mx-6 text-sm font-semibold text-slate-400">
                     {{ item.name }}
                 </p>
                 <NuxtLink
@@ -27,6 +27,15 @@
                     {{ child.name }}
                 </NuxtLink>
             </div>
+            <p class="mx-6 mt-3 text-[15px] font-semibold text-slate-400">
+                &copy; 2023-present
+                <a
+                    class="text-[15px] font-bold text-spacex-primary hover:underline"
+                    href="https://hanzy.dev"
+                    target="_blank"
+                    >Hànzy</a
+                >
+            </p>
             <div class="pb-[4.5rem] lg:hidden" />
         </div>
     </nav>
