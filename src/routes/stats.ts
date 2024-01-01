@@ -22,25 +22,6 @@ export default (_: FastifyRequest, reply: FastifyReply) => {
         'December',
     ];
 
-    let uploadTypes = uploads.reduce((acc, upload) => {
-        if (!acc.includes(upload.type)) {
-            acc.push(upload.type);
-        }
-
-        return acc;
-    }, [] as string[]);
-
-    const typesChartData = uploadTypes.map(
-        (type: string) => uploads.filter((upload) => upload.type === type).length,
-    );
-
-    uploadTypes = uploadTypes.sort((a: string, b: string) => {
-        const aCount = uploads.filter((upload) => upload.type === a).length;
-        const bCount = uploads.filter((upload) => upload.type === b).length;
-
-        return bCount - aCount;
-    });
-
     let viewsChartData: number[] = [];
 
     for (const upload of uploads) {
@@ -49,12 +30,12 @@ export default (_: FastifyRequest, reply: FastifyReply) => {
 
             if (viewDate.getFullYear() === date.getFullYear()) {
                 viewsChartData[viewDate.getMonth()] =
-                    (viewsChartData[viewDate.getMonth()] || 0) + 1;
+                    (viewsChartData[viewDate.getMonth()] ?? 0) + 1;
             }
         }
     }
 
-    viewsChartData = Array.from({ length: months.length }, (_, i) => viewsChartData[i] || 0);
+    viewsChartData = Array.from({ length: months.length }, (_, i) => viewsChartData[i] ?? 0);
 
     return reply.status(200).send({
         totalUploads: uploads.length,
@@ -94,10 +75,26 @@ export default (_: FastifyRequest, reply: FastifyReply) => {
                 labels: months,
                 data: viewsChartData,
             },
-            types: {
-                labels: uploadTypes,
-                data: typesChartData,
-            },
+            types: uploads.reduce(
+                (acc, upload) => {
+                    const labelIndex = acc.labels.indexOf(upload.type);
+
+                    if (labelIndex > -1) {
+                        acc.data[labelIndex] += 1;
+                    } else {
+                        acc.labels.push(upload.type);
+                        acc.data.push(1);
+                    }
+
+                    acc.labels.sort(
+                        (a, b) => acc.data[acc.labels.indexOf(b)] - acc.data[acc.labels.indexOf(a)],
+                    );
+                    acc.data.sort((a, b) => b - a);
+
+                    return acc;
+                },
+                { labels: [], data: [] },
+            ),
         },
     });
 };
