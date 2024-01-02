@@ -239,9 +239,9 @@
             />
 
             <Icon v-else name="file-unknown" class="text-4xl" />
-            <h6 class="!mt-1.5 text-center text-slate-400">
+            <h6 class="!mt-1.5 break-all text-center text-slate-400">
                 {{
-                    data.id.length > 48 ? `${data.id.slice(0, 48)}...` : data.id
+                    data.id.length > 84 ? `${data.id.slice(0, 84)}...` : data.id
                 }}
             </h6>
         </div>

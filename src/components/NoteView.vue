@@ -12,13 +12,13 @@
 
             <h3 class="!mt-5">Content</h3>
             <div
-                class="!mt-3 flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
+                class="mt-3 flex items-center gap-2 rounded-lg bg-spacex-3 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
             >
                 <Icon name="book" class="text-2xl text-spacex-primary" />
                 <textarea
                     :value="data.content"
                     wrap="hard"
-                    class="ml-1.5 w-full resize-none rounded-lg bg-spacex-3 text-base font-semibold placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
+                    class="w-full resize-none rounded-lg bg-spacex-3 text-base font-semibold placeholder-slate-300 outline-none focus:ring-2 focus:ring-spacex-primary"
                     disabled
                     :rows="data.content.split('\n').length"
                 />
