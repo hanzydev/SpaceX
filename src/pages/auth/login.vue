@@ -1,7 +1,7 @@
 <template>
     <GoBack v-if="page === '2fa'" to="/auth/login" @click="page = 'login'" />
     <div
-        class="absolute flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4"
+        class="flex min-h-screen w-full flex-col items-center justify-center px-4 pt-4"
     >
         <form
             v-if="page === 'login'"
@@ -40,7 +40,7 @@
             <NuxtTurnstile
                 ref="turnstileRef"
                 v-model="credentials.cf_turnstile_token"
-                class="mx-auto mt-6"
+                class="mx-auto mt-6 w-full [&>iframe]:!w-full"
                 :options="{ theme: 'dark' }"
             />
             <button
@@ -80,11 +80,11 @@
                 <NuxtTurnstile
                     ref="turnstileRef"
                     v-model="credentials.cf_turnstile_token"
-                    class="mx-auto mt-6"
+                    class="mx-auto mt-6 w-full [&>iframe]:!w-full"
                     :options="{ theme: 'dark' }"
                 />
                 <button
-                    :class="`mt-6 flex items-center justify-center rounded-lg  bg-spacex-primary px-4 py-2 text-center transition-all duration-300 ${
+                    :class="`mt-6 flex items-center justify-center rounded-lg bg-spacex-primary px-4 py-2 text-center transition-all duration-300 ${
                         isLoggingIn && 'cursor-not-allowed opacity-50'
                     }`"
                     :disabled="isLoggingIn"
