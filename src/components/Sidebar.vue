@@ -27,7 +27,7 @@
                     {{ child.name }}
                 </NuxtLink>
             </div>
-            <p class="mx-6 mt-3 text-[15px] font-semibold text-slate-400">
+            <p class="mx-6 mt-auto text-[15px] font-semibold text-slate-400">
                 &copy; 2023-present
                 <a
                     class="text-[15px] font-bold text-spacex-primary hover:underline"
