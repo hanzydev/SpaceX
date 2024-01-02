@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="!json?.error"
-        class="absolute flex h-screen w-screen items-center justify-center"
+        class="flex min-h-screen w-full items-center justify-center p-4"
     >
         <img
             v-if="json.type.includes('image')"
@@ -28,7 +28,7 @@
         />
         <div
             v-else
-            class="flex w-96 flex-col items-center justify-center rounded-xl bg-spacex-4 p-4 text-center max-xs:w-60"
+            class="flex w-[30rem] flex-col items-center justify-center rounded-xl bg-spacex-4 p-4 text-center"
         >
             <Icon
                 v-if="
@@ -66,7 +66,7 @@
 
             <Icon v-else name="file-unknown" class="text-6xl" />
 
-            <h2 class="mt-1">{{ json.id }}</h2>
+            <h2 class="mt-1 break-all">{{ json.id }}</h2>
             <button
                 class="mt-5 w-full rounded-lg bg-spacex-primary p-2 focus:ring-2 focus:ring-white"
                 @click="handleDownload"

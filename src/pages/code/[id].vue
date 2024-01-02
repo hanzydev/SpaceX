@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="!json?.error"
-        class="absolute flex h-screen w-screen items-center justify-center"
+        class="absolute flex h-screen w-full items-center justify-center"
     >
         <MonacoEditor
             class="h-full w-full"
