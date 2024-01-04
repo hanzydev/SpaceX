@@ -77,7 +77,7 @@
 <script setup lang="ts">
 import { fire } from '@/util/toast';
 import { useNotesStore } from '@/store';
-import { Note } from '@/types';
+import type { Note } from '@/types';
 
 const { data } = defineProps<{
     data: Note;

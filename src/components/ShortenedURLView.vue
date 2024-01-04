@@ -85,7 +85,7 @@
 <script setup lang="ts">
 import { fire } from '@/util/toast';
 import { useShortenedURLsStore } from '@/store';
-import { ShortenedURL } from '@/types';
+import type { ShortenedURL } from '@/types';
 
 const { data } = defineProps<{
     data: ShortenedURL;

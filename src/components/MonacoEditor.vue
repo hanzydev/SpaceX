@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import loader from '@monaco-editor/loader';
 import type * as _monaco from 'monaco-editor';
-import { Omit } from '@/types';
+import type { Omit } from '@/types';
 
 const {
     value,

@@ -82,7 +82,7 @@
 <script setup lang="ts">
 import { fire } from '@/util/toast';
 import { useCodesStore } from '@/store';
-import { Code } from '@/types';
+import type { Code } from '@/types';
 
 const { data } = defineProps<{
     data: Code;

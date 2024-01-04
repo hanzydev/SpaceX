@@ -1,4 +1,4 @@
-import { Upload } from '@/types';
+import type { Upload } from '@/types';
 
 export const replaceString = (str: string, upload: Upload) => {
     const params = {

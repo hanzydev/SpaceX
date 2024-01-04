@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { useUploadsStore } from '@/store';
-import { Folder } from '@/types';
+import type { Folder } from '@/types';
 import folderEmitter from '@/util/emitters/folder';
 
 const router = useRouter();

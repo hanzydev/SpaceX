@@ -251,7 +251,7 @@
 <script setup lang="ts">
 import { fire } from '@/util/toast';
 import { useUploadsStore, useFoldersStore } from '@/store';
-import { Upload } from '@/types';
+import type { Upload } from '@/types';
 
 const { data, alwaysRing, parentFolder } = defineProps<{
     data: Upload;

@@ -52,9 +52,6 @@ export default defineNuxtConfig({
     vue: {
         propsDestructure: true,
     },
-    experimental: {
-        inlineSSRStyles: false,
-    },
     vite: {
         plugins: [svgLoader()],
         build: {

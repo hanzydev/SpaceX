@@ -84,7 +84,7 @@
 <script setup lang="ts">
 import { fire } from '@/util/toast';
 import { useFoldersStore } from '@/store';
-import { Folder } from '@/types';
+import type { Folder } from '@/types';
 
 const { data } = defineProps<{
     data: Folder;

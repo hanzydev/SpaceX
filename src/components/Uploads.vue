@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { useUploadsStore } from '@/store';
-import { Upload } from '@/types';
+import type { Upload } from '@/types';
 
 const { filter = () => true, parentFolder } = defineProps<{
     filter?: (upload: Upload) => boolean;
