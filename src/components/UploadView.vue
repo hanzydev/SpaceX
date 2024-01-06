@@ -40,8 +40,8 @@
                         data.type.includes('image')
                             ? 'Image'
                             : data.type.includes('video')
-                            ? 'Video'
-                            : 'Audio'
+                              ? 'Video'
+                              : 'Audio'
                     }}
                 </h3>
                 <div class="mt-3 w-full">
@@ -134,7 +134,7 @@
         </div>
     </Modal>
     <div
-        :class="`relative flex h-[176px] cursor-pointer flex-col items-center justify-center rounded-lg bg-spacex-3 p-4 transition-all duration-300 ${
+        :class="`relative flex h-[176px] cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg bg-spacex-3 p-4 transition-all duration-300 ${
             isModalOpen || alwaysRing
                 ? 'ring-2 ring-spacex-primary'
                 : 'hover:ring-2 hover:ring-spacex-primary'
@@ -143,10 +143,10 @@
             $props.onClick
                 ? $props.onClick($event)
                 : (data.type.includes('image') ||
-                      data.type.includes('video')) &&
-                  !isLoaded
-                ? null
-                : (isModalOpen = true)
+                        data.type.includes('video')) &&
+                    !isLoaded
+                  ? null
+                  : (isModalOpen = true)
         "
     >
         <img
@@ -156,7 +156,7 @@
                 data.private ? `&token=${token}` : ''
             }`"
             :alt="data.id"
-            class="absolute h-full w-full rounded-lg object-contain"
+            class="absolute h-full w-full rounded-lg object-contain transition-transform duration-300 hover:scale-110"
             @load="isLoaded = true"
         />
         <div
@@ -179,7 +179,7 @@
                 :src="`${API_URL}/uploads/${data.id}?ref=cdn${
                     data.private ? `&token=${token}` : ''
                 }`"
-                class="absolute h-full w-full rounded-lg object-contain"
+                class="absolute h-full w-full rounded-lg object-contain transition-transform duration-300 hover:scale-110"
                 loop
                 muted
                 @canplay="isLoaded = true"

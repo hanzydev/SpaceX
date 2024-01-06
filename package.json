@@ -8,7 +8,7 @@
         "build": "nuxt build",
         "dev": "nuxt dev",
         "generate": "nuxt generate",
-        "preview": "nuxt preview",
+        "preview": "nuxt preview --host 0.0.0.0 --port 6748",
         "postinstall": "nuxt prepare",
         "format": "prettier --write --ignore-path .gitignore .",
         "lint": "eslint . --ignore-path .gitignore .",
