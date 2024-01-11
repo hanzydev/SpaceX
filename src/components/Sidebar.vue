@@ -160,15 +160,19 @@ const openSidebar = async (overlay = true, updateState = true) => {
         document.body.classList.add('max-lg:!overflow-hidden');
     }
 
-    await gsap.set(sidebarRef.value!, {
-        display: 'flex',
-        x: '-100%',
-    });
+    console.log(sidebarRef.value!);
 
-    await gsap.to(sidebarRef.value!, {
-        x: 0,
-        duration: 0.2,
-    });
+    await gsap.fromTo(
+        sidebarRef.value!,
+        {
+            display: 'flex',
+            x: '-100%',
+        },
+        {
+            x: 0,
+            duration: 0.2,
+        },
+    );
 };
 
 const closeSidebar = async () => {
@@ -208,13 +212,13 @@ onMounted(() => {
         if (
             !store.opened &&
             sidebarRef.value!.style.display === 'none' &&
-            window.innerWidth > 1024
+            window.innerWidth >= 1024
         ) {
             openSidebar(false, false);
         } else if (
             !store.opened &&
             sidebarRef.value!.style.display === 'flex' &&
-            window.innerWidth <= 1024
+            window.innerWidth < 1024
         ) {
             closeSidebar();
         }
