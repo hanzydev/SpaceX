@@ -1,7 +1,7 @@
 <template>
     <nav
         id="navbar"
-        class="relative flex z-50 h-[70px] w-full items-center bg-spacex-3 pl-4 lg:px-6 max-lg:pr-6"
+        class="relative z-50 flex h-[70px] w-full items-center bg-spacex-3 pl-4 max-lg:pr-6 lg:px-6"
     >
         <svg
             id="sidebar-toggler"
@@ -173,30 +173,29 @@ const closeProfile = async () => {
 
     isProfileOpened.value = false;
 
-    gsap.to('#profile', {
+    await gsap.to('#profile', {
         opacity: 0,
         duration: 0.2,
         y: '-1rem',
-        onComplete: () => {
-            gsap.set('#profile', { display: 'none' });
-        },
+        display: 'none',
     });
 };
 
 const openProfile = () => {
     isProfileOpened.value = true;
 
-    gsap.set('#profile', {
-        display: 'flex',
-        y: '-1rem',
-        onComplete: () => {
-            gsap.to('#profile', {
-                opacity: 1,
-                duration: 0.2,
-                y: 0,
-            });
+    gsap.fromTo(
+        '#profile',
+        {
+            display: 'flex',
+            y: '-1rem',
         },
-    });
+        {
+            opacity: 1,
+            duration: 0.2,
+            y: 0,
+        },
+    );
 };
 
 const closeThemes = () => {
@@ -206,26 +205,25 @@ const closeThemes = () => {
         opacity: 0,
         duration: 0.2,
         x: '1rem',
-        onComplete: () => {
-            gsap.set('#themes', { display: 'none' });
-        },
+        display: 'none',
     });
 };
 
 const openThemes = () => {
     isThemesOpened.value = true;
 
-    gsap.set('#themes', {
-        display: 'flex',
-        x: '1rem',
-        onComplete: () => {
-            gsap.to('#themes', {
-                opacity: 1,
-                duration: 0.2,
-                x: 0,
-            });
+    gsap.fromTo(
+        '#themes',
+        {
+            display: 'flex',
+            x: '1rem',
         },
-    });
+        {
+            opacity: 1,
+            duration: 0.2,
+            x: 0,
+        },
+    );
 };
 
 const handleProfile = () => {

@@ -7,8 +7,8 @@
                     modalOperation === 'enable-2fa'
                         ? 'Enable Two-Factor Authentication'
                         : modalOperation === 'disable-2fa'
-                        ? 'Disable Two-Factor Authentication'
-                        : 'Update Credentials'
+                          ? 'Disable Two-Factor Authentication'
+                          : 'Update Credentials'
                 }}
             </h3>
             <div
@@ -36,8 +36,8 @@
                     modalOperation === 'enable-2fa'
                         ? enable2FA()
                         : modalOperation === 'disable-2fa'
-                        ? disable2FA()
-                        : updateCredentials()
+                          ? disable2FA()
+                          : updateCredentials()
                 "
             >
                 <div class="flex flex-col">
@@ -72,8 +72,8 @@
                             modalOperation === 'enable-2fa'
                                 ? 'Enable Two-Factor Authentication'
                                 : modalOperation === 'disable-2fa'
-                                ? 'Disable Two-Factor Authentication'
-                                : 'Update Credentials'
+                                  ? 'Disable Two-Factor Authentication'
+                                  : 'Update Credentials'
                         }}
                     </span>
                     <Spinner v-else :size="24" color="#fff" />
@@ -101,7 +101,10 @@
                     />
                 </button>
             </div>
-            <div id="update-credentials-container" class="hidden h-0 opacity-0">
+            <div
+                id="update-credentials-container"
+                class="hidden h-0 overflow-hidden opacity-0"
+            >
                 <form
                     id="update-credentials-content"
                     class="w-full px-4 pb-4 opacity-0"
@@ -187,7 +190,10 @@
                     />
                 </button>
             </div>
-            <div id="2fa-container" class="hidden h-0 opacity-0">
+            <div
+                id="2fa-container"
+                class="hidden h-0 overflow-hidden opacity-0"
+            >
                 <div id="2fa-content" class="w-full px-4 pb-4 opacity-0">
                     <div class="flex w-fit items-center gap-2">
                         <Switch
@@ -219,7 +225,10 @@
                     />
                 </button>
             </div>
-            <div id="embed-config-container" class="hidden h-0 opacity-0">
+            <div
+                id="embed-config-container"
+                class="hidden h-0 overflow-hidden opacity-0"
+            >
                 <form
                     id="embed-config-content"
                     class="w-full px-4 pb-4 opacity-0"
@@ -683,14 +692,12 @@ const openItem = (id: string) => {
         gsap.to(itemContainer, {
             duration: 0.3,
             height: `${height}px`,
-            display: 'block',
             opacity: 1,
-            onComplete: () => {
-                gsap.to(item, {
-                    opacity: 1,
-                    duration: 0.2,
-                });
-            },
+        });
+
+        gsap.to(item, {
+            opacity: 1,
+            duration: 0.3,
         });
 
         gsap.to(toggler, {
@@ -706,22 +713,21 @@ const closeItem = (id: string) => {
     const toggler = document.getElementById(`${id}-toggler`);
 
     if (item && toggler) {
+        gsap.to(itemContainer, {
+            duration: 0.3,
+            height: 0,
+            opacity: 0,
+            display: 'none',
+        });
+
         gsap.to(item, {
             opacity: 0,
             duration: 0.2,
-            onComplete: () => {
-                gsap.to(itemContainer, {
-                    duration: 0.3,
-                    height: 0,
-                    opacity: 0,
-                    display: 'none',
-                });
-            },
         });
 
         gsap.to(toggler, {
             rotate: 0,
-            duration: 0.3,
+            duration: 0.2,
         });
     }
 };
