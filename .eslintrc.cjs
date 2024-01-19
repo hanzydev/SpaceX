@@ -12,6 +12,7 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
+        'plugin:prettier/recommended',
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         '.eslintrc-auto-import.json',
@@ -50,5 +51,11 @@ module.exports = {
         'no-useless-escape': 'off',
         'no-constant-condition': 'off',
         'no-empty-character-class': 'off',
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
     },
 };
