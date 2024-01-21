@@ -72,7 +72,7 @@ const json = await useAPI(`/notes/${route.params.id}`, {
 });
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     note.title = json.title;
     note.content = json.content;

@@ -116,7 +116,7 @@ const handleDownload = () => {
 };
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     json.url = `${API_URL}/uploads/${json.id}?ref=cdn`;
     json.extname = json.id.match(/\.[^/.]+$/)?.[0].slice(1) ?? '';

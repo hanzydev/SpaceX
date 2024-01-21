@@ -131,7 +131,7 @@ const json = await useAPI(`/codes/${route.params.id}`, {
 });
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     code.title = json.title;
     code.content = json.content;

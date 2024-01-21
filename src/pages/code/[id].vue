@@ -39,7 +39,7 @@ const onEditorLoad = (monaco: typeof Monaco) => {
 };
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     useHead({
         title: json.title,

@@ -103,7 +103,7 @@ const json = await useAPI(`/uploads/${route.params.id}`, {
 });
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     upload.id = json.id.replace(/\.[^/.]+$/, '');
     upload.private = json.private;

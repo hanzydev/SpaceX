@@ -10,7 +10,7 @@ const store = useUserStore();
 const isLoaded = ref(false);
 
 if (!useCookie('token').value) {
-    throwError(401);
+    throw createError({ statusCode: 401 });
 } else {
     const json = await useAPI('/auth/@me', {
         auth: true,
@@ -18,7 +18,7 @@ if (!useCookie('token').value) {
 
     if (json?.error) {
         useCookie('token', { maxAge: -1 }).value = '';
-        throwError(401);
+        throw createError({ statusCode: 401 });
     } else {
         store.setUsername(json.username);
         store.set2FaEnabled(json.twoFaEnabled);

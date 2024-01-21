@@ -52,7 +52,7 @@ const json = await useAPI(`/folders/${route.params.id}`, {
 });
 
 if (json?.error) {
-    throwError(404);
+    throw createError({ statusCode: 404 });
 } else {
     name.value = json.name;
 
