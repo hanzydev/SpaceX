@@ -25,13 +25,14 @@ import monacoTheme from '@/assets/monaco.json';
 
 const route = useRoute();
 
-const { data: jsonRef } = await useAsyncAPI<any>(`/codes/${route.params.id}`, {
-    query: {
-        log: true,
-    },
-});
-
-const json = unref(jsonRef)!;
+const json = (
+    await useAsyncAPI(`/codes/${route.params.id}`, {
+        headers: useRequestHeaders(['x-forwarded-for']),
+        query: {
+            log: true,
+        },
+    })
+).data.value;
 
 const handleEditorLoad = (monaco: typeof Monaco) => {
     monaco.editor.defineTheme('spacex', monacoTheme as any);

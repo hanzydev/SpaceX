@@ -90,19 +90,16 @@ import { replaceString } from '@/util/replace-string';
 
 const route = useRoute();
 
-const { data: jsonRef } = await useAsyncAPI<any>(
-    `/uploads/${route.params.id}`,
-    {
+const json = (
+    await useAsyncAPI(`/uploads/${route.params.id}`, {
         headers: useRequestHeaders(['x-forwarded-for']),
         query: {
             log: true,
         },
         auth: true,
-    },
-);
+    })
+).data.value;
 const embedConfig = await useAPI('/embed-config');
-
-const json = unref(jsonRef)!;
 
 const API_URL = import.meta.env.VITE_API_URL;
 
