@@ -12,72 +12,15 @@ import type {
     MonitorData,
 } from '@/types';
 
-export interface UploadsStore {
-    uploads: Upload[];
-    uploadsLoaded: boolean;
-}
-
-export interface NotesStore {
-    notes: Note[];
-    notesLoaded: boolean;
-}
-
-export interface ShortenedURLsStore {
-    shortenedURLs: ShortenedURL[];
-    shortenedURLsLoaded: boolean;
-}
-
-export interface CodesStore {
-    codes: Code[];
-    codesLoaded: boolean;
-}
-
-export interface BackupsStore {
-    backups: Backup[];
-    backupsLoaded: boolean;
-}
-
-export interface StatsStore {
-    stats: Stats;
-    statsLoaded: boolean;
-}
-
-export interface FoldersStore {
-    folders: Folder[];
-    foldersLoaded: boolean;
-}
-
-export interface LogsStore {
-    logs: Log[];
-    logsLoaded: boolean;
-}
-
-export interface EmbedConfigStore {
-    embedConfig: EmbedConfig | null;
-}
-
-export interface MonitorStore {
-    data: MonitorData | null;
-}
-
-export interface UserStore {
-    twoFaEnabled: boolean;
-    username: string;
-}
-
-export interface SidebarStore {
-    opened: boolean;
-}
-
 export const useStatsStore = defineStore('stats', {
-    state: (): StatsStore => ({
+    state: () => ({
         stats: {
             storageUsed: 0,
             todayUploads: 0,
             totalUploads: 0,
             views: { total: 0, today: 0 },
             chart: null,
-        },
+        } as Stats,
         statsLoaded: false,
     }),
     actions: {
@@ -95,8 +38,8 @@ export const useStatsStore = defineStore('stats', {
 });
 
 export const useUploadsStore = defineStore('uploads', {
-    state: (): UploadsStore => ({
-        uploads: [],
+    state: () => ({
+        uploads: [] as Upload[],
         uploadsLoaded: false,
     }),
     actions: {
@@ -120,8 +63,8 @@ export const useUploadsStore = defineStore('uploads', {
 });
 
 export const useNotesStore = defineStore('notes', {
-    state: (): NotesStore => ({
-        notes: [],
+    state: () => ({
+        notes: [] as Note[],
         notesLoaded: false,
     }),
     actions: {
@@ -145,8 +88,8 @@ export const useNotesStore = defineStore('notes', {
 });
 
 export const useShortenedURLsStore = defineStore('shortenedURLs', {
-    state: (): ShortenedURLsStore => ({
-        shortenedURLs: [],
+    state: () => ({
+        shortenedURLs: [] as ShortenedURL[],
         shortenedURLsLoaded: false,
     }),
     actions: {
@@ -170,8 +113,8 @@ export const useShortenedURLsStore = defineStore('shortenedURLs', {
 });
 
 export const useCodesStore = defineStore('codes', {
-    state: (): CodesStore => ({
-        codes: [],
+    state: () => ({
+        codes: [] as Code[],
         codesLoaded: false,
     }),
     actions: {
@@ -195,8 +138,8 @@ export const useCodesStore = defineStore('codes', {
 });
 
 export const useBackupsStore = defineStore('backups', {
-    state: (): BackupsStore => ({
-        backups: [],
+    state: () => ({
+        backups: [] as Backup[],
         backupsLoaded: false,
     }),
     actions: {
@@ -226,8 +169,8 @@ export const useBackupsStore = defineStore('backups', {
 });
 
 export const useFoldersStore = defineStore('folders', {
-    state: (): FoldersStore => ({
-        folders: [],
+    state: () => ({
+        folders: [] as Folder[],
         foldersLoaded: false,
     }),
     actions: {
@@ -264,8 +207,8 @@ export const useFoldersStore = defineStore('folders', {
 });
 
 export const useLogsStore = defineStore('logs', {
-    state: (): LogsStore => ({
-        logs: [],
+    state: () => ({
+        logs: [] as Log[],
         logsLoaded: false,
     }),
     actions: {
@@ -283,8 +226,8 @@ export const useLogsStore = defineStore('logs', {
 });
 
 export const useEmbedConfigStore = defineStore('embedConfig', {
-    state: (): EmbedConfigStore => ({
-        embedConfig: null,
+    state: () => ({
+        embedConfig: null as EmbedConfig | null,
     }),
     actions: {
         async fetchEmbedConfig() {
@@ -294,8 +237,8 @@ export const useEmbedConfigStore = defineStore('embedConfig', {
 });
 
 export const useMonitorStore = defineStore('monitor', {
-    state: (): MonitorStore => ({
-        data: null,
+    state: () => ({
+        data: null as MonitorData | null,
     }),
     actions: {
         setData(data: MonitorData) {
@@ -305,7 +248,7 @@ export const useMonitorStore = defineStore('monitor', {
 });
 
 export const useUserStore = defineStore('2fa', {
-    state: (): UserStore => ({
+    state: () => ({
         twoFaEnabled: false,
         username: '',
     }),
@@ -320,12 +263,23 @@ export const useUserStore = defineStore('2fa', {
 });
 
 export const useSidebarStore = defineStore('sidebar', {
-    state: (): SidebarStore => ({
+    state: () => ({
         opened: false,
     }),
     actions: {
         setOpened(opened: boolean) {
             this.opened = opened;
+        },
+    },
+});
+
+export const useUploadFilesStore = defineStore('uploadFiles', {
+    state: () => ({
+        files: [] as File[],
+    }),
+    actions: {
+        setFiles(files: File[]) {
+            this.files = files;
         },
     },
 });
