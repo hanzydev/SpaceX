@@ -1,7 +1,7 @@
 <template>
     <GoBack to="/dashboard/codes" />
     <div
-        class="absolute flex min-h-screen w-full flex-col items-center justify-center bg-spacex-5 p-4"
+        class="flex min-h-screen w-screen flex-col items-center justify-center p-4"
     >
         <form
             class="flex w-[50rem] flex-col rounded-xl bg-spacex-4 p-10 max-lg:w-[30rem] max-sm:w-80"

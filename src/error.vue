@@ -58,27 +58,27 @@ const error = {
         raw.statusCode === 404
             ? 'Not Found'
             : raw.statusCode === 500
-            ? 'Internal Server Error'
-            : raw.statusCode === 401
-            ? 'Unauthorized'
-            : 'Unhandled Error',
+              ? 'Internal Server Error'
+              : raw.statusCode === 401
+                ? 'Unauthorized'
+                : 'Unhandled Error',
     title:
         raw.statusCode === 404
             ? 'Spaceship Lost in Space'
             : raw.statusCode === 500
-            ? 'Spaceship Exploded'
-            : raw.statusCode === 401
-            ? 'Spaceship Doors Locked'
-            : 'Spaceship Damaged',
+              ? 'Spaceship Exploded'
+              : raw.statusCode === 401
+                ? 'Spaceship Doors Locked'
+                : 'Spaceship Damaged',
     error: raw.message,
     message:
         raw.statusCode === 404
             ? 'The spaceship has lost in space.'
             : raw.statusCode === 500
-            ? 'The spaceship has exploded.'
-            : raw.statusCode === 401
-            ? 'The spaceship doors are locked.'
-            : 'The spaceship has been damaged.',
+              ? 'The spaceship has exploded.'
+              : raw.statusCode === 401
+                ? 'The spaceship doors are locked.'
+                : 'The spaceship has been damaged.',
 };
 
 const button = computed(() => {

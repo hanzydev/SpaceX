@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="!json?.error"
-        class="flex min-h-screen w-full items-center justify-center p-4"
+        class="flex h-screen w-screen flex-col items-center justify-center"
     >
         <img
             v-if="json.type.includes('image')"
@@ -26,53 +26,60 @@
                 json.private ? `&token=${useCookie('token').value!}` : ''
             }`"
         />
-        <div
-            v-else
-            class="flex w-[30rem] flex-col items-center justify-center rounded-xl bg-spacex-4 p-4 text-center"
-        >
-            <Icon
-                v-if="
-                    json.type.includes('text') ||
-                    [
-                        'json',
-                        'xml',
-                        'csv',
-                        'html',
-                        'css',
-                        'js',
-                        'md',
-                        'txt',
-                    ].includes(json.extname)
-                "
-                name="file-text"
-                class="text-6xl"
-            />
-
-            <Icon
-                v-else-if="
-                    ['zip', 'rar', '7z', 'tar', 'gz', 'bin', 'iso'].includes(
-                        json.extname,
-                    )
-                "
-                name="file-archive"
-                class="text-6xl"
-            />
-
-            <Icon
-                v-else-if="json.extname === 'pdf'"
-                name="file-pdf"
-                class="text-6xl"
-            />
-
-            <Icon v-else name="file-unknown" class="text-6xl" />
-
-            <h2 class="mt-1 break-all">{{ json.id }}</h2>
-            <button
-                class="mt-5 w-full rounded-lg bg-spacex-primary p-2 focus:ring-2 focus:ring-white"
-                @click="handleDownload"
+        <div v-else class="w-full max-w-[30rem] p-4">
+            <div
+                class="flex flex-col items-center justify-center rounded-xl bg-spacex-4 p-4 text-center"
             >
-                Download
-            </button>
+                <Icon
+                    v-if="
+                        json.type.includes('text') ||
+                        [
+                            'json',
+                            'xml',
+                            'csv',
+                            'html',
+                            'css',
+                            'js',
+                            'md',
+                            'txt',
+                        ].includes(json.extname)
+                    "
+                    name="file-text"
+                    class="text-6xl"
+                />
+
+                <Icon
+                    v-else-if="
+                        [
+                            'zip',
+                            'rar',
+                            '7z',
+                            'tar',
+                            'gz',
+                            'bin',
+                            'iso',
+                        ].includes(json.extname)
+                    "
+                    name="file-archive"
+                    class="text-6xl"
+                />
+
+                <Icon
+                    v-else-if="json.extname === 'pdf'"
+                    name="file-pdf"
+                    class="text-6xl"
+                />
+
+                <Icon v-else name="file-unknown" class="text-6xl" />
+
+                <h2 class="mt-1 break-all">{{ json.id }}</h2>
+                <button
+                    class="mt-5 w-full rounded-lg bg-spacex-primary p-2 focus:ring-2 focus:ring-white"
+                    @click="handleDownload"
+                >
+                    Download
+                </button>
+            </div>
         </div>
     </div>
 </template>

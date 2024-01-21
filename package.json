@@ -4,11 +4,12 @@
     "description": "The best.",
     "author": "hanzydev",
     "license": "GPL-3.0",
+    "type": "module",
     "scripts": {
         "build": "nuxt build",
         "dev": "nuxt dev",
         "generate": "nuxt generate",
-        "preview": "nuxt preview --host 0.0.0.0 --port 6748",
+        "preview": "nuxt preview",
         "postinstall": "nuxt prepare",
         "format": "prettier --write --ignore-path .gitignore .",
         "lint": "eslint . --ignore-path .gitignore .",
