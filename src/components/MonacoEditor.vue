@@ -37,7 +37,7 @@ const editorIsLoaded = ref(false);
 let editor: _monaco.editor.IStandaloneCodeEditor;
 let monaco: typeof _monaco;
 
-const onResize = () => {
+const handleResize = () => {
     editor.layout();
 };
 
@@ -62,7 +62,7 @@ watch(
             code.value = editor.getValue();
         });
 
-        window.addEventListener('resize', onResize);
+        window.addEventListener('resize', handleResize);
 
         setTimeout(async () => {
             editorIsLoaded.value = true;
@@ -95,7 +95,7 @@ onUnmounted(() => {
         editor.dispose();
     }
 
-    window.removeEventListener('resize', onResize);
+    window.removeEventListener('resize', handleResize);
 });
 
 watch(

@@ -30,10 +30,10 @@
     </Modal>
     <div
         class="relative flex h-[176px] flex-col items-center justify-center overflow-hidden rounded-lg bg-spacex-2 p-4 transition-all duration-300 hover:ring-2 hover:ring-spacex-primary"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
-        @touchstart="onMouseEnter"
-        @touchend="onMouseLeave"
+        @mouseenter="handleMouseEnter"
+        @mouseleave="handleMouseLeave"
+        @touchstart="handleMouseEnter"
+        @touchend="handleMouseLeave"
     >
         <div class="mt-5 flex h-full w-full flex-col items-center">
             <Icon name="file-archive" class="text-4xl" />
@@ -100,7 +100,7 @@ const isDeleting = ref(false);
 const isRestoring = ref(false);
 const isModalOpen = ref(false);
 
-const onMouseEnter = () => {
+const handleMouseEnter = () => {
     gsap.fromTo(
         controlsRef.value!,
         {
@@ -116,7 +116,7 @@ const onMouseEnter = () => {
     );
 };
 
-const onMouseLeave = () => {
+const handleMouseLeave = () => {
     gsap.to(controlsRef.value!, {
         display: 'none',
         duration: 0.2,

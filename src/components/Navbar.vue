@@ -312,7 +312,7 @@ const setTheme = (name: string) => {
     themeEmitter.emit('change', name);
 };
 
-const onClickOutside = (event: any) => {
+const handleClickOutside = (event: any) => {
     if (
         isProfileOpened.value &&
         !event.target.closest('#navbar') &&
@@ -325,11 +325,11 @@ const onClickOutside = (event: any) => {
 onMounted(() => {
     theme.value = localStorage.getItem('theme') || 'default';
 
-    document.addEventListener('click', onClickOutside);
+    document.addEventListener('click', handleClickOutside);
 });
 
 onUnmounted(() => {
-    document.removeEventListener('click', onClickOutside);
+    document.removeEventListener('click', handleClickOutside);
 });
 
 router.beforeEach(async (_, __, next) => {

@@ -123,7 +123,7 @@ watch(
     { deep: true },
 );
 
-const onSaturationPointerMove = (event: MouseEvent | TouchEvent) => {
+const handleSaturationPointerMove = (event: MouseEvent | TouchEvent) => {
     const { left, top } = getRelativePosition(
         saturationRef.value!,
         event,
@@ -135,7 +135,7 @@ const onSaturationPointerMove = (event: MouseEvent | TouchEvent) => {
     saturationPointerPos.top = _.clamp(top * 100 - 6, -6, 100);
 };
 
-const onKeyDown = (event: KeyboardEvent) => {
+const handleKeyDown = (event: KeyboardEvent) => {
     const newPos = {
         top: saturationPointerPos.top,
         left: saturationPointerPos.left,
@@ -176,7 +176,7 @@ const onKeyDown = (event: KeyboardEvent) => {
     }
 };
 
-const onKeyUp = (event: KeyboardEvent) => {
+const handleKeyUp = (event: KeyboardEvent) => {
     let isKey = true;
 
     switch (event.key) {
@@ -198,7 +198,7 @@ const onKeyUp = (event: KeyboardEvent) => {
     }
 };
 
-const onHuePointerMove = (event: MouseEvent | TouchEvent) => {
+const handleHuePointerMove = (event: MouseEvent | TouchEvent) => {
     const { left } = getRelativePosition(
         hueRef.value!,
         event,
@@ -209,22 +209,22 @@ const onHuePointerMove = (event: MouseEvent | TouchEvent) => {
     color.h = _.clamp(left * 360, 0, 360);
 };
 
-const onSaturationMouseDown = (event: MouseEvent | TouchEvent) => {
-    onSaturationPointerMove(event);
+const handleSaturationMouseDown = (event: MouseEvent | TouchEvent) => {
+    handleSaturationPointerMove(event);
 
     const parentWindow = getParentWindow(saturationRef.value);
     const _isTouch = isTouch(event);
 
     parentWindow.addEventListener(
         _isTouch ? 'touchmove' : 'mousemove',
-        onSaturationPointerMove,
+        handleSaturationPointerMove,
     );
     parentWindow.addEventListener(
         _isTouch ? 'touchend' : 'mouseup',
         () => {
             parentWindow.removeEventListener(
                 _isTouch ? 'touchmove' : 'mousemove',
-                onSaturationPointerMove,
+                handleSaturationPointerMove,
             );
             saturationFocused.value = false;
         },
@@ -232,22 +232,22 @@ const onSaturationMouseDown = (event: MouseEvent | TouchEvent) => {
     );
 };
 
-const onHueMouseDown = (event: MouseEvent | TouchEvent) => {
-    onHuePointerMove(event);
+const handleHueMouseDown = (event: MouseEvent | TouchEvent) => {
+    handleHuePointerMove(event);
 
     const parentWindow = getParentWindow(hueRef.value);
     const _isTouch = isTouch(event);
 
     parentWindow.addEventListener(
         _isTouch ? 'touchmove' : 'mousemove',
-        onHuePointerMove,
+        handleHuePointerMove,
     );
     parentWindow.addEventListener(
         _isTouch ? 'touchend' : 'mouseup',
         () => {
             parentWindow.removeEventListener(
                 _isTouch ? 'touchmove' : 'mousemove',
-                onHuePointerMove,
+                handleHuePointerMove,
             );
             hueFocused.value = false;
         },
@@ -256,31 +256,37 @@ const onHueMouseDown = (event: MouseEvent | TouchEvent) => {
 };
 
 onMounted(() => {
-    saturationRef.value!.addEventListener('mousedown', onSaturationMouseDown);
-    saturationRef.value!.addEventListener('touchstart', onSaturationMouseDown);
+    saturationRef.value!.addEventListener(
+        'mousedown',
+        handleSaturationMouseDown,
+    );
+    saturationRef.value!.addEventListener(
+        'touchstart',
+        handleSaturationMouseDown,
+    );
 
-    hueRef.value!.addEventListener('mousedown', onHueMouseDown);
-    hueRef.value!.addEventListener('touchstart', onHueMouseDown);
+    hueRef.value!.addEventListener('mousedown', handleHueMouseDown);
+    hueRef.value!.addEventListener('touchstart', handleHueMouseDown);
 
-    window.addEventListener('keydown', onKeyDown);
-    window.addEventListener('keyup', onKeyUp);
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
 });
 
 onBeforeUnmount(() => {
     saturationPointerRef.value!.removeEventListener(
         'mousedown',
-        onSaturationMouseDown,
+        handleSaturationMouseDown,
     );
     saturationPointerRef.value!.removeEventListener(
         'touchstart',
-        onSaturationMouseDown,
+        handleSaturationMouseDown,
     );
 
-    huePointerRef.value!.removeEventListener('mousedown', onHueMouseDown);
-    huePointerRef.value!.removeEventListener('touchstart', onHueMouseDown);
+    huePointerRef.value!.removeEventListener('mousedown', handleHueMouseDown);
+    huePointerRef.value!.removeEventListener('touchstart', handleHueMouseDown);
 
-    window.removeEventListener('keydown', onKeyDown);
-    window.removeEventListener('keyup', onKeyUp);
+    window.removeEventListener('keydown', handleKeyDown);
+    window.removeEventListener('keyup', handleKeyUp);
 });
 </script>
 

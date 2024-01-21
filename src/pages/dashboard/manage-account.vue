@@ -839,7 +839,7 @@ const openColorPicker = () => {
     }
 };
 
-const onClick = (e: any) => {
+const handleClick = (e: any) => {
     if (
         isColorPickerOpened.value &&
         !e.target.closest('#color-picker') &&
@@ -889,14 +889,14 @@ watch(
 watch(() => userStore.twoFaEnabled, handle2FAChange);
 
 onMounted(() => {
-    document.addEventListener('click', onClick);
+    document.addEventListener('click', handleClick);
     dateUpdateInterval.value = window.setInterval(() => {
         currentDate.value = new Date();
     }, 1000);
 });
 
 onUnmounted(() => {
-    document.removeEventListener('click', onClick);
+    document.removeEventListener('click', handleClick);
     window.clearInterval(dateUpdateInterval.value);
 });
 

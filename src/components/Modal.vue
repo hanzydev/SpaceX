@@ -94,13 +94,13 @@ const closeModal = async () => {
     emit('closed');
 };
 
-const onKeyDown = (event: KeyboardEvent) => {
+const handleKeyDown = (event: KeyboardEvent) => {
     if (isOpen && event.key === 'Escape') {
         closeModal();
     }
 };
 
-const onClickOutside = (event: MouseEvent) => {
+const handleClickOutside = (event: MouseEvent) => {
     if (isOpen && event.target === containerRef.value) {
         closeModal();
     }
@@ -111,13 +111,13 @@ onMounted(() => {
         openModal();
     }
 
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('click', onClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('click', handleClickOutside);
 });
 
 onUnmounted(() => {
-    document.removeEventListener('keydown', onKeyDown);
-    document.removeEventListener('click', onClickOutside);
+    document.removeEventListener('keydown', handleKeyDown);
+    document.removeEventListener('click', handleClickOutside);
     document.body.classList.remove('overflow-hidden');
 });
 

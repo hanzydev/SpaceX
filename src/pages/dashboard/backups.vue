@@ -64,7 +64,7 @@
                                 : 'cursor-pointer'
                         }`"
                         :disabled="isRestoring"
-                        @change="onFileUpload"
+                        @change="handleFileUpload"
                     />
                 </div>
             </div>
@@ -88,7 +88,7 @@ const isRestoring = ref(false);
 const isCreating = ref(false);
 const isModalOpen = ref(false);
 
-const onFileUpload = (e: any) => {
+const handleFileUpload = (e: any) => {
     files.value = Array.from<File>(e.target.files!);
     isModalOpen.value = true;
 };

@@ -8,7 +8,7 @@
             :value="json?.content!"
             :language="json?.language.toLowerCase()!"
             :options="{ theme: 'spacex', readOnly: true }"
-            @load="onEditorLoad"
+            @load="handleEditorLoad"
         >
             <template #loading>
                 <div class="flex h-full w-full items-center justify-center">
@@ -33,7 +33,7 @@ const { data: jsonRef } = await useAsyncAPI<any>(`/codes/${route.params.id}`, {
 
 const json = unref(jsonRef)!;
 
-const onEditorLoad = (monaco: typeof Monaco) => {
+const handleEditorLoad = (monaco: typeof Monaco) => {
     monaco.editor.defineTheme('spacex', monacoTheme as any);
     monaco.editor.setTheme('spacex');
 };

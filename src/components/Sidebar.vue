@@ -193,7 +193,7 @@ const closeSidebar = async () => {
     document.body.classList.remove('max-lg:!overflow-hidden');
 };
 
-const onClickOutside = (event: any) => {
+const handleClickOutside = (event: any) => {
     if (
         store.opened &&
         window.innerWidth <= 1024 &&
@@ -206,7 +206,7 @@ const onClickOutside = (event: any) => {
 };
 
 onMounted(() => {
-    document.addEventListener('click', onClickOutside);
+    document.addEventListener('click', handleClickOutside);
 
     const observer = new ResizeObserver(() => {
         if (

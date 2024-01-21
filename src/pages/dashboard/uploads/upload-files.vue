@@ -2,7 +2,7 @@
     <h2>Upload Files</h2>
     <Modal
         :is-open="isModalOpened"
-        @close="onModalClose"
+        @close="handleModalClose"
         @closed="currentModal = undefined"
     >
         <div class="flex w-full flex-col justify-center p-4 md:p-8">
@@ -131,7 +131,7 @@
                 }`"
                 multiple
                 :disabled="isUploading"
-                @change="onFileUpload"
+                @change="handleFileUpload"
             />
             <div
                 class="z-1 absolute top-0 flex h-full w-full items-center justify-center bg-spacex-3"
@@ -341,7 +341,7 @@ const handleFileDelete = (index: number) => {
     files.value.splice(index, 1);
 };
 
-const onModalClose = () => {
+const handleModalClose = () => {
     isModalOpened.value = false;
 
     if (uploadSettings[currentModal.value as never].id === '') {
@@ -351,7 +351,7 @@ const onModalClose = () => {
     }
 };
 
-const onFileUpload = async (e: any) => {
+const handleFileUpload = async (e: any) => {
     const targetFiles = e.target.files ?? [];
     const all = [...files.value, ...targetFiles];
 

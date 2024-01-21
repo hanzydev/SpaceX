@@ -76,7 +76,7 @@
                         v-model="code.content"
                         :language="code.language.toLowerCase()"
                         :options="{ theme: 'spacex' }"
-                        @load="onEditorLoad"
+                        @load="handleEditorLoad"
                     >
                         <template #loading>
                             <div
@@ -169,7 +169,7 @@ const languages = [
     'Markdown',
 ];
 
-const onEditorLoad = (monaco: typeof Monaco) => {
+const handleEditorLoad = (monaco: typeof Monaco) => {
     monaco.editor.defineTheme('spacex', monacoTheme as any);
     monaco.editor.setTheme('spacex');
 };
@@ -202,7 +202,7 @@ const handleShare = async () => {
     }
 };
 
-const onClickOutside = (e: any) => {
+const handleClickOutside = (e: any) => {
     if (
         isDropdownOpened.value &&
         !e.target.closest('#language-dropdown') &&
@@ -213,11 +213,11 @@ const onClickOutside = (e: any) => {
 };
 
 onMounted(() => {
-    document.addEventListener('click', onClickOutside);
+    document.addEventListener('click', handleClickOutside);
 });
 
 onUnmounted(() => {
-    document.removeEventListener('click', onClickOutside);
+    document.removeEventListener('click', handleClickOutside);
 });
 
 watch(
