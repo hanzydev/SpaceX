@@ -5,7 +5,7 @@
     >
         <div class="mr-auto flex gap-2">
             <button
-                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`h-8 w-8 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isFirstPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="First page"
@@ -15,7 +15,7 @@
                 <Icon name="chevron-left-2x" />
             </button>
             <button
-                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`h-8 w-8 rounded-md bg-spacex-2 p-2  text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isFirstPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Previous page"
@@ -37,7 +37,7 @@
         </p>
         <div class="ml-auto flex gap-2">
             <button
-                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`h-8 w-8 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isLastPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Next page"
@@ -47,7 +47,7 @@
                 <Icon name="chevron-right" />
             </button>
             <button
-                :class="`rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                :class="`h-8 w-8 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
                     isLastPage ? 'cursor-not-allowed' : 'hover:text-white'
                 }`"
                 aria-label="Last page"

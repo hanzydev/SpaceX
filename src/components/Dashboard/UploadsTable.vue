@@ -42,21 +42,21 @@
                     <td class="border border-spacex-4 px-4 py-2">
                         <div class="flex items-center gap-3">
                             <button
-                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
+                                class="h-8 w-8 rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Open link"
                                 @click="handleOpen(upload.id)"
                             >
                                 <Icon name="link-open" />
                             </button>
                             <button
-                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
+                                class="h-8 w-8 rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Copy link"
                                 @click="handleCopy(upload.id)"
                             >
                                 <Icon name="copy" />
                             </button>
                             <button
-                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
+                                class="h-8 w-8 rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Download file"
                                 @click="
                                     handleDownload(upload.id, upload.private)
@@ -65,14 +65,14 @@
                                 <Icon name="download" />
                             </button>
                             <button
-                                class="rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
+                                class="h-8 w-8 rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white"
                                 aria-label="Edit upload"
                                 @click="handleEdit(upload.id)"
                             >
                                 <Icon name="pen" />
                             </button>
                             <button
-                                :class="`rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
+                                :class="`h-8 w-8 rounded-lg p-2 text-slate-400 ring-1 ring-spacex-primary transition-colors duration-300 hover:bg-spacex-primary hover:text-white ${
                                     deletings.includes(upload.id) &&
                                     'cursor-not-allowed'
                                 }`"
