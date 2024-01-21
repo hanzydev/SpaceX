@@ -73,7 +73,7 @@
                     class="relative mt-1 flex h-[45vh] w-full items-center justify-center"
                 >
                     <MonacoEditor
-                        v-model:value="code.content"
+                        v-model="code.content"
                         :language="code.language.toLowerCase()"
                         :options="{ theme: 'spacex' }"
                         @load="onEditorLoad"
@@ -90,7 +90,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="code.private" />
+                <Switch v-model="code.private" />
                 <h6>Make code private</h6>
             </div>
 

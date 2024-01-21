@@ -197,9 +197,8 @@
                 <div id="2fa-content" class="w-full px-4 pb-4 opacity-0">
                     <div class="flex w-fit items-center gap-2">
                         <Switch
-                            v-model:is-checked="userStore.twoFaEnabled"
+                            v-model="userStore.twoFaEnabled"
                             :disabled="is2FAQrCodeLoading"
-                            @update:is-checked="handle2FAChange"
                         />
                         <h6>Enable 2FA</h6>
                     </div>
@@ -493,9 +492,7 @@
 
                     <div class="mt-8 flex w-fit items-center gap-2">
                         <Switch
-                            v-model:is-checked="
-                                embedConfigStore.embedConfig!.enabled
-                            "
+                            v-model="embedConfigStore.embedConfig!.enabled"
                         />
                         <h6>Enable Embeds</h6>
                     </div>
@@ -888,6 +885,8 @@ watch(
         credentials.username = userStore.username;
     },
 );
+
+watch(() => userStore.twoFaEnabled, handle2FAChange);
 
 onMounted(() => {
     document.addEventListener('click', onClick);

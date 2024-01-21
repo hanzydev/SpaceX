@@ -2,7 +2,7 @@
     <h2>Notes</h2>
     <div class="mt-6">
         <SearchBar
-            v-model:value="searchQuery"
+            v-model="searchQuery"
             placeholder="Search for notes..."
         />
         <div
@@ -19,7 +19,7 @@
             />
         </div>
         <Paginator
-            v-model:currentPage="currentPage"
+            v-model="currentPage"
             class="mt-4"
             item-name="note"
             :data="filtered"

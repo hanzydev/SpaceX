@@ -88,7 +88,7 @@
             </tbody>
         </table>
         <Paginator
-            v-model:currentPage="currentPage"
+            v-model="currentPage"
             item-name="upload"
             :data="store.uploads"
         />

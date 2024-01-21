@@ -10,7 +10,7 @@
                 }`"
                 aria-label="First page"
                 :disabled="isFirstPage"
-                @click="$emit('update:currentPage', 0)"
+                @click="currentPage = 0"
             >
                 <Icon name="chevron-left-2x" />
             </button>
@@ -20,7 +20,7 @@
                 }`"
                 aria-label="Previous page"
                 :disabled="isFirstPage"
-                @click="$emit('update:currentPage', currentPage - 1)"
+                @click="currentPage -= 1"
             >
                 <Icon name="chevron-left" />
             </button>
@@ -42,7 +42,7 @@
                 }`"
                 aria-label="Next page"
                 :disabled="isLastPage"
-                @click="$emit('update:currentPage', currentPage + 1)"
+                @click="currentPage += 1"
             >
                 <Icon name="chevron-right" />
             </button>
@@ -52,12 +52,7 @@
                 }`"
                 aria-label="Last page"
                 :disabled="isLastPage"
-                @click="
-                    $emit(
-                        'update:currentPage',
-                        Math.ceil(data.length / itemsPerPage) - 1,
-                    )
-                "
+                @click="currentPage = Math.ceil(data.length / itemsPerPage) - 1"
             >
                 <Icon name="chevron-right-2x" />
             </button>
@@ -67,39 +62,31 @@
 
 <script setup lang="ts">
 const {
-    currentPage,
     data,
     itemName = 'item',
     itemsPerPage = 20,
 } = defineProps<{
-    currentPage: number;
     data: any[];
     itemName?: string;
     itemsPerPage?: number;
 }>();
+const currentPage = defineModel<number>({ required: true });
 
 const router = useRouter();
 const route = useRoute();
 
-const emit = defineEmits<{
-    (event: 'update:currentPage', value: number): void;
-}>();
-
-const isFirstPage = computed(() => currentPage === 0);
+const isFirstPage = computed(() => currentPage.value === 0);
 const isLastPage = computed(
-    () => currentPage >= Math.ceil(data.length / itemsPerPage) - 1,
+    () => currentPage.value! >= Math.ceil(data.length / itemsPerPage) - 1,
 );
 
-watch(
-    () => currentPage,
-    (value) => {
-        router.replace({ query: { ...route.query, page: value + 1 } });
-    },
-);
+watch(currentPage, (value) => {
+    router.replace({ query: { ...route.query, page: value! + 1 } });
+});
 
 if (!route.query.page) {
     router.replace({ query: { ...route.query, page: 1 } });
 } else {
-    emit('update:currentPage', Number(route.query.page) - 1);
+    currentPage.value = +route.query.page - 1;
 }
 </script>

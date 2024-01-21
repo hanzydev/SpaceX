@@ -85,7 +85,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="shortenedURL.private" />
+                <Switch v-model="shortenedURL.private" />
                 <h6>Make url private</h6>
             </div>
 

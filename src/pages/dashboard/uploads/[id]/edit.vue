@@ -66,7 +66,7 @@
             </div>
 
             <div class="mt-3 flex w-fit items-center gap-2">
-                <Switch v-model:is-checked="upload.private" />
+                <Switch v-model="upload.private" />
                 <h6>Make file private</h6>
             </div>
 

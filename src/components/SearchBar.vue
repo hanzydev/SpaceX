@@ -14,18 +14,9 @@
 </template>
 
 <script setup lang="ts">
-const { value: rawSearchQuery } = defineProps<{
+defineProps<{
     placeholder: string;
-    value: string;
 }>();
 
-const searchQuery = ref(rawSearchQuery);
-
-const emit = defineEmits<{
-    (event: 'update:value', value: string): void;
-}>();
-
-watch(searchQuery, (value) => {
-    emit('update:value', value);
-});
+const searchQuery = defineModel<string>({ required: true });
 </script>

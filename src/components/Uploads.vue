@@ -1,7 +1,7 @@
 <template>
     <div v-bind="$attrs">
         <SearchBar
-            v-model:value="searchQuery"
+            v-model="searchQuery"
             placeholder="Search for uploads..."
         />
         <div
@@ -19,7 +19,7 @@
             />
         </div>
         <Paginator
-            v-model:currentPage="currentPage"
+            v-model="currentPage"
             class="mt-4"
             item-name="upload"
             :data="filtered"

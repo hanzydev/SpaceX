@@ -18,25 +18,9 @@
 </template>
 
 <script setup lang="ts">
-const { isChecked: isCheckedRaw = false, disabled = false } = defineProps<{
-    isChecked?: boolean;
+const { disabled = false } = defineProps<{
     disabled?: boolean;
 }>();
 
-const isChecked = ref(isCheckedRaw);
-
-const emit = defineEmits<{
-    (event: 'update:isChecked', isChecked: boolean): void;
-}>();
-
-watch(isChecked, (value) => {
-    emit('update:isChecked', value);
-});
-
-watch(
-    () => isCheckedRaw,
-    (value) => {
-        isChecked.value = value;
-    },
-);
+const isChecked = defineModel<boolean>({ required: true });
 </script>

@@ -6,7 +6,7 @@
         <h1>Update Folder Uploads</h1>
         <div class="mt-7 w-full rounded-xl bg-spacex-4 p-4">
             <SearchBar
-                v-model:value="searchQuery"
+                v-model="searchQuery"
                 placeholder="Search for uploads..."
             />
             <div
@@ -32,7 +32,7 @@
                 />
             </div>
             <Paginator
-                v-model:currentPage="currentPage"
+                v-model="currentPage"
                 class="mt-4"
                 item-name="upload"
                 :data="filtered"

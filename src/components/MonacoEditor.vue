@@ -9,12 +9,10 @@ import type * as _monaco from 'monaco-editor';
 import type { Omit } from '@/types';
 
 const {
-    value,
     language,
     options = {},
     rounded = '8px',
 } = defineProps<{
-    value: string;
     language: string;
     rounded?: string;
     options?: Omit<
@@ -24,13 +22,14 @@ const {
 }>();
 
 const emit = defineEmits<{
-    (event: 'update:value', code: string): void;
     (
         event: 'load',
         monaco: typeof _monaco,
         editor: _monaco.editor.IStandaloneCodeEditor,
     ): void;
 }>();
+
+const code = defineModel<string>({ default: '', required: false });
 
 const editorRef = ref<HTMLDivElement>();
 const editorIsLoaded = ref(false);
@@ -56,11 +55,11 @@ watch(
         editor = monaco.editor.create(editorRef.value!, {
             ...options,
             language,
-            value,
+            value: code.value,
         });
 
         editor.onDidChangeModelContent(() => {
-            emit('update:value', editor.getValue());
+            code.value = editor.getValue();
         });
 
         window.addEventListener('resize', onResize);
@@ -101,18 +100,24 @@ onUnmounted(() => {
 
 watch(
     () => language,
-    (newLanguage) => {
+    (value) => {
         if (editor) {
-            monaco.editor.setModelLanguage(editor.getModel()!, newLanguage);
+            monaco.editor.setModelLanguage(editor.getModel()!, value);
         }
     },
 );
 
+watch(code, (value) => {
+    if (editor) {
+        editor.setValue(value);
+    }
+});
+
 watch(
     () => options,
-    (newOptions) => {
+    (value) => {
         if (editor) {
-            editor.updateOptions(newOptions);
+            editor.updateOptions(value);
         }
     },
 );
