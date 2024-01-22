@@ -1,4 +1,3 @@
-import { randomBytes } from 'node:crypto';
 import svgLoader from 'vite-svg-loader';
 
 export default defineNuxtConfig({
@@ -54,17 +53,5 @@ export default defineNuxtConfig({
     },
     vite: {
         plugins: [svgLoader()],
-        build: {
-            rollupOptions: {
-                output: {
-                    assetFileNames: () =>
-                        `_spacex/${randomBytes(10).toString('hex')}[extname]`,
-                    chunkFileNames: () =>
-                        `_spacex/${randomBytes(10).toString('hex')}.js`,
-                    entryFileNames: () =>
-                        `_spacex/${randomBytes(10).toString('hex')}.js`,
-                },
-            },
-        },
     },
 });
