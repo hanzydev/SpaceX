@@ -47,7 +47,7 @@
             </div>
 
             <div
-                v-if="files[currentModal!]!.type.startsWith('image/')"
+                v-if="store.files[currentModal!]!.type.startsWith('image/')"
                 class="mt-7 flex flex-col rounded-lg bg-spacex-3 p-4"
             >
                 <p class="text-sm font-semibold uppercase text-slate-300">
@@ -111,9 +111,7 @@
             </div>
 
             <div class="mt-7 flex w-fit items-center gap-2">
-                <Switch
-                    v-model="uploadSettings[currentModal!]!.private"
-                />
+                <Switch v-model="uploadSettings[currentModal!]!.private" />
                 <h6>Make file private</h6>
             </div>
         </div>
@@ -121,16 +119,16 @@
     <div class="mt-6 flex w-full flex-col rounded-md">
         <div
             :class="`relative h-32 w-full items-center overflow-hidden rounded-lg border-2 border-dotted border-spacex-primary shadow-md ${
-                isUploading && 'opacity-50'
+                store.uploading && 'opacity-50'
             }`"
         >
             <input
                 type="file"
                 :class="`absolute z-10 h-full w-full opacity-0 ${
-                    isUploading ? 'cursor-not-allowed' : 'cursor-pointer'
+                    store.uploading ? 'cursor-not-allowed' : 'cursor-pointer'
                 }`"
                 multiple
-                :disabled="isUploading"
+                :disabled="store.uploading"
                 @change="handleFileUpload"
             />
             <div
@@ -144,7 +142,7 @@
         </div>
         <div class="relative mt-4 flex flex-col gap-2 overflow-hidden">
             <div
-                v-for="(file, index) in files"
+                v-for="(file, index) in store.files"
                 :key="index"
                 v-memo="file.name"
                 :set="
@@ -240,20 +238,20 @@
                 <div class="flex items-center space-x-0.5 bg-spacex-3">
                     <button
                         :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-spacex-primary focus:ring-2 focus:ring-spacex-primary ${
-                            isUploading && 'cursor-not-allowed opacity-50'
+                            store.uploading && 'cursor-not-allowed opacity-50'
                         }`"
                         aria-label="Upload settings"
-                        :disabled="isUploading"
+                        :disabled="store.uploading"
                         @click="handleUploadSettings(index)"
                     >
                         <Icon name="settings" />
                     </button>
                     <button
                         :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-red-500 focus:ring-2 focus:ring-spacex-primary ${
-                            isUploading && 'cursor-not-allowed opacity-50'
+                            store.uploading && 'cursor-not-allowed opacity-50'
                         }`"
                         aria-label="Delete file"
-                        :disabled="isUploading"
+                        :disabled="store.uploading"
                         @click="handleFileDelete(index)"
                     >
                         <Icon name="trash" />
@@ -265,28 +263,28 @@
             <div
                 class="flex h-full items-center justify-between rounded-md bg-spacex-primary transition-all duration-300"
                 :style="{
-                    width: `${uploadProgress}%`,
+                    width: `${store.progress}%`,
                 }"
             >
                 <Transition name="progress">
                     <p
-                        v-if="uploadProgress"
+                        v-if="store.progress"
                         class="ml-auto px-2 text-center text-sm font-medium text-white"
                     >
-                        {{ uploadProgress.toFixed(2) }}%
+                        {{ store.progress.toFixed(2) }}%
                     </p>
                 </Transition>
             </div>
         </div>
         <button
             :class="`mt-4 flex h-10 items-center justify-center gap-4 rounded-lg bg-spacex-primary text-center text-white transition-all duration-300 ${
-                isUploading && 'cursor-not-allowed opacity-50'
+                store.uploading && 'cursor-not-allowed opacity-50'
             }`"
-            :disabled="isUploading"
+            :disabled="store.uploading"
             @click="uploadFiles"
         >
-            <span v-if="!isUploading"
-                >Upload Files ({{ files.length }} files)</span
+            <span v-if="!store.uploading"
+                >Upload Files ({{ store.files.length }} files)</span
             >
             <Spinner v-else :size="24" color="#fff" />
         </button>
@@ -299,12 +297,11 @@ import { CHUNK_SIZE_IN_MB } from '@/constants';
 import { fire } from '@/util/toast';
 import { generateUUID } from '@/util/uuid';
 import { randomString } from '@/util/random-string';
+import { useUploadFilesStore } from '@/store';
 
 const isModalOpened = ref(false);
-const isUploading = ref(false);
-const uploadProgress = ref(0);
 
-const files = ref<File[]>([]);
+const store = useUploadFilesStore();
 const currentModal = ref<number>();
 const uploadSettings = reactive<{
     [index: number]: {
@@ -338,7 +335,7 @@ const handleFileDelete = (index: number) => {
         isModalOpened.value = false;
     }
 
-    files.value.splice(index, 1);
+    store.setFiles(store.files.filter((_, i) => i !== index));
 };
 
 const handleModalClose = () => {
@@ -353,7 +350,7 @@ const handleModalClose = () => {
 
 const handleFileUpload = async (e: any) => {
     const targetFiles = e.target.files ?? [];
-    const all = [...files.value, ...targetFiles];
+    const all = [...store.files, ...targetFiles];
 
     for (const file of targetFiles) {
         const extname = file.name.match(/\.[^/.]+$/)?.[0].slice(1) ?? '';
@@ -373,26 +370,27 @@ const handleFileUpload = async (e: any) => {
         }
 
         await nextTick();
-        files.value.push(
+        store.setFiles([
+            ...store.files,
             changeFileName(file, uploadSettings[index].id, extname),
-        );
+        ]);
     }
 };
 
 const uploadFiles = async () => {
-    if (files.value.length) {
-        isUploading.value = true;
+    if (store.files.length) {
+        store.setUploading(true);
 
         let currentIndex = 0;
         let doneRight = 0;
 
-        const allChunks = unref(files).reduce(
+        const allChunks = store.files.reduce(
             (acc, file) =>
                 acc + Math.ceil(file.size / (CHUNK_SIZE_IN_MB * 1024 * 1024)),
             0,
         );
 
-        for (const file of files.value) {
+        for (const file of store.files) {
             const totalChunks = Math.ceil(
                 file.size / (CHUNK_SIZE_IN_MB * 1024 * 1024),
             );
@@ -459,19 +457,19 @@ const uploadFiles = async () => {
                     break;
                 }
 
-                uploadProgress.value = (100 * ++doneRight) / allChunks;
+                store.setProgress((100 * ++doneRight) / allChunks);
             }
 
             delete uploadSettings[currentIndex];
-            files.value = files.value.filter((f) => f.name !== file.name);
+            store.setFiles(store.files.filter((f) => f.name !== file.name));
 
             currentIndex++;
         }
 
         currentIndex = 0;
-        isUploading.value = false;
-        files.value = [];
-        uploadProgress.value = 0;
+        store.setFiles([]);
+        store.setProgress(0);
+        store.setUploading(false);
 
         fire('Files has been uploaded successfully!', {
             type: 'success',
@@ -527,12 +525,16 @@ watch(currentModal, (modalIndex) => {
         watch(
             () => uploadSettings[modalIndex].id,
             (id) => {
-                if (files.value[modalIndex]) {
-                    files.value[modalIndex] = changeFileName(
-                        files.value[modalIndex],
-                        id,
-                        uploadSettings[modalIndex].extname,
-                    );
+                if (store.files[modalIndex]) {
+                    store.setFiles([
+                        ...store.files.slice(0, modalIndex),
+                        changeFileName(
+                            store.files[modalIndex],
+                            id,
+                            uploadSettings[modalIndex].extname,
+                        ),
+                        ...store.files.slice(modalIndex + 1),
+                    ]);
                 }
             },
         ),

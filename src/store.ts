@@ -276,10 +276,18 @@ export const useSidebarStore = defineStore('sidebar', {
 export const useUploadFilesStore = defineStore('uploadFiles', {
     state: () => ({
         files: [] as File[],
+        uploading: false,
+        progress: 0,
     }),
     actions: {
         setFiles(files: File[]) {
             this.files = files;
+        },
+        setUploading(uploading: boolean) {
+            this.uploading = uploading;
+        },
+        setProgress(progress: number) {
+            this.progress = progress;
         },
     },
 });
