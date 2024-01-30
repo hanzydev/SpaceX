@@ -5,7 +5,7 @@
     "scripts": {
         "start": "node .",
         "build": "tsup",
-        "dev": "tsup --watch",
+        "dev": "tsup --watch --onSuccess \"yarn start\"",
         "build:start": "tsup && node .",
         "format": "prettier --write . --ignore-path .gitignore",
         "lint": "eslint . --ignore-path .gitignore",
