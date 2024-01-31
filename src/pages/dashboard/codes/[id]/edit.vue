@@ -108,10 +108,10 @@
 </template>
 
 <script setup lang="ts">
-import * as Monaco from 'monaco-editor';
-import monacoTheme from '@/assets/monaco.json';
+import type * as Monaco from 'monaco-editor';
 import { fire } from '@/util/toast';
 import codeEmitter from '@/util/emitters/code';
+import monacoTheme from '@/assets/monaco.json';
 
 const router = useRouter();
 const route = useRoute();

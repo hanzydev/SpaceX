@@ -134,8 +134,8 @@
 </template>
 
 <script setup lang="ts">
+import type * as Monaco from 'monaco-editor';
 import { fire } from '@/util/toast';
-import * as Monaco from 'monaco-editor';
 import monacoTheme from '@/assets/monaco.json';
 
 const router = useRouter();

@@ -5,6 +5,7 @@
     >
         <MonacoEditor
             class="h-full w-full"
+            rounded="0"
             :value="json?.content!"
             :language="json?.language.toLowerCase()!"
             :options="{ theme: 'spacex', readOnly: true }"
@@ -20,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import * as Monaco from 'monaco-editor';
+import type * as Monaco from 'monaco-editor';
 import monacoTheme from '@/assets/monaco.json';
 
 const route = useRoute();
