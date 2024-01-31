@@ -51,6 +51,9 @@ export default defineNuxtConfig({
     vue: {
         propsDestructure: true,
     },
+    experimental: {
+        clientNodeCompat: true,
+    },
     vite: {
         plugins: [svgLoader()],
     },

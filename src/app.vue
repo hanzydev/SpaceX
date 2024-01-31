@@ -12,11 +12,8 @@
 <script setup lang="ts">
 import 'vue3-toastify/dist/index.css';
 
-import { Buffer } from 'buffer';
 import { applyTheme } from '@/util/apply-theme';
 import { initWebSocket } from '@/util/ws';
-
-globalThis.Buffer = Buffer;
 
 onMounted(() => {
     applyTheme();
