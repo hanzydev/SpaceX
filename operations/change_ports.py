@@ -119,7 +119,7 @@ def change_ports():
     clear()
     print(f"{get_info_prefix()} Building frontend...")
     subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+        "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Restarting app...")

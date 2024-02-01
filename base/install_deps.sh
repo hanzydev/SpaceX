@@ -17,8 +17,8 @@ sudo $pkg_manager $update_cmd
 # explicitly install node.js from nodesource repo
 sudo $pkg_manager $install_cmd $yes_to_all nodejs
 
-# install yarn and pm2
-sudo npm i -g yarn pm2
+# install pnpm and pm2
+sudo npm i -g pnpm pm2
 
 # install postgresql
 sudo $pkg_manager $install_cmd $yes_to_all postgresql postgresql-contrib

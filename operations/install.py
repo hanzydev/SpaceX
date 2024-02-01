@@ -154,12 +154,12 @@ def install():
     clear()
     print(f"{get_info_prefix()} Installing frontend...")
     subprocess.run(
-        "yarn", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+        "pnpm install", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Building frontend...")
     subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+        "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Configuring backend...")
@@ -210,19 +210,19 @@ def install():
     clear()
     print(f"{get_info_prefix()} Installing backend...")
     subprocess.run(
-        "yarn", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+        "pnpm install", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Building backend...")
     subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+        "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Adding app to PM2...")
     subprocess.run(
-        f"pm2 start yarn --name spacex-{username}-backend -- start", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+        f"pm2 start pnpm --name spacex-{username}-backend -- start", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
     subprocess.run(
-        f"pm2 start yarn --name spacex-{username}-frontend -- preview ", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+        f"pm2 start pnpm --name spacex-{username}-frontend -- preview ", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
     subprocess.run("pm2 save --force", shell=True)
     subprocess.run("pm2 startup", shell=True)
 

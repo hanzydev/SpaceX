@@ -114,7 +114,7 @@ def change_domain():
     clear()
     print(f"{get_info_prefix()} Building frontend...")
     subprocess.run(
-        "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+        "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     if app["using_nginx"]:
         os.remove(f"/etc/nginx/sites-available/{app['domain']}")

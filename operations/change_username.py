@@ -64,15 +64,25 @@ def change_username():
     print(f"{get_info_prefix()} Renaming app folder...")
     shutil.move(
         f"/etc/SpaceX/apps/{username}", f"/etc/SpaceX/apps/{new_username}")
+    
+    clear()
+    print(f"{get_info_prefix()} Installing frontend...")
+    subprocess.run(
+        "pnpm install", cwd=f"/etc/SpaceX/apps/{new_username}/frontend", shell=True)
+    
+    clear()
+    print(f"{get_info_prefix()} Installing backend...")
+    subprocess.run(
+        "pnpm install", cwd=f"/etc/SpaceX/apps/{new_username}/backend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Renaming app in PM2...")
     subprocess.run(
         f"pm2 delete spacex-{username}-backend spacex-{username}-frontend", shell=True)
     subprocess.run(
-        f"pm2 start yarn --name spacex-{new_username}-backend -- start", cwd=f"/etc/SpaceX/apps/{new_username}/backend", shell=True)
+        f"pm2 start pnpm --name spacex-{new_username}-backend -- start", cwd=f"/etc/SpaceX/apps/{new_username}/backend", shell=True)
     subprocess.run(
-        f"pm2 start yarn --name spacex-{new_username}-frontend -- preview ", cwd=f"/etc/SpaceX/apps/{new_username}/frontend", shell=True)
+        f"pm2 start pnpm --name spacex-{new_username}-frontend -- preview ", cwd=f"/etc/SpaceX/apps/{new_username}/frontend", shell=True)
     subprocess.run("pm2 save --force", shell=True)
     subprocess.run("pm2 startup", shell=True)
 

@@ -44,12 +44,12 @@ def update():
         clear()
         print(f"{get_info_prefix()} Installing frontend...")
         subprocess.run(
-            "yarn", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+            "pnpm install", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
         clear()
         print(f"{get_info_prefix()} Building frontend...")
         subprocess.run(
-            "yarn build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
+            "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/frontend", shell=True)
 
     if not is_backend_up_to_date:
         clear()
@@ -59,12 +59,12 @@ def update():
         clear()
         print(f"{get_info_prefix()} Installing backend...")
         subprocess.run(
-            "yarn", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+            "pnpm install", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
 
         clear()
         print(f"{get_info_prefix()} Building backend...")
         subprocess.run(
-            "yarn build", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
+            "pnpm build", cwd=f"/etc/SpaceX/apps/{username}/backend", shell=True)
 
     clear()
     print(f"{get_info_prefix()} Restarting app...")
