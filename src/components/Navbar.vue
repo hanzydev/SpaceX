@@ -146,7 +146,7 @@
 <script setup lang="ts">
 import { render } from 'vue';
 import gsap from 'gsap';
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 import { useSidebarStore, useUserStore } from '@/store';
 import { pascalCase } from '@/util/pascal-case';

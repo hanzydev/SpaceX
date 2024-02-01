@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import _ from 'lodash';
+import _ from 'lodash-es';
 import Color from 'color';
 import { getRelativePosition } from '@/util/get-relative-position';
 import { getParentWindow } from '@/util/get-parent-window';

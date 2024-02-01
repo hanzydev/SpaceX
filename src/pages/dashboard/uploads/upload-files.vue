@@ -292,7 +292,7 @@
 </template>
 
 <script setup lang="ts">
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { CHUNK_SIZE_IN_MB } from '@/constants';
 import { fire } from '@/util/toast';
 import { generateUUID } from '@/util/uuid';

@@ -516,7 +516,7 @@
 
 <script setup lang="ts">
 import gsap from 'gsap';
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { useEmbedConfigStore, useUserStore } from '@/store';
 import { replaceString } from '@/util/replace-string';
 import { fire } from '@/util/toast';

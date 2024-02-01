@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { useStatsStore, useUploadsStore, useUserStore } from '@/store';
 
 const statsStore = useStatsStore();

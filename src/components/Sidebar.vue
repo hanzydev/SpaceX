@@ -160,8 +160,6 @@ const openSidebar = async (overlay = true, updateState = true) => {
         document.body.classList.add('max-lg:!overflow-hidden');
     }
 
-    console.log(sidebarRef.value!);
-
     await gsap.fromTo(
         sidebarRef.value!,
         {

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 import { isTouch } from './is-touch';
 import { getTouchPoint } from './get-touch-point';
 import { getParentWindow } from './get-parent-window';
