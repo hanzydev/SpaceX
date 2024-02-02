@@ -13,14 +13,6 @@ export default defineNuxtConfig({
         cssPath: '@/assets/main.css',
         configPath: 'tailwind.config.js',
     },
-    pwa: {
-        strategies: 'generateSW',
-        workbox: {
-            globPatterns: ['**/*.{js,css}'],
-            navigateFallback: null,
-        },
-        manifestFilename: 'manifest.json',
-    },
     app: {
         rootId: '__spacex',
         buildAssetsDir: '_spacex',
