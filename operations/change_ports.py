@@ -65,17 +65,17 @@ def change_ports():
     with open(f"/etc/SpaceX/apps/{username}/frontend/.env", "r") as f:
         env_file = f.read()
 
-        site_url_regex = re.compile(r"VITE_SITE_URL=(.*)")
-        api_url_regex = re.compile(r"VITE_API_URL=(.*)")
-        wss_url_regex = re.compile(r"VITE_WSS_URL=(.*)")
+        site_url_regex = re.compile(r"NUXT_PUBLIC_SITE_URL=(.*)")
+        api_url_regex = re.compile(r"NUXT_PUBLIC_API_URL=(.*)")
+        wss_url_regex = re.compile(r"NUXT_PUBLIC_WSS_URL=(.*)")
         port_regex = re.compile(r"PORT=(.*)")
 
         env_file = site_url_regex.sub(
-            f"VITE_SITE_URL={site_url}", env_file)
+            f"NUXT_PUBLIC_SITE_URL={site_url}", env_file)
         env_file = api_url_regex.sub(
-            f"VITE_API_URL={api_url}", env_file)
+            f"NUXT_PUBLIC_API_URL={api_url}", env_file)
         env_file = wss_url_regex.sub(
-            f"VITE_WSS_URL={wss_url}", env_file)
+            f"NUXT_PUBLIC_WSS_URL={wss_url}", env_file)
         env_file = port_regex.sub(
             f"PORT={site_port}", env_file)
 

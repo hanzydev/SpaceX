@@ -82,16 +82,16 @@ def change_domain():
     with open(f"/etc/SpaceX/apps/{username}/frontend/.env", "r") as f:
         env_file = f.read()
 
-        site_url_regex = re.compile(r"VITE_SITE_URL=(.*)")
-        api_url_regex = re.compile(r"VITE_API_URL=(.*)")
-        wss_url_regex = re.compile(r"VITE_WSS_URL=(.*)")
+        site_url_regex = re.compile(r"NUXT_PUBLIC_SITE_URL=(.*)")
+        api_url_regex = re.compile(r"NUXT_PUBLIC_API_URL=(.*)")
+        wss_url_regex = re.compile(r"NUXT_PUBLIC_WSS_URL=(.*)")
 
         env_file = site_url_regex.sub(
-            f"VITE_SITE_URL={site_url}", env_file)
+            f"NUXT_PUBLIC_SITE_URL={site_url}", env_file)
         env_file = api_url_regex.sub(
-            f"VITE_API_URL={api_url}", env_file)
+            f"NUXT_PUBLIC_API_URL={api_url}", env_file)
         env_file = wss_url_regex.sub(
-            f"VITE_WSS_URL={wss_url}", env_file)
+            f"NUXT_PUBLIC_WSS_URL={wss_url}", env_file)
 
         open(
             f"/etc/SpaceX/apps/{username}/frontend/.env", "w").write(env_file)

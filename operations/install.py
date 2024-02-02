@@ -22,11 +22,11 @@ def install():
         print(f"{get_err_prefix()} Username already exists!")
         exit(1)
 
-    cf_turnstile_site_key = str_user_input(
+    turnstile_site_key = str_user_input(
         "👉 Enter your Cloudflare Turnstile Site Key")
     clear()
 
-    cf_turnstile_secret_key = str_user_input(
+    turnstile_secret_key = str_user_input(
         "👉 Enter your Cloudflare Turnstile Secret Key")
     clear()
 
@@ -78,8 +78,8 @@ def install():
     print(
         f"{Fore.LIGHTMAGENTA_EX}===================================================={Fore.RESET}")
     print(f"{Fore.CYAN}Username:                        {Fore.RESET}{username}")
-    print(f"{Fore.CYAN}Cloudflare Turnstile Site Key:   {Fore.RESET}{cf_turnstile_site_key}")
-    print(f"{Fore.CYAN}Cloudflare Turnstile Secret Key: {Fore.RESET}{cf_turnstile_secret_key}")
+    print(f"{Fore.CYAN}Turnstile Site Key:   {Fore.RESET}{turnstile_site_key}")
+    print(f"{Fore.CYAN}Turnstile Secret Key: {Fore.RESET}{turnstile_secret_key}")
     print(f"{Fore.CYAN}Site Port:                       {Fore.RESET}{site_port}")
     print(f"{Fore.CYAN}API Port:                        {Fore.RESET}{api_port}")
     print(f"{Fore.CYAN}WSS Port:                        {Fore.RESET}{wss_port}")
@@ -130,20 +130,20 @@ def install():
     with open(f"/etc/SpaceX/apps/{username}/frontend/.env", "r") as f:
         env_file = f.read()
 
-        site_url_regex = re.compile(r"VITE_SITE_URL=(.*)")
-        api_url_regex = re.compile(r"VITE_API_URL=(.*)")
-        wss_url_regex = re.compile(r"VITE_WSS_URL=(.*)")
-        cf_turnstile_site_key_regex = re.compile(
-            r"VITE_CF_TURNSTILE_SITE_KEY=(.*)")
+        site_url_regex = re.compile(r"NUXT_PUBLIC_SITE_URL=(.*)")
+        api_url_regex = re.compile(r"NUXT_PUBLIC_API_URL=(.*)")
+        wss_url_regex = re.compile(r"NUXT_PUBLIC_WSS_URL=(.*)")
+        turnstile_site_key_regex = re.compile(
+            r"NUXT_PUBLIC_TURNSTILE_SITE_KEY=(.*)")
 
         env_file = site_url_regex.sub(
-            f"VITE_SITE_URL={site_url}", env_file)
+            f"NUXT_PUBLIC_SITE_URL={site_url}", env_file)
         env_file = api_url_regex.sub(
-            f"VITE_API_URL={api_url}", env_file)
+            f"NUXT_PUBLIC_API_URL={api_url}", env_file)
         env_file = wss_url_regex.sub(
-            f"VITE_WSS_URL={wss_url}", env_file)
-        env_file = cf_turnstile_site_key_regex.sub(
-            f"VITE_CF_TURNSTILE_SITE_KEY={cf_turnstile_site_key}", env_file)
+            f"NUXT_PUBLIC_WSS_URL={wss_url}", env_file)
+        env_file = turnstile_site_key_regex.sub(
+            f"NUXT_PUBLIC_TURNSTILE_SITE_KEY={turnstile_site_key}", env_file)
 
         env_file += f"\nPORT={site_port}\nHOST=0.0.0.0"
 
@@ -170,8 +170,8 @@ def install():
     with open(f"/etc/SpaceX/apps/{username}/backend/.env", "r") as f:
         env_file = f.read()
 
-        cf_turnstile_secret_key_regex = re.compile(
-            r"CF_TURNSTILE_SECRET_KEY=(.*)")
+        turnstile_secret_key_regex = re.compile(
+            r"TURNSTILE_SECRET_KEY=(.*)")
         username_regex = re.compile(r"USERNAME=(.*)")
         postgres_host_regex = re.compile(r"POSTGRES_HOST=(.*)")
         postgres_port_regex = re.compile(r"POSTGRES_PORT=(.*)")
@@ -182,8 +182,8 @@ def install():
         wss_port_regex = re.compile(r"WSS_PORT=(.*)")
         site_url_regex = re.compile(r"SITE_URL=(.*)")
 
-        env_file = cf_turnstile_secret_key_regex.sub(
-            f"CF_TURNSTILE_SECRET_KEY={cf_turnstile_secret_key}", env_file)
+        env_file = turnstile_secret_key_regex.sub(
+            f"TURNSTILE_SECRET_KEY={turnstile_secret_key}", env_file)
         env_file = username_regex.sub(
             f"USERNAME={username}", env_file)
         env_file = postgres_host_regex.sub(
