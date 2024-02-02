@@ -371,7 +371,7 @@
                                 <span
                                     class="w-fit text-[1rem] leading-[1.375rem] text-[#00a8fc] hover:underline"
                                 >
-                                    {{ SITE_URL }}/u/embed-preview.png
+                                    {{ runtimeConfig.public.siteURL }}/u/embed-preview.png
                                 </span>
                                 <img
                                     v-if="
@@ -443,8 +443,9 @@
                                             marginTop:
                                                 (embedConfigStore.embedConfig!
                                                     .title.length ||
-                                                    embedConfigStore.embedConfig!
-                                                        .site_name.length) &&
+                                                    embedConfigStore
+                                                        .embedConfig!.site_name
+                                                        .length) &&
                                                 '0.5rem',
                                         }"
                                     >
@@ -471,10 +472,12 @@
                                             marginTop:
                                                 (embedConfigStore.embedConfig!
                                                     .title.length ||
-                                                    embedConfigStore.embedConfig!
+                                                    embedConfigStore
+                                                        .embedConfig!
                                                         .description.length ||
-                                                    embedConfigStore.embedConfig!
-                                                        .site_name.length) &&
+                                                    embedConfigStore
+                                                        .embedConfig!.site_name
+                                                        .length) &&
                                                 '1rem',
                                         }"
                                     />
@@ -521,8 +524,9 @@ import { useEmbedConfigStore, useUserStore } from '@/store';
 import { replaceString } from '@/util/replace-string';
 import { fire } from '@/util/toast';
 
-const embedConfigStore = useEmbedConfigStore();
 const userStore = useUserStore();
+const embedConfigStore = useEmbedConfigStore();
+const runtimeConfig = useRuntimeConfig();
 
 await embedConfigStore.fetchEmbedConfig();
 
@@ -552,8 +556,6 @@ const modalOperation = ref<
 const twoFaQrCodeBase64 = ref('');
 const otpCode = ref('');
 const twoFaState = ref(userStore.twoFaEnabled);
-
-const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 const enable2FA = async () => {
     is2FAUpdating.value = true;

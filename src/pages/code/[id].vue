@@ -4,9 +4,9 @@
         class="absolute flex h-screen w-full items-center justify-center"
     >
         <MonacoEditor
+            v-model="ref(json?.content).value"
             class="h-full w-full"
             rounded="0"
-            :value="json?.content!"
             :language="json?.language.toLowerCase()!"
             :options="{ theme: 'spacex', readOnly: true }"
             @load="handleEditorLoad"

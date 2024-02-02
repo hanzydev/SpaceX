@@ -93,14 +93,15 @@ const { data } = defineProps<{
 
 const router = useRouter();
 const store = useShortenedURLsStore();
+const runtimeConfig = useRuntimeConfig();
 
 const isDeleting = ref(false);
 const isModalOpen = ref(false);
 
-const SITE_URL = import.meta.env.VITE_SITE_URL;
-
 const handleCopy = async () => {
-    await navigator.clipboard.writeText(`${SITE_URL}/link/${data.id}`);
+    await navigator.clipboard.writeText(
+        `${runtimeConfig.public.siteURL}/link/${data.id}`,
+    );
 
     fire('Link successfully copied to the clipboard!', {
         type: 'success',

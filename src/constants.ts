@@ -7,7 +7,7 @@ export const BASE_SXCU = {
     Name: 'SpaceX ({name})',
     DestinationType: '',
     RequestMethod: 'POST',
-    RequestURL: import.meta.env.VITE_API_URL,
+    RequestURL: '',
     Headers: {
         Authorization: '',
     },

@@ -13,9 +13,6 @@ export default defineNuxtConfig({
         cssPath: '@/assets/main.css',
         configPath: 'tailwind.config.js',
     },
-    turnstile: {
-        siteKey: process.env.VITE_CF_TURNSTILE_SITE_KEY,
-    },
     pwa: {
         strategies: 'generateSW',
         workbox: {
@@ -53,6 +50,13 @@ export default defineNuxtConfig({
     },
     experimental: {
         clientNodeCompat: true,
+    },
+    runtimeConfig: {
+        public: {
+            siteURL: process.env.NUXT_PUBLIC_SITE_URL,
+            apiURL: process.env.NUXT_PUBLIC_API_URL,
+            wssURL: process.env.NUXT_PUBLIC_WSS_URL,
+        },
     },
     vite: {
         plugins: [svgLoader()],

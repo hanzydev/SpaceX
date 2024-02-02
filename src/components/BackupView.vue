@@ -93,7 +93,10 @@ import type { Backup } from '@/types';
 const { data } = defineProps<{
     data: Backup;
 }>();
+
+const runtimeConfig = useRuntimeConfig();
 const store = useBackupsStore();
+
 const controlsRef = ref<HTMLDivElement>();
 
 const isDeleting = ref(false);
@@ -145,7 +148,7 @@ const handleDelete = async () => {
 
 const handleDownload = async () => {
     window.open(
-        `${import.meta.env.VITE_API_URL}/backups/${data.id}?token=${
+        `${runtimeConfig.public.apiURL}/backups/${data.id}?token=${
             useCookie('token').value
         }`,
         '_blank',

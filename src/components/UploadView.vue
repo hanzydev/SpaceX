@@ -265,6 +265,7 @@ const extname = computed(() => data.id.match(/\.[^/.]+$/)?.[0].slice(1) ?? '');
 const router = useRouter();
 const uploadsStore = useUploadsStore();
 const folderStore = useFoldersStore();
+const runtimeConfig = useRuntimeConfig();
 
 const isLoaded = ref(false);
 const isDeleting = ref(false);
@@ -275,8 +276,8 @@ const loadableElementRef = ref<HTMLVideoElement | HTMLImageElement>();
 
 const token = useCookie('token').value!;
 
-const API_URL = import.meta.env.VITE_API_URL;
-const SITE_URL = import.meta.env.VITE_SITE_URL;
+const API_URL = runtimeConfig.public.apiURL;
+const SITE_URL = runtimeConfig.public.siteURL;
 
 onMounted(() => {
     if (data.type.includes('image')) {

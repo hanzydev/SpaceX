@@ -13,6 +13,8 @@ export function useAPI<T = any>(
     route: `/${string}`,
     options: FetchOptions = { method: 'get' },
 ): Promise<T> {
+    const runtimeConfig = useRuntimeConfig();
+
     if (options.auth) {
         if (!options.headers) {
             options.headers = {};
@@ -24,7 +26,7 @@ export function useAPI<T = any>(
     return $fetch(route, {
         ...options,
         ignoreResponseError: true,
-        baseURL: import.meta.env.VITE_API_URL,
+        baseURL: runtimeConfig.public.apiURL,
     });
 }
 

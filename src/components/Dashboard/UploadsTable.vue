@@ -99,14 +99,15 @@
 import { useUploadsStore } from '@/store';
 import { fire } from '@/util/toast';
 
-const store = useUploadsStore();
 const router = useRouter();
+const store = useUploadsStore();
+const runtimeConfig = useRuntimeConfig();
 
 const deletings = ref<string[]>([]);
 const currentPage = ref(0);
 
-const API_URL = import.meta.env.VITE_API_URL;
-const SITE_URL = import.meta.env.VITE_SITE_URL;
+const API_URL = runtimeConfig.public.apiURL;
+const SITE_URL = runtimeConfig.public.siteURL;
 
 const handleCopy = (id: string) => {
     navigator.clipboard.writeText(`${SITE_URL}/u/${id}`);

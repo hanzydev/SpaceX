@@ -157,6 +157,7 @@ import themes from '@/assets/themes.json';
 
 const userStore = useUserStore();
 const sidebarStore = useSidebarStore();
+const runtimeConfig = useRuntimeConfig();
 
 const theme = ref('default');
 
@@ -243,6 +244,8 @@ const handleThemes = () => {
 };
 
 const createSXCU = async () => {
+    BASE_SXCU.RequestURL = runtimeConfig.public.apiURL;
+
     const fileUploaderSXCU: typeof BASE_SXCU & { FileFormName?: string } =
         _.cloneDeep(BASE_SXCU);
 

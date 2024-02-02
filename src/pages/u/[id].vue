@@ -89,6 +89,7 @@ import type { Meta } from '@unhead/vue';
 import { replaceString } from '@/util/replace-string';
 
 const route = useRoute();
+const runtimeConfig = useRuntimeConfig();
 
 const json = (
     await useAsyncAPI(`/uploads/${route.params.id}`, {
@@ -101,7 +102,7 @@ const json = (
 ).data.value;
 const embedConfig = await useAPI('/embed-config');
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = runtimeConfig.public.apiURL;
 
 const handleDownload = () => {
     window.open(
