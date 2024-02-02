@@ -48,7 +48,7 @@ export default async (req: FastifyRequest, reply: FastifyReply) => {
 
     const formData = new FormData();
 
-    formData.append('secret', process.env.CF_TURNSTILE_SECRET_KEY!);
+    formData.append('secret', process.env.TURNSTILE_SECRET_KEY!);
     formData.append('response', cf_turnstile_token);
     formData.append('remoteip', ip);
 
