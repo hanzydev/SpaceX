@@ -78,8 +78,8 @@ def install():
     print(
         f"{Fore.LIGHTMAGENTA_EX}===================================================={Fore.RESET}")
     print(f"{Fore.CYAN}Username:                        {Fore.RESET}{username}")
-    print(f"{Fore.CYAN}Turnstile Site Key:   {Fore.RESET}{turnstile_site_key}")
-    print(f"{Fore.CYAN}Turnstile Secret Key: {Fore.RESET}{turnstile_secret_key}")
+    print(f"{Fore.CYAN}Turnstile Site Key:              {Fore.RESET}{turnstile_site_key}")
+    print(f"{Fore.CYAN}Turnstile Secret Key:            {Fore.RESET}{turnstile_secret_key}")
     print(f"{Fore.CYAN}Site Port:                       {Fore.RESET}{site_port}")
     print(f"{Fore.CYAN}API Port:                        {Fore.RESET}{api_port}")
     print(f"{Fore.CYAN}WSS Port:                        {Fore.RESET}{wss_port}")
