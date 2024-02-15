@@ -371,7 +371,9 @@
                                 <span
                                     class="w-fit text-[1rem] leading-[1.375rem] text-[#00a8fc] hover:underline"
                                 >
-                                    {{ runtimeConfig.public.siteURL }}/u/embed-preview.png
+                                    {{
+                                        runtimeConfig.public.siteURL
+                                    }}/u/embed-preview.png
                                 </span>
                                 <img
                                     v-if="

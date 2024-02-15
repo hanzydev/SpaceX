@@ -96,7 +96,9 @@ const isDeleting = ref(false);
 const isModalOpen = ref(false);
 
 const handleCopy = async () => {
-    await navigator.clipboard.writeText(`${runtimeConfig.public.siteURL}/code/${data.id}`);
+    await navigator.clipboard.writeText(
+        `${runtimeConfig.public.siteURL}/code/${data.id}`,
+    );
 
     fire('Link successfully copied to the clipboard!', {
         type: 'success',

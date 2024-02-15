@@ -1,10 +1,7 @@
 <template>
     <h2>Logs</h2>
     <div class="mt-6">
-        <SearchBar
-            v-model="searchQuery"
-            placeholder="Search for logs..."
-        />
+        <SearchBar v-model="searchQuery" placeholder="Search for logs..." />
         <div class="relative w-full overflow-y-hidden">
             <table
                 class="mt-4 w-full table-auto border-collapse rounded-lg bg-spacex-3"

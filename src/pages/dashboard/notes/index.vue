@@ -1,10 +1,7 @@
 <template>
     <h2>Notes</h2>
     <div class="mt-6">
-        <SearchBar
-            v-model="searchQuery"
-            placeholder="Search for notes..."
-        />
+        <SearchBar v-model="searchQuery" placeholder="Search for notes..." />
         <div
             :key="currentPage + searchQuery"
             class="mt-4 grid grid-cols-5 gap-4 max-[1495px]:grid-cols-4 max-[1262px]:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"

@@ -1,9 +1,6 @@
 <template>
     <div v-bind="$attrs">
-        <SearchBar
-            v-model="searchQuery"
-            placeholder="Search for uploads..."
-        />
+        <SearchBar v-model="searchQuery" placeholder="Search for uploads..." />
         <div
             :key="currentPage + searchQuery"
             class="mt-4 grid grid-cols-5 gap-4 max-[1495px]:grid-cols-4 max-[1262px]:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1"

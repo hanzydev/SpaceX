@@ -238,7 +238,9 @@
                 <div class="flex items-center space-x-0.5 bg-spacex-3">
                     <button
                         :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                            store.uploading ? 'cursor-not-allowed opacity-50': 'hover:text-spacex-primary'
+                            store.uploading
+                                ? 'cursor-not-allowed opacity-50'
+                                : 'hover:text-spacex-primary'
                         }`"
                         aria-label="Upload settings"
                         :disabled="store.uploading"
@@ -248,7 +250,9 @@
                     </button>
                     <button
                         :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
-                            store.uploading ? 'cursor-not-allowed opacity-50' : 'hover:text-red-500'
+                            store.uploading
+                                ? 'cursor-not-allowed opacity-50'
+                                : 'hover:text-red-500'
                         }`"
                         aria-label="Delete file"
                         :disabled="store.uploading"
