@@ -143,8 +143,8 @@
         <div class="relative mt-4 flex flex-col gap-2 overflow-hidden">
             <div
                 v-for="(file, index) in store.files"
-                v-memo="[file.name, store.uploading]"
                 :key="index"
+                v-memo="[file.name, store.uploading]"
                 :set="
                     // @ts-ignore
                     (extname = file.name.match(/\.[^/.]+$/)![0].slice(1))
