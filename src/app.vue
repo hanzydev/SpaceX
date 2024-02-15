@@ -29,7 +29,9 @@ useHead({
                 : `${title} · SpaceX`
             : 'SpaceX',
     bodyAttrs: {
-        class: 'w-full h-full bg-spacex-5 text-white absolute overflow-x-hidden font-[Montserrat]',
+        class: 'w-full h-full bg-spacex-5 text-white absolute overflow-x-hidden antialiased font-[Montserrat]',
     },
 });
 </script>
+
+<style></style>
