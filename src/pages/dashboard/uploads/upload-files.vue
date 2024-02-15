@@ -143,8 +143,8 @@
         <div class="relative mt-4 flex flex-col gap-2 overflow-hidden">
             <div
                 v-for="(file, index) in store.files"
+                v-memo="[file.name, store.uploading]"
                 :key="index"
-                v-memo="file.name"
                 :set="
                     // @ts-ignore
                     (extname = file.name.match(/\.[^/.]+$/)![0].slice(1))
@@ -237,8 +237,8 @@
                 </div>
                 <div class="flex items-center space-x-0.5 bg-spacex-3">
                     <button
-                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-spacex-primary focus:ring-2 focus:ring-spacex-primary ${
-                            store.uploading && 'cursor-not-allowed opacity-50'
+                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                            store.uploading ? 'cursor-not-allowed opacity-50': 'hover:text-spacex-primary'
                         }`"
                         aria-label="Upload settings"
                         :disabled="store.uploading"
@@ -247,8 +247,8 @@
                         <Icon name="settings" />
                     </button>
                     <button
-                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 hover:text-red-500 focus:ring-2 focus:ring-spacex-primary ${
-                            store.uploading && 'cursor-not-allowed opacity-50'
+                        :class="`mr-2 rounded-md bg-spacex-2 p-2 text-slate-400 transition-colors duration-300 focus:ring-2 focus:ring-spacex-primary ${
+                            store.uploading ? 'cursor-not-allowed opacity-50' : 'hover:text-red-500'
                         }`"
                         aria-label="Delete file"
                         :disabled="store.uploading"
