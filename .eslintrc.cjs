@@ -17,9 +17,8 @@ module.exports = {
         'plugin:@typescript-eslint/recommended-requiring-type-checking',
         '.eslintrc-auto-import.json',
     ],
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint', 'simple-import-sort'],
     rules: {
-        'no-console': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
@@ -38,6 +37,8 @@ module.exports = {
         '@typescript-eslint/restrict-plus-operands': 'off',
         '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
         '@typescript-eslint/unbound-method': 'off',
+
+        'no-console': 'off',
         'no-prototype-builtins': 'off',
         'no-inner-declarations': 'off',
         'no-constant-condition': 'off',
@@ -51,6 +52,33 @@ module.exports = {
         'no-useless-escape': 'off',
         'no-constant-condition': 'off',
         'no-empty-character-class': 'off',
+
+        'simple-import-sort/imports': [
+            'error',
+            {
+                groups: [
+                    // Side effect imports.
+                    ['^\\u0000'],
+
+                    // Node.js builtins prefixed with `node:`.
+                    ['^node:'],
+
+                    // Packages.
+                    ['^\\w'],
+
+                    // Packages prefixed with `@`.
+                    ['^@\\w'],
+
+                    // Custom paths prefixed with `@`.
+                    ['^@(fastify|middlewares|routes|util|types|constants|wss)'],
+
+                    // Relative imports.
+                    ['^\\.'],
+                ],
+            },
+        ],
+        'simple-import-sort/exports': 'error',
+       
         'prettier/prettier': [
             'error',
             {
