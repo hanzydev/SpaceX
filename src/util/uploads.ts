@@ -1,7 +1,9 @@
 import { basename } from 'node:path';
-import fileType from 'file-type';
+
 import { destr } from 'destr';
+import fileType from 'file-type';
 import { filesize } from 'filesize';
+
 import { getClient } from './database';
 import { walk } from './walk';
 

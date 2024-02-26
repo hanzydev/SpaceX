@@ -1,10 +1,11 @@
+import { verify } from 'argon2';
 import { SignJWT } from 'jose';
 import { authenticator } from 'otplib';
-import { verify } from 'argon2';
-import { getIp } from '@util/get-ip';
-import { getClient } from '@util/database';
-import { dispatchEvent } from '@wss';
+
 import { createEntry } from '@util/cache';
+import { getClient } from '@util/database';
+import { getIp } from '@util/get-ip';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['only-json'];
 export const config = {

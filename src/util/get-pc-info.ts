@@ -1,8 +1,9 @@
 import os from 'node:os';
 import { setTimeout as sleep } from 'node:timers/promises';
+
+import { destr } from 'destr';
 import { execa } from 'execa';
 import { filesize } from 'filesize';
-import { destr } from 'destr';
 
 export const getOSName = async () => {
     if (os.platform() === 'darwin') {

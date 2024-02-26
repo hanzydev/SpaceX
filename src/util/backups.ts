@@ -1,5 +1,7 @@
 import { basename } from 'node:path';
+
 import { filesize } from 'filesize';
+
 import { walk } from './walk';
 
 export const getBackups = (): Backup[] => {

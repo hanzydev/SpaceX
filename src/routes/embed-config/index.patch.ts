@@ -1,7 +1,7 @@
-import { getIp } from '@util/get-ip';
+import { createEntry, getEntry } from '@util/cache';
 import { getClient } from '@util/database';
+import { getIp } from '@util/get-ip';
 import { dispatchEvent } from '@wss';
-import { getEntry, createEntry } from '@util/cache';
 
 export const middlewares = ['only-json', 'auth'];
 export const config = {

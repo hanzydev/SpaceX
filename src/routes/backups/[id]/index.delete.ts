@@ -1,7 +1,7 @@
-import { getIp } from '@util/get-ip';
-import { getClient } from '@util/database';
-import { dispatchEvent } from '@wss';
 import { createEntry, deleteEntry, getEntry } from '@util/cache';
+import { getClient } from '@util/database';
+import { getIp } from '@util/get-ip';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['auth'];
 

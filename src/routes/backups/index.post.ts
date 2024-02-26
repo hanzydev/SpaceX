@@ -1,5 +1,6 @@
-import tar from 'tar';
 import { execa } from 'execa';
+import tar from 'tar';
+
 import { getBackup } from '@util/backups';
 import { createEntry } from '@util/cache';
 import { getClient } from '@util/database';

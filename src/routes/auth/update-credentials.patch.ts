@@ -1,11 +1,12 @@
-import { authenticator } from 'otplib';
 import { hash } from 'argon2';
+import { authenticator } from 'otplib';
 import rapidenv from 'rapidenv';
-import { getIp } from '@util/get-ip';
+
+import { createEntry, deleteEntry, getKeys } from '@util/cache';
 import { getClient } from '@util/database';
-import { dispatchEvent } from '@wss';
-import { createEntry, getKeys, deleteEntry } from '@util/cache';
+import { getIp } from '@util/get-ip';
 import { randomString } from '@util/random-string';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['only-json', 'auth'];
 export const config = {

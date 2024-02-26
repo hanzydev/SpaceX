@@ -1,5 +1,6 @@
 import { jwtVerify } from 'jose';
-import { getEntry, createEntry } from './cache';
+
+import { createEntry, getEntry } from './cache';
 
 export const verifyUser = async (jwt: string) => {
     const verifiedEntry = getEntry<any>('other', `jwt_${jwt}`);

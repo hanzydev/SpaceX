@@ -1,12 +1,14 @@
-import type { MultipartFile, MultipartValue } from '@fastify/multipart';
 import { extname } from 'node:path';
-import sharp from 'sharp';
+
 import { filesize } from 'filesize';
+import sharp from 'sharp';
+
+import type { MultipartFile, MultipartValue } from '@fastify/multipart';
 import { createEntry } from '@util/cache';
-import { getIp } from '@util/get-ip';
 import { getClient } from '@util/database';
-import { dispatchEvent } from '@wss';
+import { getIp } from '@util/get-ip';
 import { randomString } from '@util/random-string';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['only-multipart', 'auth'];
 

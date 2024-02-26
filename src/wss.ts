@@ -1,12 +1,15 @@
-import { setTimeout as sleep } from 'node:timers/promises';
 import os from 'node:os';
-import { WebSocketServer, WebSocket, type AddressInfo } from 'ws';
+import { setTimeout as sleep } from 'node:timers/promises';
+
 import { destr } from 'destr';
-import { getPCInfo } from '@util/get-pc-info';
-import { randomString } from '@util/random-string';
+import { type AddressInfo, WebSocket, WebSocketServer } from 'ws';
+
 import { getIp } from '@util/get-ip';
-import { verifyUser } from '@util/verify-user';
+import { getPCInfo } from '@util/get-pc-info';
 import * as logger from '@util/logger';
+import { randomString } from '@util/random-string';
+import { verifyUser } from '@util/verify-user';
+
 import { OPCodes } from './constants';
 
 let pcInfo: PCInfo;

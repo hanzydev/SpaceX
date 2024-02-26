@@ -1,8 +1,8 @@
-import { getIp } from '@util/get-ip';
+import { createEntry, getEntry } from '@util/cache';
 import { getClient } from '@util/database';
-import { dispatchEvent } from '@wss';
-import { getEntry, createEntry } from '@util/cache';
+import { getIp } from '@util/get-ip';
 import { randomString } from '@util/random-string';
+import { dispatchEvent } from '@wss';
 
 export const middlewares = ['only-json', 'auth'];
 

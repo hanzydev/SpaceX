@@ -1,4 +1,5 @@
 import pg from 'pg';
+
 import * as logger from './logger';
 
 let client: pg.Client;

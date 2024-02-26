@@ -1,7 +1,8 @@
-import { getIp } from '@util/get-ip';
+import { createEntry, deleteEntry, getEntry } from '@util/cache';
 import { getClient } from '@util/database';
+import { getIp } from '@util/get-ip';
 import { dispatchEvent } from '@wss';
-import { getEntry, createEntry, deleteEntry } from '@util/cache';
+
 import authMiddleware from '../../../middlewares/auth';
 
 export default async (req: FastifyRequest, reply: FastifyReply) => {

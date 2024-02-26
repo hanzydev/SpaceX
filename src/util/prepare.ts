@@ -1,9 +1,10 @@
 import { destr } from 'destr';
-import { getClient } from './database';
-import { createCache } from './cache';
+
 import { getBackups } from './backups';
-import { getUploads } from './uploads';
+import { createCache } from './cache';
+import { getClient } from './database';
 import * as logger from './logger';
+import { getUploads } from './uploads';
 
 export const prepareDirs = () => {
     logger.info('Preparing directories');

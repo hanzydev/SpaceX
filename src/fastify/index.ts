@@ -1,10 +1,13 @@
 import type { AddressInfo } from 'node:net';
+
 import Fastify from 'fastify';
+
 import FastifyCors from '@fastify/cors';
 import fastifyMultipart from '@fastify/multipart';
 import * as logger from '@util/logger';
-import { generateRoutes } from './routes';
+
 import { generateMiddlewares } from './middlewares';
+import { generateRoutes } from './routes';
 
 export const initFastify = async () => {
     const routes = await generateRoutes();

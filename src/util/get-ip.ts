@@ -1,5 +1,6 @@
-import type { FastifyRequest } from 'fastify';
 import type { IncomingMessage } from 'node:http';
+
+import type { FastifyRequest } from 'fastify';
 
 export const getIp = (req: FastifyRequest | IncomingMessage): string => {
     const ip =

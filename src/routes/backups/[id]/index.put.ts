@@ -1,13 +1,16 @@
-import type { MultipartFile, MultipartValue } from '@fastify/multipart';
 import { basename } from 'node:path';
+
 import { execa } from 'execa';
 import tar from 'tar';
-import { createEntry, getEntry, deleteCache } from '@util/cache';
-import { getIp } from '@util/get-ip';
+
+import type { MultipartFile, MultipartValue } from '@fastify/multipart';
+import { createEntry, deleteCache, getEntry } from '@util/cache';
 import { getClient, prepareTables } from '@util/database';
-import { dispatchEvent } from '@wss';
-import { randomString } from '@util/random-string';
+import { getIp } from '@util/get-ip';
 import { prepareCache, prepareUploads } from '@util/prepare';
+import { randomString } from '@util/random-string';
+import { dispatchEvent } from '@wss';
+
 import onlyMultipart from '../../../middlewares/only-multipart';
 
 export const middlewares = ['auth'];

@@ -1,7 +1,8 @@
+import type { ParsedPath } from 'node:path';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { ParsedPath } from 'node:path';
-import type { FastifyRequest, FastifyReply, HTTPMethods } from 'fastify';
+
+import type { FastifyReply, FastifyRequest, HTTPMethods } from 'fastify';
 
 interface RawRoute {
     name: string;

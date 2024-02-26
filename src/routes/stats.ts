@@ -1,4 +1,5 @@
 import { filesize } from 'filesize';
+
 import { getEntries } from '@util/cache';
 
 export const middlewares = ['auth'];

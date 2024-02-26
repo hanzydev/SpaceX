@@ -1,8 +1,10 @@
 import rapidenv from 'rapidenv';
-import { initFastify } from './fastify';
-import { initWebSocketServer } from '@wss';
+
 import { connectToDatabase, prepareTables } from '@util/database';
-import { prepareDirs, prepareUploads, prepareCache } from '@util/prepare';
+import { prepareCache, prepareDirs, prepareUploads } from '@util/prepare';
+import { initWebSocketServer } from '@wss';
+
+import { initFastify } from './fastify';
 
 rapidenv().load();
 prepareDirs();
